@@ -1,0 +1,16 @@
+.btn{
+  border-radius: 2px;
+  padding: 15px 40px;
+  text-transform: uppercase;
+  font-family: $font-heading;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary{
+  background-color: $primary;
+  border-color: $primary;
+  &:hover{
+    background-color: darken($primary, 10%);
+    border-color: darken($primary, 10%);
+  }
+}
