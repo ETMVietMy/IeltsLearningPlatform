@@ -1,19 +1,31 @@
-<!-- Navigation Bar -->
-    <nav class="navbar navbar-toggleable-md  navbar-expand-md navbar-light bg-faded"
-    style="opacity: 0.80; filter:(opacity=80);">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- <a class="navbar-brand" href="<%= root_path %>">Sushi Delivery</a> -->
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <strong><a class="nav-link" href="<%= root_path %>">Home</a></strong>
-            </li>
-        </ul>
-        <div class="col-xs-6 text-right">
-          <span>Text Right</span>
-        </div>
-      </div>
-    </nav>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="<%= root_path %>">IELTS EMT</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav pull-right">
+      <% if !user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'LOG IN', new_user_session_path, class:"nav-link", :remote => true, "data-toggle" => "modal", "data-target" => "login" %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">|</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'SIGN UP', new_user_registration_path, class:"nav-link", :remote => true, "data-toggle" => "modal", "data-target" => "signup" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Welcome, <%= current_user.username %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">|</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'SIGN OUT', destroy_user_session_path, class:"nav-link", method: 'delete' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
