@@ -1,5 +1,5 @@
 <!-- Navigation Bar -->
-<nav class="navbar navbar-toggleable-md  navbar-expand-md navbar-light bg-faded"
+<nav class="navbar navbar-toggleable-md  navbar-expand-md bg-faded <%= 'navbar-dark nav-home' if current_page?(controller: 'home', action: 'index') %>"
 style="opacity: 0.80; filter:(opacity=80);">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,9 +8,9 @@ style="opacity: 0.80; filter:(opacity=80);">
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <strong><a class="nav-link" href="<%= root_path %>">Home</a></strong>
-        </li>
+      <li class="nav-item">
+        <strong><a class="nav-link" href="<%= root_path %>">Home</a></strong>
+      </li>
     </ul>
   </div>
 </nav>
