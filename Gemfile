@@ -45,6 +45,9 @@ gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 gem 'devise'
 
+# fake data 
+gem 'faker'
+
 # Upload images
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
@@ -52,8 +55,6 @@ gem 'mini_magick'
 # simple_form
 gem 'simple_form'
 gem "cocoon"
-
-
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
