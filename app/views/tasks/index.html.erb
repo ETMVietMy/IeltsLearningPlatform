@@ -5,8 +5,4 @@
 	<%= task.task_number %>
 <% end %>
 
-<%= simple_form_for @task do |f| %>
-	<%= f.text_field :description %>
-	<%= f.input :task_number, as: :number %>
-	<%= f.button :submit, class: 'btn btn-primary' %>
-<% end %>
+<%= link_to "Pick a Task", new_task_path, class: 'btn btn-primary' %>
