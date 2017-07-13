@@ -1,0 +1,5 @@
+<%= simple_form_for(Task.new) do |f| %>
+	<%= f.text_field :description %>
+	<%= f.input :task_number, as: :integer %>
+	<%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>

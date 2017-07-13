@@ -1,0 +1,8 @@
+<h1>Word to ya mother</h1>
+
+<% @tasks.each do |task| %>
+	<%= task.description %>
+	<%= task.task_number %>
+<% end %>
+
+<%= link_to "Pick a Task", new_task_path, class: 'btn btn-primary' %>
