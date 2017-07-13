@@ -1,3 +1,79 @@
-<h1>Home</h1>
-<p>Find me in app/views/home/index.html.erb</p>
- 
+<section class="hero" style="background-image: url(<%= asset_path 'hero.jpg' %>)">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1>Prepare Your IELTS Writing Test</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse atque enim, molestias id. Nihil ad dicta, nesciunt perspiciatis aperiam fuga!</p>
+      <p class="text-center">
+        <button role="button" class="btn btn-primary">Get started!</button>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <h2 class="section-heading">Why Should I Use EMT</h2>
+
+    <div class="features-list">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-item">
+            <h3>Fast Correcting</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, laudantium labore iure, </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <h3>Reason 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, laudantium labore iure, itaque quis perferendis natus </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-item">
+            <h3>Another Reason</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container hr"></div>
+
+<section class="section-how">
+  <div class="container">
+    <h2 class="section-heading">How to get your writing marked</h2> 
+
+    <div class="block-how">
+      <div class="block-how-thumb">
+        <%= image_tag Faker::Avatar.image("first-step", "130x130") %>
+      </div>
+      <div class="block-how-content">
+        <h3>Choose A Task</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe explicabo a reprehenderit quo doloribus delectus sint, laborum illum cum nisi eaque accusantium natus, obcaecati laboriosam debitis distinctio, rerum autem! Ab.</p>
+      </div>
+    </div>
+    <div class="block-how block-how-reverse">
+      <div class="block-how-thumb">
+        <%= image_tag Faker::Avatar.image("second-step", "130x130") %>
+      </div>
+      <div class="block-how-content">
+        <h3>Start Writing</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe explicabo a reprehenderit quo doloribus delectus sint, laborum illum cum nisi eaque accusantium natus, obcaecati laboriosam debitis distinctio, rerum autem! Ab.</p>
+      </div>
+    </div>
+    <div class="block-how">
+      <div class="block-how-thumb">
+        <%= image_tag Faker::Avatar.image("third-step", "130x130") %>
+      </div>
+      <div class="block-how-content">
+        <h3>Send Your Writing To A Teacher</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe explicabo a reprehenderit quo doloribus delectus sint, laborum illum cum nisi eaque accusantium natus, obcaecati laboriosam debitis distinctio, rerum autem! Ab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render 'layouts/footer' %>

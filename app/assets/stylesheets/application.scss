@@ -1,2 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto:400,700,900');
 @import "bootstrap";
 @import "font-awesome";
+// @import "sb-admin";
+
+@import "partials/variables";
+@import "partials/type";
+@import "partials/buttons";
+@import "partials/header";
+@import "partials/footer";
+
+@import "home";
