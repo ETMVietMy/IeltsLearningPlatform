@@ -22,9 +22,16 @@ body{
 }
 
 .navbar-nav{
+  align-items: center;
   .nav-link{
     font-weight: 400;
     font-family: $font-heading;
+  }
+  .nav-item{
+    .btn{
+      margin-left: 5px;
+      margin-right: 5px;
+    }
   }
 }
 
