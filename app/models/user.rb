@@ -4,5 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_one :teacher
+
   validates :username, presence: true
+
+  def is_student?
+    self.role == 'STD'
+  end
+
 end
