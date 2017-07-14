@@ -1,3 +1,35 @@
 .navbar-brand{
   font-weight: 700;
 }
+
+body{
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.nav-home{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  z-index: 1;
+  color: #fff;
+  a{
+    color: #fff;
+  }
+}
+
+.navbar-nav{
+  .nav-link{
+    font-weight: 400;
+    font-family: $font-heading;
+  }
+}
+
+header{
+  .btn{
+    padding: 7px 20px;
+  }
+}

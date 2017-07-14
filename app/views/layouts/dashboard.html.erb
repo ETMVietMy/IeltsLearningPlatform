@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IeltsLearningPlatform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/navbar-dashboard' %>
+
+    <div class="dashboard">
+      <div class="dashboard-sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Your Writing</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Your Requests</a>
+          </li>
+        </ul>
+      </div>
+      <div class="dashboard-main-content">
+        <%= yield %>
+      </div>  
+    </div>
+
+  </body>
+</html>

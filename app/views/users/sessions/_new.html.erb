@@ -1,0 +1,44 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header dl-one-header">
+      <h4 class="modal-title  dark font-bold">Log In</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- End of modal-header -->
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="modal-body">
+
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+          <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder:'Email' %>
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-key" aria-hidden="true"></i></span>
+          <%= f.password_field :password, class: 'form-control', placeholder:'Password' %>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <span class="color-6">Need an account?</span>
+            <%= link_to 'Sign Up', new_user_registration_path, class:"tkb-color", :remote => true, "data-toggle" => "modal", "data-target" => "signup" %>
+          </div>
+          <div class="col-sm-6 text-right">
+            <span class="color-6">Forgot Password?</span>
+          </div>
+        </div>
+    </div>
+    <!-- End of modal-body -->
+
+    <div class="modal-footer">
+      <%= f.submit 'Log In', class: 'btn btn-block btn-primary' %>
+    </div>
+    <!-- End of modal-footer -->
+    <% end %>
+  </div>
+  <!-- End of modal-content -->
+</div>
