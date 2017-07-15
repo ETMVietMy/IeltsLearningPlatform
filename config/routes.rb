@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index'
 
   scope '/dashboard' do
-    resources :teachers, only: [:new, :create, :edit, :update]
+    resources :teachers, only: [:new, :create, :edit, :update, :index, :show]
+    post 'teacher/search', to: 'teachers#search'
   end
 
 	resources :students
