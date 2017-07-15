@@ -1,0 +1,10 @@
+<tr>
+  <td><%= teacher.user.username %></td>
+  <td><%= teacher.nationality %></td>
+  <td><%= teacher.price %></td>
+  <td>
+    <%= link_to  teacher_path(:id => teacher.id) do %>
+      View Details <i class="fa fa-arrow-circle-right"></i>
+    <% end %>
+  </td>
+</tr>

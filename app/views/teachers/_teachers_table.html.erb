@@ -1,0 +1,15 @@
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Nationality</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @teachers.each do |teacher| %>
+    <%= render "teacher_row", teacher: teacher %>
+    <% end %>
+  </tbody>
+</table>
