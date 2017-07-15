@@ -1,0 +1,45 @@
+<div class="modal-dialog role="document"">
+  <div class="modal-content">
+
+    <div class="modal-header dl-one-header">
+
+      <h4 class="dark font-bold text-center">Sign Up</h4>
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- End of modal-header -->
+
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+    <div class="modal-body">
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :username, required: true, autofocus: true %>
+          <%= f.input :email, required: true %>
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+          <%= f.input :password_confirmation, required: true %>
+        </div>
+
+      <div class="row">
+        <div class="col-sm-8 text-left">
+          <span class="color-6">Already have an account?</span>
+          <%= link_to 'Log In', new_user_session_path, class:"tkb-color", :remote => true, "data-toggle" => "modal", "data-target" => "login" %>
+        </div>
+        <div class="col-sm-4 text-right">
+          <!-- <span class="color-6">Reset Password?</span> -->
+        </div>
+      </div>
+
+    </div>
+    <!-- End of modal-body -->
+
+    <div class="modal-footer">
+      <%= f.button :submit, "Sign up", class: 'btn btn-block btn-primary' %>
+    </div>
+    <!-- End of modal-footer -->
+    <% end %>
+  </div>
+  <!-- End of modal-content -->
+</div>

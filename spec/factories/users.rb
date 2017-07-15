@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :student do
+  factory :user do
     
   end
 end

@@ -6,17 +6,25 @@ footer{
   font-size: 0.8rem;
   
   .footer-inner{
-    display: flex;
-    justify-content: space-between;
+    text-align: center;
+    @media (min-width: 48rem){
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   .nav{
+    @media (max-width: 48rem - (1/16) ){
+      margin-top: 30px;
+      text-align: center;
+      justify-content: center;
+    }
+
     li{
-      display: block;
       @media (min-width: 48rem){
         display: inline-block;
-        margin-left: 15px;
-        margin-right: 15px;
       }
     }
     a{

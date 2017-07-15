@@ -2,10 +2,14 @@
   <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
+
       <h1>Learning English is <i><strong>ALWAYS</strong></i> never easy</h1>
+
+      <h1>Prepare Your IELTS Writing Test</h1>
+
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse atque enim, molestias id. Nihil ad dicta, nesciunt perspiciatis aperiam fuga!</p>
       <p class="text-center">
-        <button role="button" class="btn btn-primary">Get started!</button>
+        <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-primary", :remote => true, "data-toggle" => "modal", "data-target" => "signup" %>
       </p>
     </div>
   </div>

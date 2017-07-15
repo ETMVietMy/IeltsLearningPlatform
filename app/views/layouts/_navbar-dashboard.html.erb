@@ -1,0 +1,40 @@
+<!-- Navigation Bar -->
+<header>
+  <nav class="navbar navbar-toggleable-md  navbar-expand-md bg-faded
+  <%= 'navbar-light' unless current_page?(controller: 'home', action: 'index') %>
+  <%= 'navbar-dark nav-home' if current_page?(controller: 'home', action: 'index') %>"
+  style="opacity: 0.80; filter:(opacity=80);">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="<%= root_path %>">EMT</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <% if !user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Log In', new_user_session_path, class:"btn btn-primary btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "login" %>
+          </li>
+          <li class="nav-item">&nbsp;</li>
+          <li class="nav-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-primary btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "signup" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Welcome, #{current_user.username}", dashboard_path, class: 'nav-link' %>
+          </li>
+          <% if current_user.is_student? %>
+          <li class="nav-item">
+            <%= link_to 'Register Teacher', new_teacher_path, class:"btn btn-secondary btn-sm"%>
+          </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to 'Sign Out', destroy_user_session_path, class:"btn btn-primary btn-sm", method: 'delete' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
