@@ -1,6 +1,10 @@
 class TeachersController < ApplicationController
   layout 'dashboard'
 
+  def index
+    @teachers = Teacher.new
+  end
+
   def new
     @teacher = Teacher.new(user: current_user)
   end
@@ -18,7 +22,7 @@ class TeachersController < ApplicationController
     end
 
     flash[:success] = "You have registered successfully as a teacher"
-    redirect_to :dashboard_url
+    redirect_to dashboard_path
       
   end
 

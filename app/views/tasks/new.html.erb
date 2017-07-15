@@ -1,5 +1,87 @@
-<%= simple_form_for(Task.new) do |f| %>
-	<%= f.text_field :description %>
-	<%= f.input :task_number, as: :integer %>
-	<%= f.button :submit, class: 'btn btn-primary' %>
-<% end %>
+
+<div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
+	<%= simple_form_for(Task.new) do |f| %>
+		<%= f.text_field :description %>
+		<%= f.input :task_number, as: :integer, placeholder: "Task 1 and 2" %>
+		<%= f.button :submit, class: 'btn btn-primary' %>
+	<% end %>
+</div>
+
+<div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
+<div class="timer">
+    <div class="timer__controls">
+      
+      <button data-time="1200" class="timer__button">Part 1 20</button>
+      <button data-time="3600" class="timer__button">Full Exam 60 Minutes</button>
+
+      <form name="customForm" id="custom">
+        <input type="text" name="minutes" class="timer__button" placeholder="Enter Minutes" style="width: 300px; height: 100px;">
+      </form>
+    </div>
+    <div class="display">
+      <h1 class="display__time-left"></h1>
+      <p class="display__end-time"></p>
+    </div>
+  </div>
+ </div>
+
+  <script>
+  	
+let countdown;
+const timerDisplay = document.querySelector('.display__time-left');
+const endTime = document.querySelector('.display__end-time');
+const buttons = document.querySelectorAll('[data-time]');
+
+function timer(seconds) {
+  // clear any existing timers
+  clearInterval(countdown);
+
+  const now = Date.now();
+  const then = now + seconds * 1000;
+  displayTimeLeft(seconds);
+  displayEndTime(then);
+
+  countdown = setInterval(() => {
+    const secondsLeft = Math.round((then - Date.now()) / 1000);
+    // check if we should stop it!
+    if(secondsLeft < 0) {
+      clearInterval(countdown);
+      return;
+    }
+    // display it
+    displayTimeLeft(secondsLeft);
+  }, 1000);
+}
+
+function displayTimeLeft(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainderSeconds = seconds % 60;
+  const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
+  document.title = display;
+  timerDisplay.textContent = display;
+}
+
+function displayEndTime(timestamp) {
+  const end = new Date(timestamp);
+  const hour = end.getHours();
+  const adjustedHour = hour > 12 ? hour - 12 : hour;
+  const minutes = end.getMinutes();
+  endTime.textContent = `Be Back At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`;
+}
+
+function startTimer() {
+  const seconds = parseInt(this.dataset.time);
+  timer(seconds);
+}
+
+buttons.forEach(button => button.addEventListener('click', startTimer));
+document.customForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const mins = this.minutes.value;
+  console.log(mins);
+  timer(mins * 60);
+  this.reset();
+});
+
+  </script>
+
