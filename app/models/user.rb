@@ -13,6 +13,10 @@ class User < ApplicationRecord
     self.role == 'STD'
   end
 
+  def is_teacher?
+    self.role == 'TEC'
+  end
+
   def getAllFollowedTeachers
     @teachers = Teacher.where(id: Follow.where(user_id: id).map(&:teacher_id))
   end

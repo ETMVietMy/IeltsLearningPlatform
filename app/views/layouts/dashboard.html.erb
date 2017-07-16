@@ -30,9 +30,13 @@
           <li class="nav-item">
             <a href="<%= follows_path %>" class="nav-link">Follows</a>
           </li>
+          <li class="nav-item">
+            <%= link_to "Your account", account_path, class: "nav-link" %>
+          </li>
         </ul>
       </div>
       <div class="dashboard-main-content">
+        <%= flash_messages %>
         <%= yield %>
       </div>
     </div>

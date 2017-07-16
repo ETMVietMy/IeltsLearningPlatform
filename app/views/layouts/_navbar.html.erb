@@ -26,7 +26,7 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <a class="nav-link" href="#">Welcome, <%= current_user.username %></a>
+            <%= link_to "Welcome, #{current_user.username}", dashboard_path, class: "nav-link"%>
           </li>
           <li class="nav-item">
             <%= link_to 'Sign Out', destroy_user_session_path, class:"btn btn-primary btn-sm", method: 'delete' %>
