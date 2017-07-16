@@ -8,6 +8,7 @@
 </div>
 
 <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
+<h1 class="text-center">Click the Timer When You Are Ready</h1>
 <div class="timer">
     <div class="timer__controls">
       
@@ -16,6 +17,7 @@
 
       <form name="customForm" id="custom">
         <input type="text" name="minutes" class="timer__button" placeholder="Enter Minutes" style="width: 300px; height: 100px;">
+
       </form>
     </div>
     <div class="display">
@@ -74,6 +76,8 @@ function startTimer() {
   timer(seconds);
 }
 
+
+
 buttons.forEach(button => button.addEventListener('click', startTimer));
 document.customForm.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -82,6 +86,8 @@ document.customForm.addEventListener('submit', function(e) {
   timer(mins * 60);
   this.reset();
 });
+
+
 
   </script>
 
