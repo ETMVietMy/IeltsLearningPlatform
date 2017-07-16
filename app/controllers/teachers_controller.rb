@@ -15,9 +15,10 @@ class TeachersController < ApplicationController
 
   def create
     @teacher = Teacher.new(teacher_params)
-    unless @teacher.valid?
+
+    if @teacher.invalid?
       flash.now[:error] = @teacher.errors.full_messages.to_sentence
-      render :new
+      return render :new
     end
 
     Teacher.transaction do
