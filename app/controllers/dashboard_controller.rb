@@ -6,4 +6,8 @@ class DashboardController < ApplicationController
   def index
 
   end
+
+  def account
+    
+  end
 end
