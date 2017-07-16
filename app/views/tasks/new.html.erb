@@ -1,11 +1,40 @@
 
 <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
-	<%= simple_form_for(Task.new) do |f| %>
-		<%= f.text_field :description %>
-		<%= f.input :task_number, as: :integer, placeholder: "Task 1 and 2" %>
-		<%= f.button :submit, class: 'btn btn-primary' %>
-	<% end %>
+	<form><input name="code" id="code" type="text" value="">
+	<script>
+	var task = [
+
+        "Nowadays, families are not as close as in the past and a lot of people have become used to this. Explain the reasons for this and discuss any possible effects it may have on society.",
+        "Smokers have rights too, so they should be allowed to smoke in public places.To what extent do you agree or disagree with this statement?",
+        "These days, we are seeing an increasing amount of violence on television, and this is having a negative impact on children's behaviour.Do you agree or disagree?",
+        "Stress is now a major problem in many countries around the world.What are some of the factors in modern society that cause this stress, and how can we reduce it?",
+        "Eating a balanced diet is the most important factor for a healthy life.To what extent do you agree?",
+        "Currently there is a trend towards the use of alternative forms of medicine. However, at best these methods are ineffective, and at worst they may be dangerous.To what extent do you agree with this statement?",
+        "Developed countries have created many environmental problems in the World, particularly in their contribution to global warming.What can be done to reduce the dangers of global warming?"
+      ];
+
+
+
+    function makeTask() {
+   	return Math.floor(Math.random() * task.length);
+   }
+
+   
+   var taskName = task[makeTask];
+
+	</script>
+
+<input type="button" style="font-size:9pt" value="Get a Test Question" onclick="document.getElementById('code').value = makeTask()">
+	
+</input>
+</form>
+        
 </div>
+
+<!--Goals is to:
+1) Click on Button
+2) On click display random topic
+3) Each click produces a different topic  -->
 
 <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
 <h1 class="text-center">Click the Timer When You Are Ready</h1>
@@ -28,7 +57,15 @@
  </div>
 
   <script>
+
+  
+  	// task display
   	
+
+   // task display
+   
+
+ // timer display  	
 let countdown;
 const timerDisplay = document.querySelector('.display__time-left');
 const endTime = document.querySelector('.display__end-time');

@@ -107,3 +107,17 @@ input {
   padding:1rem;
   font-family: 'Inconsolata', monospace;
 }
+
+.topic__button {
+  background-color: #dfdfdf;
+  border:0;
+  cursor: pointer;
+  color: #3F7FBF;
+  font-size: 2rem;
+  text-transform: uppercase;
+  background:rgba(0,0,0,0.1);
+  border-bottom:3px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(0,0,0,0.2);
+  padding:1rem;
+  font-family: 'Inconsolata', monospace;
+}
