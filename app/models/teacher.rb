@@ -1,5 +1,6 @@
 class Teacher < ApplicationRecord
   belongs_to :user
+  has_many :follows
 
   def self.search(params)
     joins(:user)
@@ -8,4 +9,5 @@ class Teacher < ApplicationRecord
                   "%#{params[:nationality]}%"
                   )
   end
+
 end

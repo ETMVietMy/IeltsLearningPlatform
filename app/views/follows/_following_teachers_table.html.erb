@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <% @teachers.each do |teacher| %>
-    <%= render "teachers/teacher_row", teacher: teacher, is_following: current_user.isFollowing(teacher.id) %>
+    <%= render "follows/following_teacher_row", teacher: teacher, is_following: current_user.isFollowing(teacher.id) %>
     <% end %>
   </tbody>
 </table>

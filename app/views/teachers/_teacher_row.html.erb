@@ -7,4 +7,19 @@
       View Details <i class="fa fa-arrow-circle-right"></i>
     <% end %>
   </td>
+
+  <!-- Follow status -->
+  <% if is_following %>
+    <td><i class="fa fa-fw fa-check"></i>Following </td>
+  <% else %>
+    <% if teacher.user==current_user %>
+      <td><i class="fa fa-fw fa-user"></i>You </td>
+    <% else %>
+      <td>
+        <div class="button-group">
+          <%= link_to '<i class="fa fa-plus"></i> Follow'.html_safe, follows_add_path(id: teacher.id), {method: :post, remote: true, class: "btn btn-success btn-sm" } %>
+        </div>
+      </td>
+    <% end %>
+  <% end %>
 </tr>
