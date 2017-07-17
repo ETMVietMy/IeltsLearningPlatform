@@ -1,0 +1,97 @@
+<!-- <hr class=""> -->
+  <div class="row">
+    <div class="col-sm-9">
+      <h1 class=""><%= @teacher.user.username %></h1>
+      <button type="button" class="btn btn-success">Book me!</button>  <button type="button" class="btn btn-info">Send me a message</button>
+      <br>
+    </div>
+
+    <div class="col-sm-3">
+      <a href="/users" class="float-right"><img title="profile image" class="img-circle img-responsive" src="http://www.rlsandbox.com/img/profile.jpg"></a>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <!--left col-->
+      <ul class="list-group">
+        <li class="list-group-item text-muted" contenteditable="false">Profile</li>
+        <li class="list-group-item justify-content-between">
+          <span class="font-bold">Joined</span>
+          <span class="">2.13.2014</span>
+        </li>
+        <li class="list-group-item justify-content-between">
+          <span class="font-bold">Real name</span>
+          <span>Joseph Doe</span>
+        </li>
+        <li class="list-group-item justify-content-between">
+          <span class="font-bold">Rate</span>
+          <i class="fa fa-star"   aria-hidden="true"></i>
+          <i class="fa fa-star"   aria-hidden="true"></i>
+          <i class="fa fa-star"   aria-hidden="true"></i>
+          <i class="fa fa-star"   aria-hidden="true"></i>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+        </li>
+      </ul>
+
+      <br>
+
+      <div class="card">
+        <div class="card-header">
+          Website&nbsp;<i class="fa fa-link fa-1x"></i>
+        </div>
+        <div class="card-block">
+          My website.
+        </div>
+      </div>
+
+      <br>
+
+      <ul class="list-group">
+        <li class="list-group-item text-muted">Activity&nbsp;<i class="fa fa-dashboard fa-1x"></i></li>
+        <li class="list-group-item justify-content-between">
+          <span class="font-bold">Corrections</span>
+          <span>125</span>
+        </li>
+        <li class="list-group-item justify-content-between">
+          <span class="font-bold">Students</span>
+          <span>50</span>
+        </li>
+        <li class="list-group-item justify-content-between">
+          <span class="font-bold">Posts</span>
+          <span>37</span>
+        </li>
+        <li class="list-group-item justify-content-between">
+          <span class="font-bold">Followers</span>
+          <span>78</span>
+        </li>
+      </ul>
+
+      <br>
+
+      <div class="card">
+        <div class="card-header">Social Media</div>
+        <div class="card-block">
+          <i class="fa fa-facebook fa-2x"></i>
+          <i class="fa fa-github fa-2x"></i>
+          <i class="fa fa-twitter fa-2x"></i>
+          <i class="fa fa-pinterest fa-2x"></i>
+          <i class="fa fa-google-plus fa-2x"></i>
+        </div>
+      </div>
+    </div>
+    <!--/col-3-->
+
+    <!--right col-->
+    <div class="col-sm-9">
+      <div class="card">
+        <div class="card-header"> <%= @teacher.user.username %>'s Experience </div>
+        <div class="card-block">
+          <%= @teacher.experience %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of row -->

@@ -16,12 +16,7 @@
   padding: 20px 20px 20px 20px;
 }
 
-html {
-  box-sizing: border-box;
-  font-size: 10px;
-  background: #8E24AA;
-  background: linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%);
-}
+
 
 *, *:before, *:after {
   box-sizing: inherit;
@@ -111,4 +106,32 @@ input {
   border-right:1px solid rgba(0,0,0,0.2);
   padding:1rem;
   font-family: 'Inconsolata', monospace;
+}
+
+.topic__button {
+  background-color: #dfdfdf;
+  border:0;
+  cursor: pointer;
+  color: #3F7FBF;
+  font-size: 2rem;
+  text-transform: uppercase;
+  background:rgba(0,0,0,0.1);
+  border-bottom:3px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(0,0,0,0.2);
+  padding:1rem;
+  font-family: 'Inconsolata', monospace;
+}
+
+#code {
+ background-color: #dfdfdf;
+ color: #3F7FBF;
+ text-transform: uppercase;
+ width:75%;
+ height:50px;
+ margin-top: 20px;
+ position:relative;
+}
+
+#button {
+	margin-bottom: 10px;
 }

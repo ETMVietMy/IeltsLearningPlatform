@@ -2,7 +2,11 @@ class TeachersController < ApplicationController
   layout 'dashboard'
 
   def index
-    @teachers = Teacher.new
+    @teachers = Teacher.all
+  end
+
+  def show
+    @teacher = Teacher.find_by(id: params[:id])
   end
 
   def new
@@ -11,9 +15,10 @@ class TeachersController < ApplicationController
 
   def create
     @teacher = Teacher.new(teacher_params)
-    unless @teacher.valid?
+
+    if @teacher.invalid?
       flash.now[:error] = @teacher.errors.full_messages.to_sentence
-      render :new
+      return render :new
     end
 
     Teacher.transaction do
@@ -23,7 +28,7 @@ class TeachersController < ApplicationController
 
     flash[:success] = "You have registered successfully as a teacher"
     redirect_to dashboard_path
-      
+
   end
 
   def edit
@@ -32,7 +37,11 @@ class TeachersController < ApplicationController
   def update
   end
 
-  private 
+  def search
+    @teachers = Teacher.search(params)
+  end
+
+  private
   def teacher_params
     params.require(:teacher).permit(:user_id, :experience, :nationality, :price, :linkedin)
   end
