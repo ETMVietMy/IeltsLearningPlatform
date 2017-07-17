@@ -1,8 +1,12 @@
 
 <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
-	<form><input name="code" id="code" type="text" value="">
+
+	<form><textarea name="textarea" id="code" ></textarea>
+	<input type="button" id="button" style="font-size:9pt" value="Get a Test Question" onclick="document.getElementById('code').value = makeTask()">
 	<script>
-	var task = [
+	
+    function makeTask() {
+    var task = [
 
         "Nowadays, families are not as close as in the past and a lot of people have become used to this. Explain the reasons for this and discuss any possible effects it may have on society.",
         "Smokers have rights too, so they should be allowed to smoke in public places.To what extent do you agree or disagree with this statement?",
@@ -13,18 +17,15 @@
         "Developed countries have created many environmental problems in the World, particularly in their contribution to global warming.What can be done to reduce the dangers of global warming?"
       ];
 
-
-
-    function makeTask() {
-   	return Math.floor(Math.random() * task.length);
+      var studentTasks = task[Math.floor(Math.random() * task.length)];
+      return  studentTasks = task[Math.floor(Math.random() * task.length)];
    }
 
    
-   var taskName = task[makeTask];
 
 	</script>
 
-<input type="button" style="font-size:9pt" value="Get a Test Question" onclick="document.getElementById('code').value = makeTask()">
+
 	
 </input>
 </form>
