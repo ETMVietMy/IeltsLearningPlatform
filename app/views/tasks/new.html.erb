@@ -1,131 +1,133 @@
 
-<div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
-
-	<form><textarea name="textarea" id="code" ></textarea><br />
-	<input type="button" id="button" style="font-size:9pt" value="Get a Test Question" onclick="document.getElementById('code').value = makeTask()">
-	<script>
-	
-    function makeTask() {
-    var task = [
-
-        "Nowadays, families are not as close as in the past and a lot of people have become used to this. Explain the reasons for this and discuss any possible effects it may have on society.",
-        "Smokers have rights too, so they should be allowed to smoke in public places.To what extent do you agree or disagree with this statement?",
-        "These days, we are seeing an increasing amount of violence on television, and this is having a negative impact on children's behaviour.Do you agree or disagree?",
-        "Stress is now a major problem in many countries around the world.What are some of the factors in modern society that cause this stress, and how can we reduce it?",
-        "Eating a balanced diet is the most important factor for a healthy life.To what extent do you agree?",
-        "Currently there is a trend towards the use of alternative forms of medicine. However, at best these methods are ineffective, and at worst they may be dangerous.To what extent do you agree with this statement?",
-        "Developed countries have created many environmental problems in the World, particularly in their contribution to global warming.What can be done to reduce the dangers of global warming?"
-      ];
-
-      var studentTasks = task[Math.floor(Math.random() * task.length)];
-      return  studentTasks = task[Math.floor(Math.random() * task.length)];
-   }
-
-   
-
-	</script>
-
-
-	
-</input>
-</form>
-        
-</div>
-
-<!--Goals is to:
-1) Click on Button
-2) On click display random topic
-3) Each click produces a different topic  -->
-
-<div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
-<h1 class="text-center">Click the Timer When You Are Ready</h1>
-<div class="timer">
-    <div class="timer__controls">
-      
-      <button data-time="1200" class="timer__button">Part 1 20</button>
-      <button data-time="3600" class="timer__button">Full Exam 60 Minutes</button>
-
-      <form name="customForm" id="custom">
-        <input type="text" name="minutes" class="timer__button1" placeholder="Enter Minutes" style="width: 300px; height: 100px;">
-
-      </form>
-    </div>
-    <div class="display">
-      <h1 class="display__time-left"></h1>
-      <p class="display__end-time"></p>
-    </div>
-  </div>
- </div>
-
-  <script>
-
+<div class="task-container">
+  <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
   
-  	// task display
-  	
-
-   // task display
-   
-
- // timer display  	
-let countdown;
-const timerDisplay = document.querySelector('.display__time-left');
-const endTime = document.querySelector('.display__end-time');
-const buttons = document.querySelectorAll('[data-time]');
-
-function timer(seconds) {
-  // clear any existing timers
-  clearInterval(countdown);
-
-  const now = Date.now();
-  const then = now + seconds * 1000;
-  displayTimeLeft(seconds);
-  displayEndTime(then);
-
-  countdown = setInterval(() => {
-    const secondsLeft = Math.round((then - Date.now()) / 1000);
-    // check if we should stop it!
-    if(secondsLeft < 0) {
-      clearInterval(countdown);
-      return;
-    }
-    // display it
-    displayTimeLeft(secondsLeft);
-  }, 1000);
-}
-
-function displayTimeLeft(seconds) {
-  const minutes = Math.floor(seconds / 60);
-  const remainderSeconds = seconds % 60;
-  const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
-  document.title = display;
-  timerDisplay.textContent = display;
-}
-
-function displayEndTime(timestamp) {
-  const end = new Date(timestamp);
-  const hour = end.getHours();
-  const adjustedHour = hour > 12 ? hour - 12 : hour;
-  const minutes = end.getMinutes();
-  endTime.textContent = `Be Back At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`;
-}
-
-function startTimer() {
-  const seconds = parseInt(this.dataset.time);
-  timer(seconds);
-}
-
-
-
-buttons.forEach(button => button.addEventListener('click', startTimer));
-document.customForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const mins = this.minutes.value;
-  console.log(mins);
-  timer(mins * 60);
-  this.reset();
-});
-
-
-
-  </script>
+    <form><textarea name="textarea" id="code" ></textarea><br />
+    <input type="button" id="button" style="font-size:9pt" value="Get a Test Question" onclick="document.getElementById('code').value = makeTask()">
+    <script>
+    
+      function makeTask() {
+      var task = [
+  
+          "Nowadays, families are not as close as in the past and a lot of people have become used to this. Explain the reasons for this and discuss any possible effects it may have on society.",
+          "Smokers have rights too, so they should be allowed to smoke in public places.To what extent do you agree or disagree with this statement?",
+          "These days, we are seeing an increasing amount of violence on television, and this is having a negative impact on children's behaviour.Do you agree or disagree?",
+          "Stress is now a major problem in many countries around the world.What are some of the factors in modern society that cause this stress, and how can we reduce it?",
+          "Eating a balanced diet is the most important factor for a healthy life.To what extent do you agree?",
+          "Currently there is a trend towards the use of alternative forms of medicine. However, at best these methods are ineffective, and at worst they may be dangerous.To what extent do you agree with this statement?",
+          "Developed countries have created many environmental problems in the World, particularly in their contribution to global warming.What can be done to reduce the dangers of global warming?"
+        ];
+  
+        var studentTasks = task[Math.floor(Math.random() * task.length)];
+        return  studentTasks = task[Math.floor(Math.random() * task.length)];
+     }
+  
+     
+  
+    </script>
+  
+  
+    
+  </input>
+  </form>
+          
+  </div>
+  
+  <!--Goals is to:
+  1) Click on Button
+  2) On click display random topic
+  3) Each click produces a different topic  -->
+  
+  <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
+  <h1 class="text-center">Click the Timer When You Are Ready</h1>
+  <div class="timer">
+      <div class="timer__controls">
+        
+        <button data-time="1200" class="timer__button">Part 1 20</button>
+        <button data-time="3600" class="timer__button">Full Exam 60 Minutes</button>
+  
+        <form name="customForm" id="custom">
+          <input type="text" name="minutes" class="timer__button1" placeholder="Enter Minutes" style="width: 300px; height: 100px;">
+  
+        </form>
+      </div>
+      <div class="display">
+        <h1 class="display__time-left"></h1>
+        <p class="display__end-time"></p>
+      </div>
+    </div>
+   </div>
+  
+    <script>
+  
+    
+      // task display
+      
+  
+     // task display
+     
+  
+   // timer display    
+  let countdown;
+  const timerDisplay = document.querySelector('.display__time-left');
+  const endTime = document.querySelector('.display__end-time');
+  const buttons = document.querySelectorAll('[data-time]');
+  
+  function timer(seconds) {
+    // clear any existing timers
+    clearInterval(countdown);
+  
+    const now = Date.now();
+    const then = now + seconds * 1000;
+    displayTimeLeft(seconds);
+    displayEndTime(then);
+  
+    countdown = setInterval(() => {
+      const secondsLeft = Math.round((then - Date.now()) / 1000);
+      // check if we should stop it!
+      if(secondsLeft < 0) {
+        clearInterval(countdown);
+        return;
+      }
+      // display it
+      displayTimeLeft(secondsLeft);
+    }, 1000);
+  }
+  
+  function displayTimeLeft(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainderSeconds = seconds % 60;
+    const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
+    document.title = display;
+    timerDisplay.textContent = display;
+  }
+  
+  function displayEndTime(timestamp) {
+    const end = new Date(timestamp);
+    const hour = end.getHours();
+    const adjustedHour = hour > 12 ? hour - 12 : hour;
+    const minutes = end.getMinutes();
+    endTime.textContent = `Be Back At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes}`;
+  }
+  
+  function startTimer() {
+    const seconds = parseInt(this.dataset.time);
+    timer(seconds);
+  }
+  
+  
+  
+  buttons.forEach(button => button.addEventListener('click', startTimer));
+  document.customForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const mins = this.minutes.value;
+    console.log(mins);
+    timer(mins * 60);
+    this.reset();
+  });
+  
+  
+  
+    </script>
+</div>
 

@@ -1,0 +1,24 @@
+<h1>Writing task</h1>
+
+<p>Suggestion:</p>
+
+<p>Or create your own:</p>
+
+<%= form_for(@task, html:{class: 'form-dashboard'}) do |f| %>
+  <%= hidden_field_tag :next_location, 'writing' %>
+  <div class="form-group">
+    <label>Task Number *</label>
+    <%= f.select :task_number, options_for_select([1,2]), {}, class: 'form-control' %>
+
+  </div>
+  <div class="form-group">
+    <label>Attachment (optional)</label>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <%= f.text_area :description, rows: 6, class: 'form-control' %>
+  </div>
+  <%= submit_tag "Continue", class: "btn btn-primary" %>
+<% end %>
+  
+
