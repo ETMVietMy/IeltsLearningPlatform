@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  layout 'dashboard'
+
 	def index
 		@tasks = Task.all
 	end
