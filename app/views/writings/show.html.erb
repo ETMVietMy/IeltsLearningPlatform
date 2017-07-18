@@ -1,0 +1,23 @@
+<h1>Writing Answer</h1>
+
+<div class="container-limited">
+  <div>
+    <h5>
+      <strong>Question:</strong>
+    </h5>
+    <%= image_tag(@task.attachments.last.attachment.url, class: 'attachment img-responsive') if @task.attachments.present? %> 
+    <p><%= @writing.task_description %></p>
+  </div>
+  
+  <div>
+    <h5>
+      <strong>Your Answer:</strong>
+    </h5>
+    <%= simple_format @writing.answer %>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "Go Back", writings_path, class: 'btn btn-primary'  %>
+  </div>
+</div>
+
