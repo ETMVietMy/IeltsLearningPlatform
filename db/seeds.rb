@@ -64,7 +64,8 @@ if Task.count == 0
     'While it is argued that a distinguished career is regarded as the most pivotal thing in a person’s life, I strongly believe that there are other factors which can make people’s lifetime become meaningful.',
     'Parents often give children everything they ask for and do what they like. Is it good for children? What are the consequences when they grow up?'
   ]
+
+  tasks.each do |task|
+    Task.create(description: task, task_number: 2)
+  end
 end
-
-
-
