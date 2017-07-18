@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170718182103) do
+=======
+ActiveRecord::Schema.define(version: 20170718054840) do
+>>>>>>> a69f0cdfa24ea4aa6d728d7a29793830b6ee9b70
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "comments", force: :cascade do |t|
     t.text "message"
     t.integer "rating"
@@ -22,6 +27,17 @@ ActiveRecord::Schema.define(version: 20170718182103) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "teacher_id"
+=======
+  create_table "attachments", force: :cascade do |t|
+    t.string "attachment"
+    t.integer "attached_item_id"
+    t.string "attached_item_type"
+    t.string "original_filename"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attached_item_id", "attached_item_type"], name: "index_attachments_on_attached_item_id_and_attached_item_type"
+>>>>>>> a69f0cdfa24ea4aa6d728d7a29793830b6ee9b70
   end
 
   create_table "follows", force: :cascade do |t|
@@ -80,6 +96,22 @@ ActiveRecord::Schema.define(version: 20170718182103) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "writings", force: :cascade do |t|
+    t.text "task_description"
+    t.string "task_type"
+    t.bigint "task_id"
+    t.bigint "user_id"
+    t.integer "teacher_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "answer"
+    t.index ["task_id"], name: "index_writings_on_task_id"
+    t.index ["user_id"], name: "index_writings_on_user_id"
+  end
+
   add_foreign_key "follows", "teachers"
   add_foreign_key "follows", "users"
+  add_foreign_key "writings", "tasks"
+  add_foreign_key "writings", "users"
 end

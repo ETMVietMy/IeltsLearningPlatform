@@ -1,0 +1,8 @@
+<tr>
+  <td><%= writing.id %></td>
+  <td><%= link_to truncate(writing.task_description, length: 40), writing %></td>
+  <td><%= time_ago_in_words writing.created_at %></td>
+  <td class="text-right">
+    <a href="#" class="btn btn-primary btn-sm">send request</a>
+  </td>
+</tr>

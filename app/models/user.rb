@@ -6,7 +6,12 @@ class User < ApplicationRecord
 
   has_one  :teacher
   has_many :follows
+
   has_many :comments
+
+  has_many :writings
+  has_many :tasks
+
 
   validates :username, presence: true
 
