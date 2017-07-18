@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
+
 ActiveRecord::Schema.define(version: 20170718182103) do
-=======
+
 ActiveRecord::Schema.define(version: 20170718054840) do
->>>>>>> a69f0cdfa24ea4aa6d728d7a29793830b6ee9b70
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
+
   create_table "comments", force: :cascade do |t|
     t.text "message"
     t.integer "rating"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170718054840) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "teacher_id"
-=======
+
   create_table "attachments", force: :cascade do |t|
     t.string "attachment"
     t.integer "attached_item_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20170718054840) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["attached_item_id", "attached_item_type"], name: "index_attachments_on_attached_item_id_and_attached_item_type"
->>>>>>> a69f0cdfa24ea4aa6d728d7a29793830b6ee9b70
+
   end
 
   create_table "follows", force: :cascade do |t|

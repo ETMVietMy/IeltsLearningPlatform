@@ -3,14 +3,15 @@ class CommentsController < ApplicationController
 
 
 	def create
-		@teacher = Teacher.find_by(id: params[:id])
-		@teacher.comments.create(comment_params.merge(user: current_user))
+		@teacher = Teacher.find(params[:teacher_id])
+		@teacher.comments.create(comment_params)
 		redirect_to teacher_path(@teacher)
 	end
 
+
 	private
 
-	def comments_params
+	def comment_params
 		params.require(:comment).permit(:message, :rating)
 	end
 end
