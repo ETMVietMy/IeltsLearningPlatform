@@ -18,8 +18,12 @@ Rails.application.routes.draw do
     patch 'account/edit-teacher-info', to: 'account#update_teacher'
   end
 
-	resources :students
+	resources :teachers do
+    resources :comments, only: :create
+  end
+
 	resources :tasks
+  
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations'}
 

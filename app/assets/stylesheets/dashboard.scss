@@ -10,7 +10,10 @@
 @import "partials/header";
 @import "partials/sidebar";
 
+
 @import "modal";
+@import "tasks";
+@import "teachers";
 
 html, body{
   height: 100%;
@@ -60,11 +63,6 @@ header{
   box-sizing: inherit;
 }
 
-body {
-  margin:0;
-  text-align: center;
-  font-family: 'Inconsolata', monospace;
-}
 
 .display__time-left {
   font-weight: 100;
@@ -126,7 +124,7 @@ body {
   border-right:1px solid rgba(0,0,0,0.2);
   padding:1rem;
   font-family: 'Inconsolata', monospace;
-  
+
   
 }
 
@@ -190,3 +188,44 @@ input {
 #button {
   margin-bottom: 10px;
 }
+
+.battery:after {
+    background-color: #fff;
+    border: 2px solid #000;
+    content: "";
+    display: block;
+    height: 16px;
+    position: absolute;
+    right: -6px;
+    top: 6px;
+    width: 6px;
+}
+.battery {
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 100px;
+}
+
+.battery .battery-level {
+    background-color: #666;
+    height: 100%;
+}
+
+.battery .battery-level.high {
+    background-color: #66CD00;
+}
+.battery .battery-level.medium {
+    background-color: #FCD116;
+}
+.battery .battery-level.low {
+    background-color: #FF3333;
+}
+
+battery .battery-level {
+    text-align: center;
+}
+

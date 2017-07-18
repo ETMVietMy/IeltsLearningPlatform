@@ -53,7 +53,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 
 # simple_form
-gem 'simple_form'
+
 gem "cocoon"
 
 # Use Capistrano for deployment
@@ -70,7 +70,7 @@ group :development, :test do
   gem 'simplecov', '~> 0.12.0', require: false
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
-  gem 'faker'
+  
 end
 
 group :development do

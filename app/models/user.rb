@@ -6,8 +6,11 @@ class User < ApplicationRecord
 
   has_one  :teacher
   has_many :follows
+  has_many :comments
 
   validates :username, presence: true
+
+  
 
   def is_student?
     self.role == 'STD'

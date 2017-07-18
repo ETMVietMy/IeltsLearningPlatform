@@ -2,7 +2,7 @@
 <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
 
 	<form><textarea name="textarea" id="code" ></textarea><br />
-	<input type="button" id="button" style="font-size:9pt" value="Get a Test Question" onclick="document.getElementById('code').value = makeTask()">
+	<input type="button" id="button" readonly="readonly" style="font-size:9pt" value="Get a Test Question" onclick="document.getElementById('code').value = makeTask()">
 	<script>
 	
     function makeTask() {
@@ -29,7 +29,7 @@
 	
 </input>
 </form>
-        
+
 </div>
 
 <!--Goals is to:
@@ -57,14 +57,10 @@
   </div>
  </div>
 
-  <script>
 
-  
-  	// task display
-  	
 
-   // task display
-   
+
+  <script>  
 
  // timer display  	
 let countdown;
@@ -125,7 +121,9 @@ document.customForm.addEventListener('submit', function(e) {
   this.reset();
 });
 
-
-
   </script>
+
+  <div id="battery">Boom<div id="battery-level"></div></div>
+
+
 
