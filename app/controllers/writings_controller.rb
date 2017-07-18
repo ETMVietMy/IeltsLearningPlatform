@@ -1,8 +1,15 @@
 class WritingsController < ApplicationController
   layout 'dashboard'
-  before_action :set_task, only: [:new, :create]
+
+  before_action :set_task, only: [:new]
 
   def index
+    @writings = current_user.writings
+  end
+
+  def show
+    @writing = Writing.find(params[:id])
+    @task = @writing.task
   end
 
   def new
@@ -10,7 +17,19 @@ class WritingsController < ApplicationController
   end
 
   def create
-    @writing = Writing.new(task: @task)
+    @writing = Writing.new(writing_params)
+    @task = Task.find(writing_params[:task_id])
+    @writing.user = current_user
+    @writing.task_type = @task.task_number
+    @writing.task_description = @task.description
+
+    if @writing.save
+      flash[:success] = 'You have successfully created a writing'
+      redirect_to writings_path
+    else 
+      flash.now[:error] = @writing.errors.full_messages.to_sentence
+      render :index
+    end
   end
 
   private 
@@ -18,6 +37,6 @@ class WritingsController < ApplicationController
     @task = Task.find(params[:task_id])
   end
   def writing_params
-    params.require(:writing).permit(:answer)
+    params.require(:writing).permit(:answer, :task_id)
   end
 end

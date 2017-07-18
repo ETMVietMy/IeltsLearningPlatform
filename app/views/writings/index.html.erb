@@ -1,7 +1,7 @@
 <h1>Your writing</h1>
 
 <div class="text-right mt-4 mb-4">
-  <%= link_to "New Writing", task_suggest_path, class: 'btn btn-primary' %>
+  <%= link_to "New Writing", tasks_suggest_path, class: 'btn btn-primary' %>
 </div>
 <table class="table">
   <thead>
@@ -13,11 +13,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>625</td>
-      <td>Task 2</td>
-      <td>Jul 24, 2017</td>
-      <td class="text-right"><a href="#" class="btn btn-primary btn-sm">send request</a></td>
-    </tr>
+    <%= render @writings %>
   </tbody>
 </table>

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     post 'tasks/:task_id/writings', to: 'writings#create', as: 'create_writing'
 
     # writing
-    resources :writings, only: [:index, :show]
+    resources :writings, only: [:index, :show, :create]
     # resources :tasks, only: [:show] do
     #   resources :writings, only: [:new, :create]
     # end

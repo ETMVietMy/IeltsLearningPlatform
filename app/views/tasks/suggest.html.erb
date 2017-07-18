@@ -4,7 +4,7 @@
 
 <p>Or create your own:</p>
 
-<%= form_for(@task, html:{class: 'form-dashboard'}) do |f| %>
+<%= form_for(@task, html:{class: 'form-dashboard', multipart: true}) do |f| %>
   <%= hidden_field_tag :next_location, 'writing' %>
   <div class="form-group">
     <label>Task Number *</label>
@@ -12,7 +12,8 @@
 
   </div>
   <div class="form-group">
-    <label>Attachment (optional)</label>
+    <label>Attachment (optional)</label><br>
+    <%= file_field :attachment, :attachment %>
   </div>
   <div class="form-group">
     <label>Description</label>
@@ -22,3 +23,4 @@
 <% end %>
   
 
+<%= debug @attachment %>
