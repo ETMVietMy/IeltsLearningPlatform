@@ -1,0 +1,10 @@
+<table class="table table-striped">
+  <tbody>
+    <% @teachers.each do |teacher| %>
+    <tr>
+      <td><%= teacher.username %></td>
+      <td class="text-right"><%= link_to "Choose", create_request_path(@writing.id, teacher.id), method: "post", class: 'btn btn-secondary btn-sm'  %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

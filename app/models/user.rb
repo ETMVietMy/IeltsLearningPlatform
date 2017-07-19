@@ -16,7 +16,17 @@ class User < ApplicationRecord
 
   validates :username, presence: true
 
-  
+  def name_or_username
+    self.name.presence || self.username
+  end
+
+  def self.teachers
+    where("role = 'TEC'")
+  end
+
+  def rating
+    5
+  end
 
   def is_student?
     self.role == 'STD'

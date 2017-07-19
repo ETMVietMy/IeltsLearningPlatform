@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
     # writing
     resources :writings, only: [:index, :show, :create]
+    get 'writing/:writing_id/request', to: 'writings#new_request', as: 'new_request'
+    post 'writing/:writing_id/request/:teacher_id', to: 'writings#create_request', as: 'create_request'
     # resources :tasks, only: [:show] do
     #   resources :writings, only: [:new, :create]
     # end
@@ -34,9 +36,11 @@ Rails.application.routes.draw do
     # message
     resources :messages
     get 'messages_sent', to: 'messages#sent'
+    get 'accept_request/:message_id', to: 'messages#accept_request', as: 'accept_request'
+    get 'deny_request/:message_id', to: 'messages#deny_request', as: 'deny_request'
   end
 
-	resources :teachers do
+    resources :teachers do
     resources :comments, only: :create
   end
 

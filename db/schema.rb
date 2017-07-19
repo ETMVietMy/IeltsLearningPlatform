@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719173335) do
+ActiveRecord::Schema.define(version: 20170719174639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,21 @@ ActiveRecord::Schema.define(version: 20170719173335) do
     t.integer "teacher_id"
   end
 
+  create_table "corrections", force: :cascade do |t|
+    t.integer "teacher_id"
+    t.bigint "writing_id"
+    t.text "body"
+    t.string "status", default: "new"
+    t.float "task_achievement"
+    t.float "coherence_cohesion"
+    t.float "lexical_resource"
+    t.float "grammar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id", "status"], name: "index_corrections_on_teacher_id_and_status"
+    t.index ["writing_id"], name: "index_corrections_on_writing_id"
+  end
+
   create_table "follows", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "teacher_id"
@@ -51,6 +66,10 @@ ActiveRecord::Schema.define(version: 20170719173335) do
     t.boolean "is_read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "message_type", default: "msg"
+    t.integer "writing_id"
+    t.index ["message_type"], name: "index_messages_on_message_type"
+    t.index ["writing_id"], name: "index_messages_on_writing_id"
   end
 
   create_table "recipients", force: :cascade do |t|
@@ -124,6 +143,7 @@ ActiveRecord::Schema.define(version: 20170719173335) do
     t.index ["user_id"], name: "index_writings_on_user_id"
   end
 
+  add_foreign_key "corrections", "writings"
   add_foreign_key "follows", "teachers"
   add_foreign_key "follows", "users"
   add_foreign_key "recipients", "messages"
