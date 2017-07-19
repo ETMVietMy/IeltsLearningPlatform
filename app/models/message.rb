@@ -5,6 +5,13 @@ class Message < ApplicationRecord
   validates :sender, presence: true
   validates :content, :subject, presence: true
 
+  def writing
+  end
+
+  def is_request?
+    self.message_type == 'req'
+  end
+
   def getSender
     @user ||= User.find_by(id: sender)
   end
