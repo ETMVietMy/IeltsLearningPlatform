@@ -10,7 +10,10 @@
 @import "partials/header";
 @import "partials/sidebar";
 
+
 @import "modal";
+@import "tasks";
+@import "teachers";
 
 html, body{
   height: 100%;
@@ -66,9 +69,12 @@ header{
   box-sizing: inherit;
 }
 
+
+
 .task-container{
   margin:0;
   text-align: center;
+
 
   .display__time-left {
     font-weight: 100;
@@ -118,6 +124,23 @@ header{
 
   }
 
+
+#custom {
+  background-color: #dfdfdf;
+  border:0;
+  cursor: pointer;
+  color: #3F7FBF;
+  font-size: 2rem;
+  text-transform: uppercase;
+  background:rgba(0,0,0,0.1);
+  border-bottom:3px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(0,0,0,0.2);
+  padding:1rem;
+  font-family: 'Inconsolata', monospace;
+
+  
+}
+
   #custom {
     background-color: #dfdfdf;
     border:0;
@@ -133,6 +156,7 @@ header{
     
     
   }
+
 
   .timer__button:hover,
   .timer__button:focus {
@@ -191,8 +215,55 @@ header{
    position:relative;
   }
 
+
+#button {
+  margin-bottom: 10px;
+}
+
+.battery:after {
+    background-color: #fff;
+    border: 2px solid #000;
+    content: "";
+    display: block;
+    height: 16px;
+    position: absolute;
+    right: -6px;
+    top: 6px;
+    width: 6px;
+}
+.battery {
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 100px;
+}
+
+.battery .battery-level {
+    background-color: #666;
+    height: 100%;
+}
+
+.battery .battery-level.high {
+    background-color: #66CD00;
+}
+.battery .battery-level.medium {
+    background-color: #FCD116;
+}
+.battery .battery-level.low {
+    background-color: #FF3333;
+}
+
+battery .battery-level {
+    text-align: center;
+}
+
+
   #button {
     margin-bottom: 10px;
   }
   font-family: 'Inconsolata', monospace;
 }
+

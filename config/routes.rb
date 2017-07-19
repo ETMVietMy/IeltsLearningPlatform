@@ -36,8 +36,12 @@ Rails.application.routes.draw do
     get 'messages_sent', to: 'messages#sent'
   end
 
-	resources :students
+	resources :teachers do
+    resources :comments, only: :create
+  end
+
 	resources :tasks
+  
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations'}
 
