@@ -28,9 +28,10 @@
       <%= simple_form_for @comment, url: teacher_comments_path(@teacher) do |f| %>
       <%= f.input :message %>
       <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
+      <%= f.submit "Add a Comment About Your Teacher", class: 'btn btn-primary' %>
       </div>
       <div class="modal-footer">
-        <%= f.submit "Add a Comment About Your Teacher", class: 'btn btn-primary' %>
+        
     
       </div>
        <% end %>
@@ -142,16 +143,18 @@
             <th>Comment</th>
             <th>Sender</th>
             <th>Time</th> 
+
           </tr>
         </thead>
       <tbody>
-      <div class="row">
       <% @teacher.comments.each do |comment| %>
         <tr>
+        <div>
+        <blockquote>
           <% if comment.humanized_rating.present? %>
             <b><%= comment.humanized_rating %></b> -
           <% end %>
-        <blockquote>
+        
           <td id="message"><strong><%= comment.message %></strong></td>
           <td id = "user"><small><%= comment.user.username %></small></td>
           <td id = "time"><small><%= time_ago_in_words(comment.created_at) %> ago </small></td>
