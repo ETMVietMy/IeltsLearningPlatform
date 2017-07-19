@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get 'account', to: 'account#index'
     get 'account/edit', to: 'account#edit'
     patch 'account', to: 'account#update'
-    get 'account/change-password', to: 'account#change_password' 
+    get 'account/change-password', to: 'account#change_password'
     get 'account/edit-teacher-info', to: 'account#edit_teacher'
     patch 'account/edit-teacher-info', to: 'account#update_teacher'
 
@@ -30,10 +30,18 @@ Rails.application.routes.draw do
     # resources :tasks, only: [:show] do
     #   resources :writings, only: [:new, :create]
     # end
+
+    # message
+    resources :messages
+    get 'messages_sent', to: 'messages#sent'
   end
 
-	resources :students
+	resources :teachers do
+    resources :comments, only: :create
+  end
+
 	resources :tasks
+  
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations'}
 

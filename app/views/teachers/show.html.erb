@@ -2,14 +2,52 @@
   <div class="row">
     <div class="col-sm-9">
       <h1 class=""><%= @teacher.user.username %></h1>
-      <button type="button" class="btn btn-success">Book me!</button>  <button type="button" class="btn btn-info">Send me a message</button>
+      <button type="button" class="btn btn-success">Book me!</button>  <button type="button" class="btn btn-info">Send me a message</button> 
+
+      <div class="clear"></div>
+
+      <br />
+      
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+ Add a Comment About Your Teacher
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add a Comment About Your Teacher</h4>
+      </div>
+      <div class="modal-body">
+      <%= simple_form_for @comment, url: teacher_comments_path(@teacher) do |f| %>
+      <%= f.input :message %>
+      <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "Add a Comment About Your Teacher", class: 'btn btn-primary' %>
+    
+      </div>
+       <% end %>
+    </div>
+  </div>
+</div>
+
       <br>
     </div>
 
     <div class="col-sm-3">
       <a href="/users" class="float-right"><img title="profile image" class="img-circle img-responsive" src="http://www.rlsandbox.com/img/profile.jpg"></a>
+
     </div>
   </div>
+
+
 
   <br>
 
@@ -35,6 +73,8 @@
           <i class="fa fa-star-o" aria-hidden="true"></i>
         </li>
       </ul>
+
+
 
       <br>
 
@@ -95,3 +135,22 @@
     </div>
   </div>
   <!-- End of row -->
+
+
+
+
+  <h1>Comments</h1>
+
+<% @teacher.comments.each do |comment| %>
+  <div class="col-xs-9">
+    <blockquote>
+      <% if comment.humanized_rating.present? %>
+        <b><%= comment.humanized_rating %></b> -
+      <% end %>
+      <%= comment.message %>
+      <small><%= comment.user.email %></small>
+    </blockquote>
+  </div>
+<% end %>
+
+

@@ -79,7 +79,7 @@ There are two types of writing task in a IELTS Exam
 
 Here's a walkthrough of implemented user stories:
 
-![Video Walkthrough](/app/assets/xxx.gif)
+![Video Walkthrough](/app/assets/video_walkthrough.gif)
 
 ## License
 

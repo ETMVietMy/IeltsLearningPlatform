@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718054840) do
+ActiveRecord::Schema.define(version: 20170718182103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20170718054840) do
     t.index ["attached_item_id", "attached_item_type"], name: "index_attachments_on_attached_item_id_and_attached_item_type"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "message"
+    t.integer "rating"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "teacher_id"
+  end
+
   create_table "follows", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "teacher_id"
@@ -35,13 +44,22 @@ ActiveRecord::Schema.define(version: 20170718054840) do
     t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.integer "user_id"
+  create_table "messages", force: :cascade do |t|
+    t.bigint "sender"
+    t.string "subject"
+    t.text "content"
+    t.boolean "is_read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.bigint "message_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_recipients_on_message_id"
+    t.index ["user_id"], name: "index_recipients_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -98,6 +116,8 @@ ActiveRecord::Schema.define(version: 20170718054840) do
 
   add_foreign_key "follows", "teachers"
   add_foreign_key "follows", "users"
+  add_foreign_key "recipients", "messages"
+  add_foreign_key "recipients", "users"
   add_foreign_key "writings", "tasks"
   add_foreign_key "writings", "users"
 end
