@@ -50,16 +50,13 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 
 # simple_form
-
+gem 'simple_form'
 gem "cocoon"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # fake data 
-  gem 'faker'
-  
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -70,7 +67,7 @@ group :development, :test do
   gem 'simplecov', '~> 0.12.0', require: false
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
-  
+  gem 'faker'
 end
 
 group :development do
