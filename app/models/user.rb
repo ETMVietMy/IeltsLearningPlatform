@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :follows
   has_many :writings
   has_many :tasks
+  has_many :recipients
 
   validates :username, presence: true
 
@@ -25,6 +26,24 @@ class User < ApplicationRecord
 
   def isFollowing(teacher_id)
     !Follow.find_by(user_id: id, teacher_id: teacher_id).nil?
+  end
+
+  # messages
+  def received_messages
+    Message.where(id: self.recipients.map(&:message_id))
+          #  .where.not(sender: getAllBlockCases).order("created_at desc")
+  end
+
+  def unread_messages
+    received_messages.select{|message| message.is_read == false}
+  end
+
+  def read_messages
+    received_messages.select{|message| message.is_read == false}
+  end
+
+  def sent_messages
+    Message.where(sender: id).order("created_at desc")
   end
 
 end

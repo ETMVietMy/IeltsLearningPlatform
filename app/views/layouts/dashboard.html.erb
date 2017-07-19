@@ -16,22 +16,30 @@
       <div class="dashboard-sidebar">
         <ul class="nav nav-sidebar">
           <li class="nav-item">
-            <a href="#" class="nav-link">Dashboard</a>
+            <a href="#" class="nav-link"><i class="fa fa-fw fa-bar-chart"></i> Dashboard</a>
           </li>
-          <li class="nav-item">
-            <%= link_to 'Your writing', writings_path, class: 'nav-link'  %>
+          <li class="nav-item <%= active_class(controller: 'account', action: 'index') %>">
+            <a class="nav-link" href="<%= account_path %>"><i class="fa fa-fw fa-user-circle-o"></i> Profile</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <%= active_class(controller: 'messages', action: 'index') %>">
+            <a class="nav-link" href="<%= messages_path %>"><i class="fa fa-fw fa-envelope-o"></i> Inbox</a>
+          </li>
+          <li class="nav-item <%= active_class(controller: 'messages', action: 'sent')%>">
+            <a class="nav-link" href="<%= messages_sent_path %>"><i class="fa fa-fw fa-paper-plane-o"></i> Sent</a>
+          </li>
+          <li class="nav-item <%= active_class(controller: 'writings', action: 'index') %>">
+            <%= link_to writings_path, class: 'nav-link' do %>
+              <i class="fa fa-fw fa-pencil-square-o"></i> Your writing
+            <% end %>
+          </li>
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">Your Requests</a>
+          </li> -->
+          <li class="nav-item <%= active_class(controller: 'teachers', action: 'index') %>">
+            <a class="nav-link" href="<%= teachers_path %>"><i class="fa fa-fw fa-graduation-cap"></i> Find your teacher</a>
           </li>
-          <li class="nav-item">
-            <a href="<%= teachers_path %>" class="nav-link">Find your teacher</a>
-          </li>
-          <li class="nav-item">
-            <a href="<%= follows_path %>" class="nav-link">Follows</a>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Your account", account_path, class: "nav-link" %>
+          <li class="nav-item <%= active_class(controller: 'follows', action: 'index') %>">
+            <a class="nav-link" href="<%= follows_path %>"><i class="fa fa-fw fa-address-book-o"></i> Follows</a>
           </li>
         </ul>
       </div>
