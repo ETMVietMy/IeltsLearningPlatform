@@ -1,7 +1,7 @@
 class Teacher < ApplicationRecord
   belongs_to :user
   has_many :follows
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   validates :experience, :nationality, :price, presence: true
   validates :price, numericality: true

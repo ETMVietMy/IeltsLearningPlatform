@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one  :teacher
   has_many :follows
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   has_many :writings
   has_many :tasks

@@ -74,7 +74,7 @@
         </li>
       </ul>
 
-      
+
 
       <br>
 
@@ -136,10 +136,13 @@
   </div>
   <!-- End of row -->
 
+
+
+
   <h1>Comments</h1>
 
 <% @teacher.comments.each do |comment| %>
-  <div>
+  <div class="col-xs-9">
     <blockquote>
       <% if comment.humanized_rating.present? %>
         <b><%= comment.humanized_rating %></b> -

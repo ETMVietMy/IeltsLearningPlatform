@@ -1,12 +1,18 @@
 class CommentsController < ApplicationController
 	before_action :authenticate_user!
 
-
-	def create
+	def create	
 		@teacher = Teacher.find(params[:teacher_id])
-		@teacher.comments.create(comment_params)
-		redirect_to teacher_path(@teacher)
+		@comment = @teacher.comments.create(comment_params)
+		@comment.user_id = current_user.id
+		if @comment.save
+			flash[:success] = "New Comment posted!"
+			redirect_to teacher_path(@teacher)
+		else
+			flash[:error] = "Unable to post!"
+			redirect_to teacher_path(@teacher)
 	end
+end
 
 
 	private
