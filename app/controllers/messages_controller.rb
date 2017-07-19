@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
       @message.is_read = false
 
       if @message.save
-        Recipient.create(user_id: @user.id, message_id: @message.id)
+        Recipient.create(user_id: recipient.id, message_id: @message.id)
         flash[:success] = "Your message has been sent."
         redirect_to messages_sent_path
       else
