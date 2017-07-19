@@ -1,0 +1,73 @@
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-sm-8">
+        <h1 class="page-header">
+            New Message
+        </h1>
+    </div>
+    <div class="col-sm-4 text-right">
+      <a href="<%= messages_path %>" class="btn btn-primary btn-sm">Inbox</a>
+    </div>
+</div>
+<!-- /.row -->
+
+<%= form_tag messages_path do %>
+  <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header card-default">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= label_tag "To" %>
+              <%= text_field_tag :addresses, params[:recipient], class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= label_tag :subject %>
+              <%= text_field_tag :subject, params[:subject], class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <!-- End of row -->
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value=""> Create a Correcting Request
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+              <option selected>Attach your writing...</option>
+              <option value="1">Write a letter to your mom</option>
+            </select>
+          </div>
+        </div>
+        <!-- End of row -->
+      </div>
+
+      <div class="card-block">
+        <%= label_tag "Message" %>
+        <div class="form-group">
+          <%= text_area_tag :content, nil,  rows: 10,class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+<br>
+<div class="row">
+  <div class="col-sm-2 offset-sm-5">
+    <div class="form-group">
+      <%= submit_tag 'Send', class: 'btn btn-block btn-sm btn-success' %>
+    </div>
+  </div>
+</div>
+  <!-- /.row -->
+<% end %>

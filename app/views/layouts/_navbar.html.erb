@@ -18,11 +18,11 @@
       <ul class="navbar-nav navbar-right">
         <% if !user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'Log In', new_user_session_path, class:"btn btn-primary btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "login" %>
+            <%= link_to 'Log In', new_user_session_path, class:"btn btn-primary btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "#login" %>
           </li>
           <li class="nav-item">&nbsp;</li>
           <li class="nav-item">
-            <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-primary btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "signup" %>
+            <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-primary btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "#signup" %>
           </li>
         <% else %>
           <li class="nav-item">

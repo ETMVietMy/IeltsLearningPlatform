@@ -1,11 +1,11 @@
 
-<div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
-	<h1 class="text-center">Need Help Picking a Task?</h1>
 
-	<% @tasks.each do |task| %>
-		<%= task.description %>
-		<%= task.task_number %>
-	<% end %>
+<div class="task-container">
+  <div class="booyah-box col-xs-10 col-xs-offset-1 text-center">
+    <h1 class="text-center">Need Help Picking a Task?</h1>
+  
+    
+    <%= link_to "Get a topic", new_task_path, class: 'btn btn-primary' %>
+  </div>
 
-	<%= link_to "Get a topic", new_task_path, class: 'btn btn-primary' %>
 </div>
