@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 	def create	
 		@teacher = Teacher.find(params[:teacher_id])
 		@comment = @teacher.comments.create(comment_params)
-		@comment.user_id = current_user.id
+		@comment.user_id = current_user
 		if @comment.save
 			flash[:success] = "New Comment posted!"
 			redirect_to teacher_path(@teacher)

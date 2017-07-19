@@ -132,25 +132,45 @@
           <%= @teacher.experience %>
         </div>
       </div>
-    </div>
-  </div>
+      <br />
+      
+        <h1 class="hello text-center">Comments</h1>
+
+        <table class="table table-stripped">
+        <thead class="thead thead-default">
+          <tr>
+            <th>Comment</th>
+            <th>Sender</th>
+            <th>Time</th> 
+          </tr>
+        </thead>
+      <tbody>
+      <div class="row">
+      <% @teacher.comments.each do |comment| %>
+        <tr>
+          <% if comment.humanized_rating.present? %>
+            <b><%= comment.humanized_rating %></b> -
+          <% end %>
+        <blockquote>
+          <td id="message"><strong><%= comment.message %></strong></td>
+          <td id = "user"><small><%= comment.user.username %></small></td>
+          <td id = "time"><small><%= time_ago_in_words(comment.created_at) %> ago </small></td>
+        </blockquote>
+      <% end %>
+      </div>
+      </tr>
+  </tbody>
+  </table>
   <!-- End of row -->
 
 
 
 
-  <h1>Comments</h1>
+  
 
-<% @teacher.comments.each do |comment| %>
-  <div class="col-xs-9">
-    <blockquote>
-      <% if comment.humanized_rating.present? %>
-        <b><%= comment.humanized_rating %></b> -
-      <% end %>
-      <%= comment.message %>
-      <small><%= comment.user.email %></small>
-    </blockquote>
-  </div>
-<% end %>
+  
+  
+
+
 
 
