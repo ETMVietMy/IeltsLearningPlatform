@@ -1,0 +1,11 @@
+<tr>
+  <td><%= correction.writing.user.name_or_username %></td>
+  <td><%= "Task #{correction.writing.task_type}"  %></td>
+  <td><%= time_ago_in_words correction.created_at %></td>
+  <td><%= correction.status %></td>
+  <td>
+    <%= link_to "View", correction_path(correction.id) %>
+    |
+    <%= link_to "Edit", edit_correction_path(correction.id) %>
+  </td>
+</tr>

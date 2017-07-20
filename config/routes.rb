@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     get 'messages_sent', to: 'messages#sent'
     get 'accept_request/:message_id', to: 'messages#accept_request', as: 'accept_request'
     get 'deny_request/:message_id', to: 'messages#deny_request', as: 'deny_request'
+
+    # correction
+    resources :corrections, only: [:index, :edit, :update, :show]
   end
 
     resources :teachers do
