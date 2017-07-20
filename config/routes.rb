@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   end
 
     resources :teachers do
-    resources :comments, only: :create
+        resources :comments, only: :create
   end
 
 	resources :tasks
