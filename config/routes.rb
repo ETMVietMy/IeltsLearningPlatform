@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   end
 
 	resources :tasks
+    resources :ratings, only: :update
   
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations'}

@@ -26,18 +26,27 @@
       </div>
       <div class="modal-body">
       <%= simple_form_for @comment, url: teacher_comments_path(@teacher) do |f| %>
-      <%= f.input :message %>
-      <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
-      <%= f.submit "Add a Comment About Your Teacher", class: 'btn btn-primary' %>
-      </div>
-      <div class="modal-footer">
-        
-    
+        <%= f.input :message %>
+        <div id="rating-form">
+          <label>Rating</label>
+        </div>
+        <%= f.submit "Add a Comment About Your Teacher", class: 'btn btn-primary' %>
       </div>
        <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  
+
+  $('#rating-form').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });
+</script>
+
+
 
       <br>
     </div>
@@ -66,14 +75,39 @@
           <span>Joseph Doe</span>
         </li>
         <li class="list-group-item justify-content-between">
-          <span class="font-bold">Rate</span>
-          <i class="fa fa-star"   aria-hidden="true"></i>
-          <i class="fa fa-star"   aria-hidden="true"></i>
-          <i class="fa fa-star"   aria-hidden="true"></i>
-          <i class="fa fa-star"   aria-hidden="true"></i>
-          <i class="fa fa-star-o" aria-hidden="true"></i>
+          <span class="font-bold">Rating</span>
+          <h2 class="avg-rating">Average Rating</h2>
+      <div class="average-review-rating" data-score=<%= @average_review %>></div>
+      
+          
         </li>
       </ul>
+
+      <script>
+
+      
+  $('.review-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
+
+
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>
+
+
+      </script>
 
 
 
@@ -149,11 +183,7 @@
       <tbody>
       <% @teacher.comments.each do |comment| %>
         <tr>
-        <div>
-        <blockquote>
-          <% if comment.humanized_rating.present? %>
-            <b><%= comment.humanized_rating %></b> -
-          <% end %>
+        
         
           <td id="message"><strong><%= comment.message %></strong></td>
           <td id = "user"><small><%= comment.user.username %></small></td>
@@ -165,6 +195,12 @@
   </tbody>
   </table>
   <!-- End of row -->
+
+  <!-- Ratings Placeholder -->
+
+
+
+
 
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719174639) do
+ActiveRecord::Schema.define(version: 20170720161943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(version: 20170719174639) do
     t.integer "writing_id"
     t.index ["message_type"], name: "index_messages_on_message_type"
     t.index ["writing_id"], name: "index_messages_on_writing_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "comment_id"
+    t.bigint "user_id"
+    t.float "score", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_ratings_on_comment_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "recipients", force: :cascade do |t|
@@ -146,6 +156,8 @@ ActiveRecord::Schema.define(version: 20170719174639) do
   add_foreign_key "corrections", "writings"
   add_foreign_key "follows", "teachers"
   add_foreign_key "follows", "users"
+  add_foreign_key "ratings", "comments"
+  add_foreign_key "ratings", "users"
   add_foreign_key "recipients", "messages"
   add_foreign_key "recipients", "users"
   add_foreign_key "writings", "tasks"
