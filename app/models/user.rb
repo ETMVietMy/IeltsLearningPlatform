@@ -30,6 +30,12 @@ class User < ApplicationRecord
     5
   end
 
+  def corrections
+    return nil if self.is_student?
+
+    Correction.where(teacher_id: self.id)
+  end
+
   def is_student?
     self.role == 'STD'
   end
