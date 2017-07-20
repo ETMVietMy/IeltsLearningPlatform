@@ -40,7 +40,6 @@ source 'https://rails-assets.org' do
 end
 
 gem 'bootstrap', '~> 4.0.0.alpha5'
-gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 gem 'devise'
@@ -52,6 +51,9 @@ gem 'mini_magick'
 # simple_form
 gem 'simple_form'
 gem "cocoon"
+
+# editor
+gem "wysiwyg-rails"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
