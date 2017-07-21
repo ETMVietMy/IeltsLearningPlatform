@@ -1,9 +1,11 @@
 include ActionView::Helpers::DateHelper
 
 class Message < ApplicationRecord
-  has_one :recipient
+  has_many :recipients
   validates :sender, presence: true
   validates :content, :subject, presence: true
+
+  accepts_nested_attributes_for :recipients
 
   def writing
   end

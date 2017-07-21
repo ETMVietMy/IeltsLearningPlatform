@@ -16,28 +16,27 @@ class MessagesController < ApplicationController
         @message.save
       end
     else
-      flash[:error] = "Cannot get data of the message!"
+      flash[:error] = "ERROR: Cannot get data of the message!"
       redirect_to messages_path
     end
   end
 
   def create
-    if params[:addresses].nil? || params[:addresses].strip==""
-      flash[:error] = "Message cannot send without recipient."
+    @message = Message.new(message_params)
+
+    if @message.recipients_emails.nil? || @message.recipients_emails.strip==""
+      flash[:error] = "ERROR: Message cannot send without recipient."
       redirect_to new_message_path
       return
     else
-      recipient = User.find_by(email: params[:addresses])
+      recipient = User.find_by(email: @message.recipients_emails)
       if recipient.nil?
-        flash[:error] = "Cannot find User with email '#{params[:addresses]}'!"
+        flash[:error] = "ERROR: Cannot find User with email '#{@message.recipients_emails}'!"
         redirect_to new_message_path
         return
       end
 
-      @message = Message.new
       @message.sender = current_user.id
-      @message.subject = params[:subject]
-      @message.content = params[:content]
       @message.is_read = false
 
       if @message.save
@@ -49,6 +48,20 @@ class MessagesController < ApplicationController
         redirect_to new_message_path
       end
     end
+  end
+
+  def destroy
+    @message = Message.find_by(id: params[:id])
+    @message.hide_recipient = true
+    @message.save
+    @messages = current_user.received_messages
+  end
+
+  def delete_sent
+    @message = Message.find_by(id: params[:id])
+    @message.hide_sender = true
+    @message.save
+    @messages = current_user.sent_messages
   end
 
   def accept_request
@@ -64,11 +77,16 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def message_params
+    params.require(:message).permit(:subject, :content, :message_type, :writing_id, :recipients_emails)
+  end
+
   def reply_request(is_accepted)
     @request = Message.find(params[:message_id])
 
     unless @request.writing_id.present?
-      flash[:error] = "The message doesn't link to any writing"
+      flash[:error] = "ERROR: The message doesn't link to any writing"
       redirect_to messages_path
     end
 
@@ -87,7 +105,7 @@ class MessagesController < ApplicationController
       end
 
       @message = Message.new(
-        sender: current_user.id, 
+        sender: current_user.id,
         subject: reply_subject,
         content: reply_content,
         is_read: false
