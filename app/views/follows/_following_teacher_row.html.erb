@@ -13,7 +13,7 @@
     <div class="button-group">
       <a href="#" class="btn btn-success btn-sm">Send Request</a>
       <%= link_to '<i class="fa fa-times-circle text-danger" aria-hidden="true"></i> Unfollow'.html_safe,
-                  follows_path(id: teacher.id),
+                  follow_path(id: teacher.id),
                   { data: { confirm: "Are you sure you want to unfollow teacher '#{teacher.user.username}'?" },
                   method: :delete, remote: true, class: "btn btn-secondary btn-sm" } %>
     </div>

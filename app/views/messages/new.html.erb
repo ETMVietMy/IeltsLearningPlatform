@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-8">
         <h1 class="page-header">
-            New Message
+            Compose
         </h1>
     </div>
     <div class="col-sm-4 text-right">
@@ -11,63 +11,30 @@
 </div>
 <!-- /.row -->
 
-<%= form_tag messages_path do %>
-  <div class="row">
-    <div class="col-sm-12">
-    <div class="card">
-      <div class="card-header card-default">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <%= label_tag "To" %>
-              <%= text_field_tag :addresses, params[:recipient], class: 'form-control' %>
-            </div>
-          </div>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item">
+  <a class="nav-link active" data-toggle="tab" href="#correcting-request" role="tab">Correcting Request</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="tab" href="#compose-message" role="tab">Message</a>
+</li>
+</ul>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <%= label_tag :subject %>
-              <%= text_field_tag :subject, params[:subject], class: 'form-control' %>
-            </div>
-          </div>
-        </div>
-        <!-- End of row -->
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value=""> Create a Correcting Request
-              </label>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-              <option selected>Attach your writing...</option>
-              <option value="1">Write a letter to your mom</option>
-            </select>
-          </div>
-        </div>
-        <!-- End of row -->
-      </div>
-
-      <div class="card-block">
-        <%= label_tag "Message" %>
-        <div class="form-group">
-          <%= text_area_tag :content, nil,  rows: 10,class: 'form-control' %>
-        </div>
-      </div>
-    </div>
-    </div>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="correcting-request" role="tabpanel">
+    <%= render "correcting_request"%>
   </div>
-<br>
-<div class="row">
-  <div class="col-sm-2 offset-sm-5">
-    <div class="form-group">
-      <%= submit_tag 'Send', class: 'btn btn-block btn-sm btn-success' %>
-    </div>
+
+  <div class="tab-pane" id="compose-message" role="tabpanel">
+    <%= render "compose_message"%>
   </div>
 </div>
-  <!-- /.row -->
-<% end %>
+
+<script type="text/javascript">
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>

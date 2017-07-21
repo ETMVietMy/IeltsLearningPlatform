@@ -9,4 +9,10 @@
     <td><%= message.subject %></td>
     <td><%= message.getSentAt %></td>
   <% end %>
+  <td>
+    <%= link_to '<i class="fa fa-times-circle text-danger" aria-hidden="true"></i>'.html_safe,
+              message_path(id: message.id),
+              { data: { confirm: "Are you sure you want to delete this message?" },
+              method: :delete, remote: true, class: "delete-button"} %>
+  </td>
 </tr>
