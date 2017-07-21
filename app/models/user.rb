@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def getAllFollowedTeachers
-    @teachers = Teacher.where(id: Follow.where(user_id: id).map(&:teacher_id))
+    @follow_teachers ||= Teacher.where(id: Follow.where(user_id: id).map(&:teacher_id))
   end
 
   def isFollowing(teacher_id)
@@ -46,20 +46,24 @@ class User < ApplicationRecord
 
   # messages
   def received_messages
-    Message.where(id: self.recipients.map(&:message_id))
+    @received_messages ||= Message.where(id: self.recipients.map(&:message_id), hide_recipient: false).order("created_at desc")
           #  .where.not(sender: getAllBlockCases).order("created_at desc")
   end
 
   def unread_messages
-    received_messages.select{|message| message.is_read == false}
+    @unread_messages ||= received_messages.select{|message| message.is_read == false}
   end
 
   def read_messages
-    received_messages.select{|message| message.is_read == false}
+    @read_messages ||= received_messages.select{|message| message.is_read == false}
   end
 
   def sent_messages
-    Message.where(sender: id).order("created_at desc")
+    @sent_message ||= Message.where(sender: id, hide_sender: false).order("created_at desc")
+  end
+
+  def self.getAllTeacherUser()
+    @users ||= User.where(role: "TCH")
   end
 
 end

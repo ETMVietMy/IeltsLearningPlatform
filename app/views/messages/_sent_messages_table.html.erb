@@ -1,0 +1,14 @@
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>To</th>
+            <th>Subject</th>
+            <th>Sent at</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @messages.each do |message| %>
+      <%= render "sent_message_row", message: message, recipient: message.getRecipient %>
+      <% end %>
+    </tbody>
+</table>

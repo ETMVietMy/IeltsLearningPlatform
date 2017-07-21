@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719174639) do
+ActiveRecord::Schema.define(version: 20170721090635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,9 @@ ActiveRecord::Schema.define(version: 20170719174639) do
     t.datetime "updated_at", null: false
     t.string "message_type", default: "msg"
     t.integer "writing_id"
+    t.boolean "hide_sender", default: false
+    t.boolean "hide_recipient", default: false
+    t.string "recipients_emails"
     t.index ["message_type"], name: "index_messages_on_message_type"
     t.index ["writing_id"], name: "index_messages_on_writing_id"
   end
@@ -79,15 +82,6 @@ ActiveRecord::Schema.define(version: 20170719174639) do
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_recipients_on_message_id"
     t.index ["user_id"], name: "index_recipients_on_user_id"
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
