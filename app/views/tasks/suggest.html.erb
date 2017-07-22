@@ -2,11 +2,14 @@
 
 <div class="container-limited">
   <h5><strong>Example task:</strong></h5>
-  <div class="alert alert-info">
+
+  <div class="alert alert-info" id="task-description">
     <%= simple_format @suggest_task.description %>
   </div>
-  <div>
-    <%= link_to "Choose this", new_writing_path(task_id: @suggest_task.id), class: 'btn btn-primary btn-sm mb-4' %>
+
+  <div class="mb-4">
+    <a id="js-new-suggestion" role="button" class="btn btn-secondary btn-sm mr-2">New Suggestion</a>
+    <%= link_to "Choose this", new_writing_path(task_id: @suggest_task.id),role: "button",id: 'task-choose', class: 'btn btn-primary btn-sm' %>
   </div>
   
   <h5><strong>Or create your own:</strong></h5>
