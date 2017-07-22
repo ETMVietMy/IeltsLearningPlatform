@@ -38,14 +38,7 @@
   </div>
 </div>
 
-<script>
-  
 
-  $('#rating-form').raty({
-    path: '/assets/',
-    scoreName: 'review[rating]'
-  });
-</script>
 
 
 
@@ -79,21 +72,12 @@
           <h2 class="avg-rating">Average Rating</h2>
       <div class="average-review-rating" data-score=<%= @average_review %>></div>
       
+
           
         </li>
       </ul>
 
-      <script>
-
-  
-  $('.average-review-rating').raty({
-    readOnly: true,
-    path: '/assets/',
-    score: function() {
-      return $(this).attr('data-score')
-    }
-  });
-</script>
+     
 
 
       
@@ -171,9 +155,8 @@
       <% @teacher.comments.each do |comment| %>
         <tr>
           <td id="message"><strong><%= comment.message %></strong><br />
-            <div class="review-rating" data-score="<%= comment.score %>"></div></td>
-
-
+          
+          <div class="review-rating" data-score=<%= comment.rating %>></div></td>
 
 
 
@@ -184,23 +167,42 @@
 
           
         </blockquote>
-      <% end %>
+      
       </div>
       </tr>
+      <% end %>
   </tbody>
   </table>
   <!-- End of row -->
+
+<script>
+  
+  $('#rating-form').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });
+</script>
+
 <script>             
   $('.review-rating').raty({
     readOnly: true,
     score: function() {
-      return $(this).attr('data-score');
+      return $(this).getAttribute('data-score');
     },
     path: '/assets/'
   });
 </script>
  
+ <script>
 
+  $('.average-review-rating').raty({
+    readOnly: true,
+    path: '/assets/',
+    score: function() {
+      return $(this).getAttribute('data-score')
+    }
+  });
+</script>
   <!-- Ratings Placeholder -->
 
 

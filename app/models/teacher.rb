@@ -16,8 +16,6 @@ class Teacher < ApplicationRecord
                   )
   end
 
-  def average_rating
-  ratings.sum(:score) / ratings.size
-end
+  
 
 end

@@ -19,8 +19,7 @@ class RatingsController < ApplicationController
 	end
 
 	def update
-		@comment = Comment.find(params[:comment_id])
-    @rating = Rating.find(params[:id])
+	@comment = Comment.find(params[:comment_id])
     @comment = @rating.comment
     if @rating.update_attributes(score: params[:score])
       respond_to do |format|
