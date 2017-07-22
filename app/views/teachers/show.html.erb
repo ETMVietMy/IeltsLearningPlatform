@@ -183,13 +183,8 @@
       <tbody>
       <% @teacher.comments.each do |comment| %>
         <tr>
-
-
-        
-        
-        
-          <td id="message"><strong><%= comment.message %></strong></td>
-          <%= comment.rating %>
+          <td id="message"><strong><%= comment.message %></strong><br />
+            <div class="review-rating" data-score="<%= comment.rating %>"></div></td>
 
           <td id = "user"><small><%= comment.user.username %></small></td>
           

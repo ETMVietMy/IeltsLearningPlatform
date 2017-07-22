@@ -1,7 +1,7 @@
 <h1>Correction #<%= @correction.id  %></h1>
 
 <h2>Task</h2>
-<% unless @task.attachment.attachment.file.nil? %>
+<% unless @task.attachment.nil? || @task.attachment.attachment.file.nil? %>
   <div class="task-image">
     <%= image_tag @task.attachment.attachment.url %>  
   </div>

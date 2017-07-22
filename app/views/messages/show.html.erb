@@ -2,12 +2,16 @@
 <div class="row">
     <div class="col-sm-8">
         <h1 class="page-header">
-            Message Detail
+          <% if @message.text_message? %>
+            Message
+          <% else %>
+            Correcting Request
+          <% end %>
         </h1>
 
     </div>
     <div class="col-sm-4 text-right">
-      <a href="<%= messages_path %>" class="btn btn-sm btn-primary">Inbox</a>
+      <%= link_to 'Back', :back, class: "btn btn-sm btn-primary" %>
     </div>
 </div>
 <!-- /.row -->
@@ -20,44 +24,68 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <%= label_tag "Sender" %>
-                    <input class="form-control" type="text" placeholder="<%= @message.getSender.email %>" disabled="">
+                    <input class="form-control" type="text" placeholder="<%= @message.getSender.email %>" readonly="">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
                     <%= label_tag :subject %>
-                    <input class="form-control" type="text" placeholder="<%= @message.subject %>" disabled="">
+                    <input class="form-control" type="text" placeholder="<%= @message.subject %>" readonly="">
                   </div>
                 </div>
               </div>
               <!-- End of row -->
             </div>
             <div class="card-block">
-              <%= label_tag "Message" %>
               <div class="form-group">
-                <textarea class="form-control" rows="10" type="text" readonly=""><%= @message.content %>
+                <span class="font-bold"> <%= @message.getSender.username %> wrote:</span>
+                <textarea class="form-control" type="text" readonly=""><%= @message.content %>
                 </textarea>
               </div>
+              <% if @message.request? %>
+                <% if !@writing.nil? %>
+                  <div class="form-group">
+                    <span class="font-bold">Writing</span>
+                    <div class="card">
+                      <p> <%= @markdown.render("####_"+@writing.task_description + "_").html_safe %> </p>
+                      <p> <%= @markdown.render(@writing.answer).html_safe %> </p>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="alert alert-danger" role="alert">
+                    <strong>ERROR: </strong> The message doesn't link to any writing!
+                  </div>
+                <% end %>
+              <% end %>
             </div>
         </div>
     </div>
   </div>
   <br>
-  <% if @message.is_request? && @message.writing_id.present? %>
+  <% if @message.request? && !@writing.nil? %>
     <div class="row">
       <div class="col-sm-2 offset-sm-4">
         <div class="form-group">
-          <%= link_to "Accept", accept_request_path(@message.writing_id), class: 'btn btn-block btn-sm btn-success'  %>
+          <%= link_to "Accept", accept_request_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
           <!-- <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Accept]<%= @message.subject %>" class="btn btn-block btn-sm btn-success">Accept</a> -->
         </div>
       </div>
       <div class="col-sm-2">
         <div class="form-group">
-          <%= link_to "Decline", deny_request_path(@message.writing_id), class: 'btn btn-block btn-sm btn-danger'  %>
+          <%= link_to "Decline", deny_request_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
           <!-- <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Decline]<%= @message.subject %>" class="btn btn-block btn-sm btn-danger">Decline</a> -->
         </div>
       </div>
     </div>
+  <% else %>
+  <div class="row">
+    <div class="col-sm-2 offset-sm-5">
+      <div class="form-group">
+        <%= link_to "Reply", nil, class: 'btn btn-block btn-sm btn-success'  %>
+        <!-- <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Accept]<%= @message.subject %>" class="btn btn-block btn-sm btn-success">Accept</a> -->
+      </div>
+    </div>
+  </div>
   <% end %>
   <!-- /.row -->

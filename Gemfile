@@ -55,6 +55,9 @@ gem "cocoon"
 # editor
 gem "wysiwyg-rails"
 
+# markdown
+gem 'redcarpet'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

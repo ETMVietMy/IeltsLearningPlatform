@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
     # follows
     resources :follows, only: [:new, :index]
-    delete 'follows', to: 'follows#destroy'
+    delete 'follow', to: 'follows#destroy'
     post 'follows_add', to: 'follows#create'
 
     # account
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     # message
     resources :messages
     get 'messages_sent', to: 'messages#sent'
+    delete 'messages_sent', to: 'messages#delete_sent'
     get 'accept_request/:message_id', to: 'messages#accept_request', as: 'accept_request'
     get 'deny_request/:message_id', to: 'messages#deny_request', as: 'deny_request'
 
@@ -48,8 +49,8 @@ Rails.application.routes.draw do
   end
 
 	resources :tasks
-    resources :ratings, only: :update
-  
+  resources :ratings, only: :update
+
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations'}
 
