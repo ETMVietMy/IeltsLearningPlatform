@@ -11,7 +11,7 @@
   <!-- Unfollow -->
   <td>
     <div class="button-group">
-      <a href="#" class="btn btn-success btn-sm">Send Request</a>
+      <%= link_to "Send Request", new_message_path(teacher_id: teacher.user.email), class: 'btn btn-success btn-sm' %>
       <%= link_to '<i class="fa fa-times-circle text-danger" aria-hidden="true"></i> Unfollow'.html_safe,
                   follow_path(id: teacher.id),
                   { data: { confirm: "Are you sure you want to unfollow teacher '#{teacher.user.username}'?" },

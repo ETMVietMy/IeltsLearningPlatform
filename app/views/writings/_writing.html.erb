@@ -4,6 +4,6 @@
   <td><%= time_ago_in_words writing.created_at %></td>
   <td class="text-right">
     <a href="#" class=""></a>
-    <%= link_to "Get correcting", new_request_path(writing.id), class: 'btn btn-primary btn-sm' %>
+    <%= link_to "Get correcting", new_message_path(writing_id: writing.id), class: 'btn btn-primary btn-sm' %>
   </td>
 </tr>
