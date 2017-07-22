@@ -16,7 +16,6 @@ class Message < ApplicationRecord
     end
   end
 
-
   def writing
   end
 
