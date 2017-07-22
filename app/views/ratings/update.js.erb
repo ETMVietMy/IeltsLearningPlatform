@@ -1,12 +1,12 @@
 
 
-$('#star').raty({
+$('.review-rating').raty({
   readOnly: true,
   score: <%= @comment.average_rating %>,
   path: '/assets'
 });
 
-$('#user_star').raty({
+$('.average-review-rating').raty({
   score: <%= @rating.score %>,
   path: '/assets',
   click: function(score, evt) {

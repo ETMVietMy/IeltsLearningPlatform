@@ -17,6 +17,6 @@ end
 	private
 
 	def comment_params
-		params.require(:comment).permit(:message, :rating)
+		params.require(:comment).permit(:message, :rating, :score)
 	end
 end

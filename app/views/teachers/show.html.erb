@@ -85,18 +85,7 @@
 
       <script>
 
-      
-  $('.review-rating').raty({
-    readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
-</script>
-
-
-<script>
+  
   $('.average-review-rating').raty({
     readOnly: true,
     path: '/assets/',
@@ -107,9 +96,7 @@
 </script>
 
 
-      </script>
-
-
+      
 
       <br>
 
@@ -184,9 +171,14 @@
       <% @teacher.comments.each do |comment| %>
         <tr>
           <td id="message"><strong><%= comment.message %></strong><br />
-            <div class="review-rating" data-score="<%= comment.rating %>"></div></td>
+            <div class="review-rating" data-score="<%= comment.score %>"></div></td>
+
+
+
+
 
           <td id = "user"><small><%= comment.user.username %></small></td>
+
           
           <td id = "time"><small><%= time_ago_in_words(comment.created_at) %> ago </small></td>
 
@@ -198,6 +190,16 @@
   </tbody>
   </table>
   <!-- End of row -->
+<script>             
+  $('.review-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
+ 
 
   <!-- Ratings Placeholder -->
 
