@@ -1,0 +1,2 @@
+$('#task-description').html('<%= j simple_format @suggest_task.description %>')
+$('#task-choose').attr('href', '<%= new_writing_path(task_id: @suggest_task.id) %>')
