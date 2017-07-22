@@ -301,11 +301,8 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.1)
   rails-assets-tether (>= 1.1.0)!
-<<<<<<< HEAD
   raty_ratings
-=======
   redcarpet
->>>>>>> 1e49a84c0a73c56332266966b0572b6f34f2955a
   rspec-rails (~> 3.5, >= 3.5.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

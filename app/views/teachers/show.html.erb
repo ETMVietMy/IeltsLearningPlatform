@@ -28,7 +28,7 @@
       <%= simple_form_for @comment, url: teacher_comments_path(@teacher) do |f| %>
         <%= f.input :message %>
         <div id="rating-form">
-            <label class="text-left"><strong>Rating</strong></label>
+           <span class="line-of-stars"><label class="text-left"><strong>Rating</strong></label></span>
         </div>
         <br />
         <%= f.submit "Add a Comment About Your Teacher", class: 'btn btn-primary' %>
