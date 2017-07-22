@@ -44,6 +44,9 @@ gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 gem 'devise'
 
+#vue
+gem 'vuejs-rails'
+
 # Upload images
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'

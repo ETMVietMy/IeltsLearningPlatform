@@ -17,6 +17,7 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require cocoon
+//= require froala_editor.min.js
 //= require turbolinks
 //= require_tree .
 

@@ -1,4 +1,4 @@
-jQuery.noConflict()
+# jQuery.noConflict()
 $ ->
   $('#js-new-suggestion').click (e) -> 
     e.prefentDefault
