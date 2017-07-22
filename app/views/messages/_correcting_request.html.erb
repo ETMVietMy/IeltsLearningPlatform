@@ -6,7 +6,8 @@
         <div class="row">
           <div class="col-md-6">
             <%= f.input :recipients_emails,:collection => User.getAllTeacherUser.order(:username),prompt: "Choose your teacher..",
-                        :label_method => :username,:value_method => :email, :label => "Teacher"  %>
+                        :label_method => :username,:value_method => :email, :label => "Teacher",
+                        selected: params[:teacher_id] %>
           </div>
 
           <div class="col-md-6">
@@ -18,7 +19,8 @@
         <div class="row">
           <div class="col-md-6">
             <%= f.input :writing_id, :collection => current_user.writings, prompt: "Attach your writing...",
-                        :label_method => :task_description, :value_method => :id, :label => ""  %>
+                        :label_method => :task_description, :value_method => :id, :label => "",
+                        selected: params[:writing_id] %>
           </div>
         </div>
         <!-- End of row -->

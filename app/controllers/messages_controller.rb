@@ -10,10 +10,15 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find_by(id: params[:id])
+    @writing = nil
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     if @message
       if !@message.is_read
         @message.is_read = true
         @message.save
+      end
+      if @message.request?
+        @writing = Writing.find_by(id: @message.writing_id)
       end
     else
       flash[:error] = "ERROR: Cannot get data of the message!"

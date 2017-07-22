@@ -7,6 +7,16 @@ class Message < ApplicationRecord
 
   accepts_nested_attributes_for :recipients
 
+  # define constant for message_type
+  TEXT_MESSAGE = 'msg'
+  REQUEST = 'req'
+  %w(text_message request).each do |state|
+    define_method "#{state}?" do
+      message_type == self.class.const_get(state.upcase)
+    end
+  end
+
+
   def writing
   end
 
