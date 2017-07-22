@@ -20,10 +20,11 @@ class CorrectionsController < ApplicationController
         @correction.update_attribute(:status, 'done')
         # send message
         @message = Message.new(sender: current_user.id, 
-          subject: 'Your writing has been correcting',
+          subject: 'Your writing has been finished',
           content: 'Teacher has been finish correcting your writing',
           is_read: false,
-          message_type: 'rep'
+          writing_id: @writing.id,
+          message_type: Message::CORRECTION
         )
         @recipient = Recipient.new(message: @message,
           user_id: @writing.user_id

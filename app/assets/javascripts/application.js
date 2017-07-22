@@ -11,12 +11,13 @@
 // about supported directives.
 //
 
-//= require jquery.raty
 //= require jquery
 //= require jquery_ujs
+//= require jquery.raty
 //= require tether
 //= require bootstrap-sprockets
 //= require cocoon
+//= require froala_editor.min.js
 //= require turbolinks
 //= require_tree .
 

@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         @message.is_read = true
         @message.save
       end
-      if @message.request?
+      if @message.request? || @message.correction?
         @writing = Writing.find_by(id: @message.writing_id)
       end
     else
@@ -77,6 +77,28 @@ class MessagesController < ApplicationController
     reply_request(false)
   end
 
+  def accept_correction
+    # reply_correction(true)
+    handle_reply(
+      params[:message_id], 
+      true,
+      "Your correcting has been accepted",
+      "#{current_user.name_or_username} has accepted your correcting",
+      "You have been accepted the correcting succefully"
+    )
+    #def handle_reply(message_id, is_accepted, reply_subject, reply_content, success_flash = 'You have been reply to the request succefully')
+
+  end
+  def deny_correction
+    handle_reply(
+      params[:message_id], 
+      false,
+      "Your correcting request has been denied",
+      "#{current_user.name_or_username} has denied your correting, please review and update it",
+      "You have been accepted the correcting succefully"
+    )
+  end
+
   def sent
     @messages = current_user.sent_messages
   end
@@ -87,6 +109,7 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:subject, :content, :message_type, :writing_id, :recipients_emails)
   end
 
+  # handle request
   def reply_request(is_accepted)
     @request = Message.find(params[:message_id])
 
@@ -96,7 +119,7 @@ class MessagesController < ApplicationController
     end
 
     @writing = Writing.find(@request.writing_id)
-    @correction = Correction.new(writing_id: @writing.id, teacher_id: current_user.id, status: 'new')
+    @correction = Correction.new(writing_id: @writing.id, teacher_id: current_user.id, status: Correction::STATUS_NEW)
 
     Correction.transaction do
       @correction.save!
@@ -124,6 +147,108 @@ class MessagesController < ApplicationController
     end
 
     flash[:success] = 'You have been reply to the request succefully'
+    return redirect_to messages_path
+
+    rescue ActiveRecord::RecordInvalid => invalid
+      flash[:error] = invalid.record.errors.full_messages.to_sentence
+      return redirect_to messages_path
+  end
+
+  #handle correction
+  def reply_correction(is_accepted)
+    @request = Message.find(params[:message_id])
+
+    unless @request.writing_id.present?
+      flash[:error] = "ERROR: The message doesn't link to any writing"
+      redirect_to messages_path
+    end
+
+    @writing = Writing.find(@request.writing_id)
+    @correction = @writing.correction
+    if is_accepted
+      @correction.assign_attributes(status: Correction::STATUS_ACCEPTED)
+    else 
+      @correction.assign_attributes(status: Correction::STATUS_DENIED)
+    end
+
+    Correction.transaction do
+      @correction.save!
+
+      if is_accepted
+        reply_subject = "Your correcting has been accepted"
+        reply_content = "#{current_user.name_or_username} has accepted your correcting"
+      else
+        reply_subject = "Your correcting request has been denied"
+        reply_content = "#{current_user.name_or_username} has denied your correting, please review and update it"
+      end
+
+      @message = Message.new(
+        sender: current_user.id,
+        subject: reply_subject,
+        content: reply_content,
+        is_read: false
+      )
+      @recipient = Recipient.new(
+        message: @message,
+        user_id: @request.sender
+      )
+      @message.save!
+      @recipient.save!
+    end
+
+    flash[:success] = 'You have been reply to the request succefully'
+    return redirect_to messages_path
+
+    rescue ActiveRecord::RecordInvalid => invalid
+      flash[:error] = invalid.record.errors.full_messages.to_sentence
+      return redirect_to messages_path
+  end
+
+  def handle_reply(message_id, is_accepted, reply_subject, reply_content, success_flash = 'You have been reply to the request succefully')
+    @request = Message.find(message_id)
+
+    unless @request.writing_id.present?
+      flash[:error] = "ERROR: The message doesn't link to any writing"
+      redirect_to messages_path
+    end
+
+    @writing = Writing.find(@request.writing_id)
+    @correction = @writing.correction || Correction.new(writing_id: @writing.id, teacher_id: current_user.id, status: Correction::STATUS_NEW)
+
+    if @correction.new_record?
+      if is_accepted
+        @correction.assign_attributes(status: Correction::STATUS_ACCEPTED)
+      else 
+        @correction.assign_attributes(status: Correction::STATUS_DENIED)
+      end
+    end
+
+    Correction.transaction do
+      @correction.save!
+
+      # if is_accepted
+      #   reply_subject = "Your correcting has been accepted"
+      #   reply_content = "#{current_user.name_or_username} has accepted your correcting"
+      # else
+      #   reply_subject = "Your correcting request has been denied"
+      #   reply_content = "#{current_user.name_or_username} has denied your correting, please review and update it"
+      # end
+
+      @message = Message.new(
+        sender: current_user.id,
+        subject: reply_subject,
+        content: reply_content,
+        is_read: false
+      )
+      @recipient = Recipient.new(
+        message: @message,
+        user_id: @request.sender
+      )
+      @message.save!
+      @recipient.save!
+    end
+
+    flash[:success] = success_flash
     return redirect_to messages_path
 
     rescue ActiveRecord::RecordInvalid => invalid

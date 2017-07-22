@@ -10,7 +10,9 @@ class Message < ApplicationRecord
   # define constant for message_type
   TEXT_MESSAGE = 'msg'
   REQUEST = 'req'
-  %w(text_message request).each do |state|
+  CORRECTION = 'cor'
+
+  %w(text_message request correction).each do |state|
     define_method "#{state}?" do
       message_type == self.class.const_get(state.upcase)
     end
@@ -20,7 +22,7 @@ class Message < ApplicationRecord
   end
 
   def is_request?
-    self.message_type == 'req'
+    self.message_type == REQUEST
   end
 
   def getSender
