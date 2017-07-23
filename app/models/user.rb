@@ -29,9 +29,7 @@ class User < ApplicationRecord
     where(role: self::ROLE_TEACHER)
   end
 
-  def rating
-    5
-  end
+  
 
   def average_rating
   ratings.sum(:score) / ratings.size

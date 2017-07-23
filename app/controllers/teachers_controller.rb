@@ -8,12 +8,13 @@ class TeachersController < ApplicationController
 
 
   def show
-    @teacher = Teacher.find_by(id: params[:id])
+    @teacher = Teacher.find(params[:id])
+    @comments = Comment.where(teacher_id: @teacher)
     @comment = Comment.new
     if @teacher.comments.blank?
       @average_review = 0
     else
-      @average_review = @teacher.comments.average(:score).round(2)
+      @average_review = @teacher.comments.average(:rating).round(2)
     end
     
   end

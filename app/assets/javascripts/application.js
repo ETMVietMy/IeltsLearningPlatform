@@ -13,7 +13,7 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require jquery.raty
+//= require jquery.raty.js
 //= require tether
 //= require bootstrap-sprockets
 //= require cocoon
