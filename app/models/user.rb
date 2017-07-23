@@ -5,13 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one  :teacher
+  has_one  :account
   has_many :follows
   has_many :ratings
 
 
 
   has_many :comments, dependent: :destroy
-
   has_many :writings
   has_many :tasks
   has_many :recipients

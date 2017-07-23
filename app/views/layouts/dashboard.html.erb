@@ -21,6 +21,9 @@
           <li class="nav-item <%= active_class(controller: 'account', action: 'index') %>">
             <a class="nav-link" href="<%= account_path %>"><i class="fa fa-fw fa-user-circle-o"></i> Profile</a>
           </li>
+          <li class="nav-item <%= active_class(controller: 'transactions', action: 'index') %>">
+            <a class="nav-link" href="<%= transactions_path %>"><i class="fa fa-fw fa-history"></i> Transaction History</a>
+          </li>
           <li class="nav-item <%= active_class(controller: 'messages', action: 'index') %>">
             <a class="nav-link" href="<%= messages_path %>"><i class="fa fa-fw fa-envelope-o"></i> Inbox</a>
           </li>

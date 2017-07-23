@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722160940) do
+
+ActiveRecord::Schema.define(version: 20170723005028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "balance"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "attachments", force: :cascade do |t|
     t.string "attachment"
@@ -76,6 +86,15 @@ ActiveRecord::Schema.define(version: 20170722160940) do
     t.index ["writing_id"], name: "index_messages_on_writing_id"
   end
 
+  create_table "promo_codes", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.integer "percent"
+    t.integer "limit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.bigint "comment_id"
     t.bigint "user_id"
@@ -124,6 +143,29 @@ ActiveRecord::Schema.define(version: 20170722160940) do
     t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
+  create_table "transaction_types", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "from_account"
+    t.bigint "to_account"
+    t.integer "amount"
+    t.string "transaction_description"
+    t.bigint "transaction_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "promo_code_id"
+    t.string "status"
+    t.bigint "writing_id"
+    t.index ["promo_code_id"], name: "index_transactions_on_promo_code_id"
+    t.index ["transaction_type_id"], name: "index_transactions_on_transaction_type_id"
+    t.index ["writing_id"], name: "index_transactions_on_writing_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -159,6 +201,7 @@ ActiveRecord::Schema.define(version: 20170722160940) do
     t.index ["user_id"], name: "index_writings_on_user_id"
   end
 
+  add_foreign_key "accounts", "users"
   add_foreign_key "corrections", "writings"
   add_foreign_key "follows", "teachers"
   add_foreign_key "follows", "users"
@@ -166,6 +209,9 @@ ActiveRecord::Schema.define(version: 20170722160940) do
   add_foreign_key "ratings", "users"
   add_foreign_key "recipients", "messages"
   add_foreign_key "recipients", "users"
+  add_foreign_key "transactions", "promo_codes"
+  add_foreign_key "transactions", "transaction_types"
+  add_foreign_key "transactions", "writings"
   add_foreign_key "writings", "tasks"
   add_foreign_key "writings", "users"
 end
