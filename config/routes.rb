@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     delete 'messages_sent', to: 'messages#delete_sent'
     get 'accept_request/:message_id', to: 'messages#accept_request', as: 'accept_request'
     get 'deny_request/:message_id', to: 'messages#deny_request', as: 'deny_request'
+    get 'accept_correction/:message_id', to: 'messages#accept_correction', as: 'accept_correction'
+    get 'deny_correction/:message_id', to: 'messages#deny_correction', as: 'deny_correction'
 
     # correction
     resources :corrections, only: [:index, :edit, :update, :show]
@@ -48,7 +50,7 @@ Rails.application.routes.draw do
   end
 
     resources :teachers do
-    resources :comments, only: :create
+        resources :comments, only: :create
   end
 
 	resources :tasks

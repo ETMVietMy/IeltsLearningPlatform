@@ -2,6 +2,10 @@
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on('turbolinks:load', function(){
-  $('.editor').froalaEditor();
-});
+jQuery.noConflict();
+(function($) {
+  $(document).on('turbolinks:load', function(){
+    $('.editor').froalaEditor({height: 300});
+  });
+  console.log('asciausgciqw')
+})(jQuery)

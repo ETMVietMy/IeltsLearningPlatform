@@ -17,12 +17,15 @@ class User < ApplicationRecord
 
   validates :username, presence: true
 
+  ROLE_TEACHER = "TCH"
+  ROLE_STUDENT = "STD"
+
   def name_or_username
     self.name.presence || self.username
   end
 
   def self.teachers
-    where("role = 'TEC'")
+    where(role: self::ROLE_TEACHER)
   end
 
   def rating
@@ -36,11 +39,11 @@ class User < ApplicationRecord
   end
 
   def is_student?
-    self.role == 'STD'
+    self.role == ROLE_STUDENT
   end
 
   def is_teacher?
-    self.role == 'TEC'
+    self.role == ROLE_TEACHER
   end
 
   def getAllFollowedTeachers

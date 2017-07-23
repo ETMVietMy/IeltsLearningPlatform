@@ -67,14 +67,25 @@
     <div class="row">
       <div class="col-sm-2 offset-sm-4">
         <div class="form-group">
-          <%= link_to "Accept", accept_request_path(@message.writing_id), class: 'btn btn-block btn-sm btn-success'  %>
-          <!-- <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Accept]<%= @message.subject %>" class="btn btn-block btn-sm btn-success">Accept</a> -->
+          <%= link_to "Accept", accept_request_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
         </div>
       </div>
       <div class="col-sm-2">
         <div class="form-group">
-          <%= link_to "Decline", deny_request_path(@message.writing_id), class: 'btn btn-block btn-sm btn-danger'  %>
-          <!-- <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Decline]<%= @message.subject %>" class="btn btn-block btn-sm btn-danger">Decline</a> -->
+          <%= link_to "Decline", deny_request_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
+        </div>
+      </div>
+    </div>
+  <% elsif @message.correction? && !@writing.nil? %>
+    <div class="row">
+      <div class="col-sm-2 offset-sm-4">
+        <div class="form-group">
+          <%= link_to "Accept", accept_correction_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <%= link_to "Decline", deny_correction_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
         </div>
       </div>
     </div>

@@ -28,8 +28,9 @@
       <%= simple_form_for @comment, url: teacher_comments_path(@teacher) do |f| %>
         <%= f.input :message %>
         <div id="rating-form">
-          <label>Rating</label>
+           <span class="line-of-stars"><label class="text-left"><strong>Rating</strong></label></span>
         </div>
+        <br />
         <%= f.submit "Add a Comment About Your Teacher", class: 'btn btn-primary' %>
       </div>
        <% end %>
@@ -75,7 +76,6 @@
           <span>Joseph Doe</span>
         </li>
         <li class="list-group-item justify-content-between">
-          <span class="font-bold">Rating</span>
           <h2 class="avg-rating">Average Rating</h2>
       <div class="average-review-rating" data-score=<%= @average_review %>></div>
       
@@ -85,18 +85,7 @@
 
       <script>
 
-      
-  $('.review-rating').raty({
-    readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
-</script>
-
-
-<script>
+  
   $('.average-review-rating').raty({
     readOnly: true,
     path: '/assets/',
@@ -107,9 +96,7 @@
 </script>
 
 
-      </script>
-
-
+      
 
       <br>
 
@@ -174,7 +161,7 @@
         <table class="table table-stripped">
         <thead class="thead thead-default">
           <tr>
-            <th>Comment</th>
+            <th>Feedback</th>
             <th>Sender</th>
             <th>Time</th> 
 
@@ -183,11 +170,19 @@
       <tbody>
       <% @teacher.comments.each do |comment| %>
         <tr>
-        
-        
-          <td id="message"><strong><%= comment.message %></strong></td>
+          <td id="message"><strong><%= comment.message %></strong><br />
+            <div class="review-rating" data-score="<%= comment.score %>"></div></td>
+
+
+
+
+
           <td id = "user"><small><%= comment.user.username %></small></td>
+
+          
           <td id = "time"><small><%= time_ago_in_words(comment.created_at) %> ago </small></td>
+
+          
         </blockquote>
       <% end %>
       </div>
@@ -195,6 +190,16 @@
   </tbody>
   </table>
   <!-- End of row -->
+<script>             
+  $('.review-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
+ 
 
   <!-- Ratings Placeholder -->
 

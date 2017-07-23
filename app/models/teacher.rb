@@ -3,6 +3,8 @@ class Teacher < ApplicationRecord
   has_many :follows
   has_many :comments, dependent: :destroy
 
+  has_many :ratings
+
   validates :experience, :nationality, :price, presence: true
   validates :price, numericality: true
 
@@ -13,5 +15,9 @@ class Teacher < ApplicationRecord
                   "%#{params[:nationality]}%"
                   )
   end
+
+  def average_rating
+  ratings.sum(:score) / ratings.size
+end
 
 end
