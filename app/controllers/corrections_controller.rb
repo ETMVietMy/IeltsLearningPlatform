@@ -1,5 +1,6 @@
 class CorrectionsController < ApplicationController
   before_action :set_correction, only: [:show, :edit, :update]
+  before_action :require_teacher
 
   def index
     @corrections = current_user.corrections
