@@ -44,6 +44,9 @@ Rails.application.routes.draw do
 
     # correction
     resources :corrections, only: [:index, :edit, :update, :show]
+
+    # transactions
+    resources :transactions, only: [:index]
   end
 
     resources :teachers do

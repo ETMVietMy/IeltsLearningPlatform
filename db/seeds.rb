@@ -58,6 +58,36 @@ if User.find_by(email: 'teacher3@email.com')==nil
     })
 end
 
+# Create Account
+User.all.each do |user|
+  if user.account.nil?
+    a = Account.create({
+      user_id: user.id,
+      balance: 0,
+      status: "active"
+      })
+  end
+end
+
+TransactionType.delete_all
+# Create transaction_type
+TransactionType.create(
+  name: 'Top Up Account',
+  code: 'TOPUP'
+)
+TransactionType.create(
+  name: 'Pay for correcting',
+  code: 'PAYMENT'
+)
+TransactionType.create(
+  name: 'Settle Payment for correcting',
+  code: 'SETTLE_PAYMENT'
+)
+TransactionType.create(
+  name: 'Account to Account transaction',
+  code: 'A2A'
+)
+
 if Task.count == 0
   tasks = ['Some people say that zoos have no useful purpose. Others believe that zoos are beneficial in many ways. Discuss and give your opinion.',
     'While some people think that reading books rather than watching TV is more beneficial for one’s imagination and language acquisition, I content that the role of the former in boosting intelligence and language ability is equal to the latter.',
