@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8">
       <h2 class="section-heading text-left">Your Account Information</h2>
-      
+
       <table class="table">
         <tbody>
           <tr>
@@ -17,6 +17,10 @@
             <td><label>Account Type:</label></td>
             <td><%= @account.is_student? ? "Student" : "Teacher" %></td>
           </tr>
+          <tr>
+            <td><label>Account Balance:</label></td>
+            <td><%= @account.account.balance %> <%= image_tag 'coin.png', style: "width:25px;height:25px;"%></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -27,7 +31,7 @@
     <div class="col-md-8">
       <% if current_user.is_teacher? %>
         <h2 class="section-heading text-left mt-4">Teacher Information</h2>
-        
+
         <table class="table">
           <tbody>
             <tr>

@@ -1,0 +1,43 @@
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-sm-8">
+        <h1 class="page-header">
+            Transaction History
+        </h1>
+    </div>
+    <div class="col-sm-4 text-right">
+      <%= link_to 'Back', :back, class: "btn btn-sm btn-primary" %>
+    </div>
+</div>
+<!-- /.row -->
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item">
+  <a class="nav-link active" data-toggle="tab" href="#correcting-request" role="tab">Transactions</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="tab" href="#compose-message" role="tab">Pending Transactions</a>
+</li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="correcting-request" role="tabpanel">
+    <% if !@transactions.nil? && @transactions.count>0 %>
+      <%= render "transactions"%>
+    <% else %>
+      <br>
+      <p class="alert alert-info">There are no transaction done at this moment.</p>
+    <% end %>
+  </div>
+
+  <div class="tab-pane" id="compose-message" role="tabpanel">
+    <% if !@pending_transactions.nil? && @pending_transactions.count>0 %>
+      <%= render "pending_transactions"%>
+    <% else %>
+      <br>
+      <p class="alert alert-info">There are no pending transaction at this moment.</p>
+    <% end %>
+  </div>
+</div>
