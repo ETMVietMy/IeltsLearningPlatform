@@ -61,6 +61,9 @@ gem "wysiwyg-rails"
 # markdown
 gem 'redcarpet'
 
+#dot env, store env locally
+gem 'dotenv-rails', group: [:development, :test], require: 'dotenv/rails-now'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
