@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
 
   # TODO: fetch user dashboard index
   def index
-
+    
   end
 
   def account

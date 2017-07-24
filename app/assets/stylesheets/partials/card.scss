@@ -1,0 +1,23 @@
+.card-dashboard{
+  border: 0;
+  box-shadow: 0 5px 30px 0 rgba(0,0,0,0.1);
+  &-1{
+    background-color: #EAF9EE;
+  }
+  &-2{
+    background-color: #CCD5E5;
+  }
+  &-3{
+    background-color: #E2D7D8;
+  }
+  &-heading{
+    font-family: $font-heading;
+    font-size: 24px;
+  }
+  &-num{
+    span{
+      font-size: 40px;
+      margin-right: 5px;
+    }
+  }
+}

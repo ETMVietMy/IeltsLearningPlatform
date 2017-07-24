@@ -12,6 +12,7 @@
 @import "partials/header";
 @import "partials/sidebar";
 @import "partials/table";
+@import "partials/card";
 
 
 @import "modal";
@@ -71,7 +72,6 @@ header{
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
 
 
 .task-container{

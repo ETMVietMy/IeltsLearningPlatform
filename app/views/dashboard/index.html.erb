@@ -1,8 +1,30 @@
+<h1>Dashboard</h1>
 
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/register_teacher.html.erb</p>
-
-<p>You are a <%= current_user.is_student? ? "student" : "teacher" %></p>
-
-
-
+<div class="container-narrow">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card card-dashboard card-dashboard-1">
+        <div class="card-block">
+          <div class="card-dashboard-heading">You have: </div>
+          <div class="card-dashboard-num"><span>15</span>Writings</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-dashboard card-dashboard-2">
+        <div class="card-block">
+          <div class="card-dashboard-heading">You have: </div>
+          <div class="card-dashboard-num"><span>5</span>Messages</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-dashboard card-dashboard-3">
+        <div class="card-block">
+          <div class="card-dashboard-heading">You follows: </div>
+          <div class="card-dashboard-num"><span>10</span>People</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
