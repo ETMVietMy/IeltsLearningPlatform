@@ -49,6 +49,7 @@ gem 'vuejs-rails'
 
 # Upload images
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-aws'
 gem 'mini_magick'
 
 # simple_form
