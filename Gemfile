@@ -64,6 +64,7 @@ gem 'redcarpet'
 
 #dot env, store env locally
 gem 'dotenv-rails', group: [:development, :test], require: 'dotenv/rails-now'
+gem 'faker'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -79,7 +80,6 @@ group :development, :test do
   gem 'simplecov', '~> 0.12.0', require: false
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
-  gem 'faker'
 end
 
 group :development do
