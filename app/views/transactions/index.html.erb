@@ -11,6 +11,21 @@
 </div>
 <!-- /.row -->
 
+<div class="row">
+  <div class="col-sm-12">
+    <div class="alert alert-info">
+      <h4 class="">
+        <span>
+          You have <span class="font-bold text-primary"> <%= @account.balance %></span> <%= image_tag 'coin.png', class: "coin"%> in your account.
+        </span>
+      </h4>
+      <span>Last 30 days: <span class="font-bold text-success"> +<%= @account.getIncomeLast30 %> <%= image_tag 'coin.png', class: "coin"%> Income</span> <span class="font-bold text-danger"> -<%= @account.getOutcomeLast30 %> <%= image_tag 'coin.png', class: "coin"%> Outcome</span></span>
+      <!-- <span><span class="font-bold text-success"> +<%= @account.getIncomeLast30 %> <%= image_tag 'coin.png', class: "coin"%> Income</span> (last 30 days)</span><br>
+      <span><span class="font-bold text-danger"> -<%= @account.getOutcomeLast30 %> <%= image_tag 'coin.png', class: "coin"%> Outcome</span> (last 30 days)</span> -->
+    </div>
+  </div>
+</div>
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item">

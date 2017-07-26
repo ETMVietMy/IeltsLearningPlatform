@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'raty_ratings'
+gem 'raty_ratings', '1.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # bundle exec rake doc:rails generates the API under doc/api.

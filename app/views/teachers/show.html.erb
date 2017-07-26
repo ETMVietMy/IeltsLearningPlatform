@@ -27,7 +27,10 @@
       <div class="modal-body">
       <%= simple_form_for @comment, url: teacher_comments_path(@teacher) do |f| %>
         <%= f.input :message %>
+        <%= f.label :rating %>
+        <%= f.select :rating, 1..5%>
 
+  
         <div id="rating-form">
         
            <span class="line-of-stars"><label class="text-left"><strong>Rating</strong></label></span>
@@ -159,7 +162,8 @@
         <tr>
           <td id="message"><strong><%= comment.message %></strong><br />
           
-             <div class="review-rating" data-score="<%= comment.rating %>"></div></td>
+             <div class="review-rating" data-score= <%= comment.rating %> ></div>
+            
 
           <td id = "user"><small><%= comment.user.username %></small></td>
 
@@ -182,7 +186,7 @@
   
   $('#rating-form').raty({
     path: '/assets/',
-    scoreName: 'review[rating]'
+    scoreName: '[rating]'
   });
 </script>
 
@@ -206,7 +210,11 @@
 </script>
   <!-- Ratings Placeholder -->
 
-
+<!-- readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/' -->
 
 
 

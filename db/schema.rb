@@ -37,12 +37,13 @@ ActiveRecord::Schema.define(version: 20170723005028) do
 
   create_table "comments", force: :cascade do |t|
     t.text "message"
-    t.integer "rating"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "teacher_id"
     t.integer "score"
+    t.float "rating", default: 0.0
+    t.integer "comment_id"
   end
 
   create_table "corrections", force: :cascade do |t|
@@ -113,15 +114,6 @@ ActiveRecord::Schema.define(version: 20170723005028) do
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_recipients_on_message_id"
     t.index ["user_id"], name: "index_recipients_on_user_id"
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|

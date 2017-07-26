@@ -6,7 +6,8 @@ class CommentsController < ApplicationController
 	end
 
 	def new
-		@comment = Comment.new
+	@teacher = Teacher.find(params[:teacher_id])
+  @comment = Comment.new
 	end
 
 	def show
@@ -21,7 +22,7 @@ class CommentsController < ApplicationController
 end
 
 
-	def create	
+	def create
 		@teacher = Teacher.find(params[:teacher_id])
 		@comment = @teacher.comments.create(comment_params.merge(user: current_user))
 
@@ -35,7 +36,7 @@ end
 end
 
 	def update
-		if @comment.update(comment_params)
+		if @comment.update_attributes(comment_params)
 			flash[:success] = "Update completed!"
 			redirect_to teacher_path(@teacher)
 		else
@@ -47,6 +48,6 @@ end
 	private
 
 	def comment_params
-		params.require(:comment).permit(:message, :rating, :score)
+		params.require(:comment).permit(:message, :rating)
 	end
 end

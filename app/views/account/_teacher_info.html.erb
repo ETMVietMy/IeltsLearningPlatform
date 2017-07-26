@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><label>Nationality:</label></td>
+              <td><%= @account.teacher.nationality %></td>
+            </tr>
+            <tr>
+              <td><label>Price:</label></td>
+              <td><%= @account.teacher.price %></td>
+            </tr>
+            <tr>
+              <td><label>Experience:</label></td>
+              <td><%= @account.teacher.experience %></td>
+            </tr>
+            <tr>
+              <td><label>Linkedin URL:</label></td>
+              <td><%= @account.teacher.linkedin %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <%= link_to "Change Information", account_edit_teacher_info_path, class: 'btn btn-sm btn-primary' %>
+    </div>
+  </div>
+</div>
