@@ -1,11 +1,11 @@
 <tr class='clickable-row' data-href="<%= message_path(message) %>">
   <% if !message.is_read %>
-    <td><strong> <%= sender.email %> </strong></td>
+    <td><strong> <%= sender %> </strong></td>
     <td><strong><%= message.subject %></strong></td>
     <td><strong><%= message.getSentAt %></strong></td>
 
   <% else %>
-    <td><%= sender.email %></td>
+    <td><%= sender %></td>
     <td><%= message.subject %></td>
     <td><%= message.getSentAt %></td>
   <% end %>

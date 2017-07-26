@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <h4>You have <span class="font-bold text-primary"> <%= @current_user.account.balance %></span> <%= image_tag 'coin.png', class: "coin"%> in your account.</h4>
+
+      <a class="btn btn-sm btn-primary" href="<%= transactions_path %>"><i class="fa fa-fw fa-arrow-right"></i> Transaction History</a>
+      <hr>
+      <h4>Top Up</h4>
+        <%= simple_form_for Transaction.new do |f| %>
+        <%= f.input :amount, label: "Amount", :input_html => { :value => params[:amount] }%>
+        <% end %>
+        <a class="btn btn-sm btn-primary" href="#"><i class="fa fa-fw fa-arrow-right"></i> Submit</a>
+      <hr>
+      <h4>Transfer Coins</h4>
+      <%= simple_form_for Transaction.new do |f| %>
+      <%= f.input :amount, label: "Amount", :input_html => { :value => params[:amount] }%>
+      <%= f.input :to_account, label: "To Email", :input_html => { :value => params[:to_account] }%>
+      <% end %>
+      <a class="btn btn-sm btn-primary" href="#"><i class="fa fa-fw fa-arrow-right"></i> Submit</a>
+    </div>
+  </div>
+</div>

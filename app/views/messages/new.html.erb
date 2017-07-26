@@ -14,20 +14,20 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item">
-  <a class="nav-link active" data-toggle="tab" href="#correcting-request" role="tab">Correcting Request</a>
+  <a class="nav-link <%= "active" if params[:type].nil? || params[:type]!="msg" %>" data-toggle="tab" href="#correcting-request" role="tab">Correcting Request</a>
 </li>
-<li class="nav-item">
+<li class="nav-item <%= "active" if !params[:type].nil? && params[:type]=="msg" %>">
   <a class="nav-link" data-toggle="tab" href="#compose-message" role="tab">Message</a>
 </li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="correcting-request" role="tabpanel">
+  <div class="tab-pane <%= "active" if params[:type].nil? || params[:type]!="msg" %>" id="correcting-request" role="tabpanel">
     <%= render "correcting_request"%>
   </div>
 
-  <div class="tab-pane" id="compose-message" role="tabpanel">
+  <div class="tab-pane <%= "active" if !params[:type].nil? && params[:type]=="msg" %>" id="compose-message" role="tabpanel">
     <%= render "compose_message"%>
   </div>
 </div>

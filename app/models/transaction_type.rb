@@ -3,7 +3,7 @@ class TransactionType < ApplicationRecord
 
   # define constant for transaction_type
   TOPUP = 'TOPUP'
-  PENDING_PAYMENT = 'PENDING_PAYMENT'
+  PENDING_PAYMENT = 'PAYMENT'
   SETTLE_PAYMENT = 'SETTLE_PAYMENT'
   A2A = 'A2A'
   %w(topup pending_payment settle_payment a2a).each do |state|
