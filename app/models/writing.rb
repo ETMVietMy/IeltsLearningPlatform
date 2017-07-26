@@ -6,6 +6,10 @@ class Writing < ApplicationRecord
   has_one :correction
 
   def self.writings_count
-    where('created_at >= ?', 1.week.ago ).group('Date(created_at)').select('count(*) as count, DATE(created_at) as date')
+    group_by_day(:created_at, last: 7, format: "%b %e").count
+  end
+
+  def self.total_writings(user_id)
+    where(user_id: user_id).count
   end
 end

@@ -19,6 +19,10 @@ class Message < ApplicationRecord
     end
   end
 
+  def self.total_unread_message(user_id)
+    joins(:recipients).where('recipients.user_id = ? and is_read = ?', user_id, false).count
+  end
+
   def writing
   end
 

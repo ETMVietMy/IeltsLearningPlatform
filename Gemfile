@@ -69,6 +69,9 @@ gem 'faker'
 # charts
 gem "highcharts-rails"
 
+# group date
+gem 'groupdate'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

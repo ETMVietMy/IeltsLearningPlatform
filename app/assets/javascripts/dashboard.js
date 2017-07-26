@@ -7,7 +7,7 @@ jQuery.noConflict();
           type: 'line'
         },
         title: {
-          text: 'Writing Count'
+          text: 'Your writings in the last week'
         },
         xAxis: {
           categories: writings.map(function(item){ return item.date })

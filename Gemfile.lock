@@ -116,6 +116,8 @@ GEM
     formatador (0.2.5)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    groupdate (3.2.0)
+      activesupport (>= 3)
     guard (2.14.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -319,6 +321,7 @@ DEPENDENCIES
   faker
   font-awesome-rails
   font-kit-rails (~> 1.2.0)
+  groupdate
   guard-rspec
   highcharts-rails
   jbuilder (~> 2.5)
@@ -348,4 +351,4 @@ DEPENDENCIES
   wysiwyg-rails
 
 BUNDLED WITH
-   1.15.2
+   1.15.3
