@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   ROLE_TEACHER = "TCH"
   ROLE_STUDENT = "STD"
+  ROLE_ADMIN = "ADM"
 
   def name_or_username
     self.name.presence || self.username

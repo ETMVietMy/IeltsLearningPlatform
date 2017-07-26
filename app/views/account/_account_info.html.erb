@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><label>Username:</label></td>
+            <td><%= @account.username %></td>
+          </tr>
+          <tr>
+            <td><label>Email:</label></td>
+            <td><%= @account.email %></td>
+          </tr>
+          <tr>
+            <td><label>Account Type:</label></td>
+            <td><%= @account.is_student? ? "Student" : "Teacher" %></td>
+          </tr>
+          <tr>
+            <td><label>Account Balance:</label></td>
+            <td><%= @account.account.balance %> <%= image_tag 'coin.png', class: "coin"%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= link_to "Change Information", account_edit_path, class: 'btn btn-sm btn-primary mr-3' %>
+  <%= link_to "Change Password", account_edit_path, class: 'btn btn-sm btn-secondary' %>
+</div>

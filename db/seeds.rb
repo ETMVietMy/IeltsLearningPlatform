@@ -58,6 +58,17 @@ if User.find_by(email: 'teacher3@email.com')==nil
     })
 end
 
+# Create Admin and System mailing User
+if User.find_by(email: 'etm_admin1@email.com')==nil
+  u = User.create({
+    email: 'etm_admin1@email.com',
+    username: 'First Admin',
+    role: 'ADM',
+    password: 'admin1',
+    password_confirmation: 'admin1'
+    })
+end
+
 # Create Account
 User.all.each do |user|
   if user.account.nil?

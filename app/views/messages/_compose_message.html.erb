@@ -5,11 +5,11 @@
       <div class="card-header card-default">
         <div class="row">
           <div class="col-md-6">
-            <%= f.input :recipients_emails, label: "To email"%>
+            <%= f.input :recipients_emails, label: "To email", :input_html => { :value => params[:recipient] }%>
           </div>
 
           <div class="col-md-6">
-            <%= f.input :subject, label: "Subject"%>
+            <%= f.input :subject, label: "Subject", :input_html => { :value => params[:subject] }%>
           </div>
         </div>
         <!-- End of row -->
@@ -27,6 +27,7 @@
   <div class="row">
     <div class="col-sm-2 offset-sm-5">
       <div class="form-group">
+        <%= f.hidden_field :message_type, value: "msg" %>
         <%= f.submit 'Send', class: 'btn btn-block btn-sm btn-success' %>
       </div>
     </div>
