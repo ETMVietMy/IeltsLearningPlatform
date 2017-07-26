@@ -18,6 +18,7 @@
 //= require bootstrap-sprockets
 //= require cocoon
 //= require froala_editor.min.js
+//= require highcharts
 //= require turbolinks
 //= require_tree .
 

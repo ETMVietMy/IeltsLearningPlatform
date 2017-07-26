@@ -17,4 +17,23 @@ module ApplicationHelper
   def active_class(link_path)
     current_page?(link_path) ? "active" : ""
   end
+
+  def is_active_class(name)
+    case name
+      when 'dashboard'
+        return true if current_page?(controller: 'dashboard')
+      when 'profile'
+        return true if current_page?(controller: '')
+      when 'inbox'
+        return true if controller.controller_name == 'messages' && ['index', 'new', 'show'].include?(controller.action_name)
+      when 'sent'
+        return true if controller.controller_name == 'messages' && ['sent'].include?(controller.action_name)
+      when 'writings'
+        return true if current_page?(controller: 'writings') || current_page?(controller: 'tasks', action: 'suggest')
+      when 'teachers'
+        return true if current_page?(controller: 'teachers')
+      when 'follows'
+        return true if current_page?(controller: 'follows')
+    end
+  end
 end

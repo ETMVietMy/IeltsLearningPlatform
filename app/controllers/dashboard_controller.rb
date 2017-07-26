@@ -4,10 +4,6 @@ class DashboardController < ApplicationController
 
   # TODO: fetch user dashboard index
   def index
-    
-  end
-
-  def account
-    
+    @student_graph = Writing.writings_count.map { |item| {date: item.date, value: item.count} }
   end
 end
