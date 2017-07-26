@@ -7,8 +7,7 @@ class User < ApplicationRecord
   has_one  :teacher
   has_one  :account
   has_many :follows
-  has_many :ratings
-
+  
 
 
   has_many :comments, dependent: :destroy
@@ -31,9 +30,7 @@ class User < ApplicationRecord
 
   
 
-  def average_rating
-  ratings.sum(:score) / ratings.size
-end
+  
 
   def corrections
     return nil if self.is_student?
