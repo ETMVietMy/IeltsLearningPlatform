@@ -27,6 +27,12 @@ img{
   max-width: 100%;
 }
 
+.coin {
+  width : 25px !important;
+  height : 25px !important;
+  margin-top : -6px;
+}
+
 header{
   position: absolute;
   top: 0;
@@ -141,7 +147,7 @@ header{
   padding:1rem;
   font-family: 'Inconsolata', monospace;
 
-  
+
 }
 
   #custom {
@@ -156,8 +162,8 @@ header{
     border-right:1px solid rgba(0,0,0,0.2);
     padding:1rem;
     font-family: 'Inconsolata', monospace;
-    
-    
+
+
   }
 
 
@@ -269,4 +275,3 @@ battery .battery-level {
   }
   font-family: 'Inconsolata', monospace;
 }
-

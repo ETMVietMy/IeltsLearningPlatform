@@ -16,4 +16,12 @@ class Correction < ApplicationRecord
     end
   end
 
+  def get_teacher
+    @teacher ||= User.find(teacher_id).teacher
+  end
+
+  def get_teacher_account
+    @account ||= User.find(teacher_id).account
+  end
+
 end

@@ -15,7 +15,7 @@
     <div class="dashboard">
       <div class="dashboard-sidebar">
         <ul class="nav nav-sidebar">
-          <li class="nav-item">
+          <li class="nav-item <%= active_class(controller: 'dashboard', action: 'index') %>">
             <a href="<%= dashboard_path %>" class="nav-link"><i class="fa fa-fw fa-bar-chart"></i> Dashboard</a>
           </li>
           <li class="nav-item <%= active_class(controller: 'account', action: 'index') %>">
