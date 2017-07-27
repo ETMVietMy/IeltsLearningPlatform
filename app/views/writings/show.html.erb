@@ -2,33 +2,50 @@
 
 <div>
   <div class="container-limited">
-    <h5>
-      <strong>Question:</strong>
-    </h5>
-    <%= image_tag(@task.attachments.last.attachment.url, class: 'attachment img-responsive') if @task.attachments.present? %> 
-    <p><%= @writing.task_description %></p>
-  </div>
-  
-  <div class="row">
-    <div class="col-sm-6">
-      <h5><strong>Your Answer:</strong></h5>
-      <%= simple_format @writing.answer %>
+    <h5><strong>Question:</strong></h5>
+    <div class="card card-question">
+      <div class="card-block">
+        <%= image_tag(@task.attachments.last.attachment.url, class: 'attachment img-responsive') if @task.attachments.present? %> 
+        <p><%= @writing.task_description %></p>
+      </div>
     </div>
-    <% if @writing.can_view_correction? %>
-      <div class="col-sm-6">
-        <h5><strong>Correction:</strong></h5>
-        <div class="block-correction">
-          <div class="block-correction-points"></div>
-          <div class="block-correction-body">
+  
+    <h5 class="mt-4"><strong>Your Answer:</strong></h5>
+    <div class="card card-writing-show">
+      <div class="card-block">
+        <%= simple_format @writing.answer %>
+        
+      </div>
+    </div>
+
+    <h5 class="mt-4"><strong>Correction:</strong></h5>
+    <div class="card card-correction">
+      <div class="card-block">
+        <% if @writing.can_view_correction? %>
+          <div class="correction-points">
+            <div class="correction-point-item">
+              <strong>Task Achivement:</strong> <span class="num"><%= @writing.correction.task_achievement %></span>
+            </div>
+            <div class="correction-point-item">
+              <strong>Coherence Cohesion:</strong> <span class="num"><%= @writing.correction.coherence_cohesion %></span>
+            </div>
+            <div class="correction-point-item">
+              <strong>Lexical Resource:</strong> <span class="num"><%= @writing.correction.lexical_resource %></span>
+            </div>
+            <div class="correction-point-item"><strong>Grammar:</strong> <span class="num"><%= @writing.correction.grammar %></span></div>
+            <div class="correction-point-item"><strong>Overall:</strong> <span class="num"><%= @writing.correction.average_score %></span></div>
+          </div>
+          <div class="correction-body">
             <%= simple_format @writing.correction.body %>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
 
-  <div class="mt-4">
-    <%= link_to "Go Back", writings_path, class: 'btn btn-primary'  %>
+    <div class="mt-4">
+      <%= link_to "Go Back", writings_path, class: 'btn btn-primary'  %>
+    </div>
+
   </div>
 </div>
 

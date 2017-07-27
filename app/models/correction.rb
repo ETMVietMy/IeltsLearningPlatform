@@ -25,7 +25,8 @@ class Correction < ApplicationRecord
   end
 
   def average_score
-    
+    average = [self.task_achievement, self.coherence_cohesion, self.lexical_resource, self.grammar].reduce(:+).to_f / 4
+    (average * 2).ceil / 2.0
   end
 
 end
