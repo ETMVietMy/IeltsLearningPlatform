@@ -24,4 +24,8 @@ class Correction < ApplicationRecord
     @account ||= User.find(teacher_id).account
   end
 
+  def average_score
+    
+  end
+
 end

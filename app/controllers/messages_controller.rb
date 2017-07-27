@@ -46,6 +46,11 @@ class MessagesController < ApplicationController
 
       if @message.save
         Recipient.create(user_id: recipient.id, message_id: @message.id)
+        # change writing status
+        if @message.writing_id.present?
+          Writing.find(@message.writing_id).change_status(Writing::STATUS_REQUESTED)
+        end
+
         flash[:success] = "Your message has been sent."
         redirect_to messages_sent_path
       else
@@ -123,15 +128,18 @@ class MessagesController < ApplicationController
     @correction = Correction.new(writing_id: @writing.id, teacher_id: current_user.id, status: Correction::STATUS_NEW)
 
     Correction.transaction do
-      @correction.save!
-
       if is_accepted
+        @correction.save!
         reply_subject = "Your correcting request has been accepted"
         reply_content = "#{current_user.name_or_username} has accepted your request, please wait for him/her to correct your answer"
         Account.start_payment_for_correcting(@writing.user.account.id, current_user.account.id, current_user.teacher.price, @writing.id)
+        # change status of writing
+        @writing.change_status(Writing::STATUS_CORRECTING)
       else
         reply_subject = "Your correcting request has been denied"
         reply_content = "#{current_user.name_or_username} has denied your request, please request to another teacher"
+        # change status of writing
+        @writing.change_status(Writing::STATUS_NEW)
       end
 
       @message = Message.new(
