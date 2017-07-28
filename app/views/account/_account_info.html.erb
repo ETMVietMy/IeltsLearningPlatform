@@ -1,6 +1,12 @@
-<div class="container-fluid">
+<div class="">
+  <% if @account.has_avatar? %>
+    <div class="user-info">
+      <%= image_tag @account.avatar_url, class: 'img-thumbnail user-info-avatar' %>
+      <span class="user-info-name"><%= @account.name_or_username %></span>
+    </div>
+  <% end %>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <table class="table">
         <tbody>
           <tr>

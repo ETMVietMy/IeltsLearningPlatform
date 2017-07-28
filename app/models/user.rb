@@ -7,8 +7,7 @@ class User < ApplicationRecord
   has_one  :teacher
   has_one  :account
   has_many :follows
-  
-
+  has_one :attachment, as: :attached_item, dependent: :destroy
 
   has_many :comments, dependent: :destroy
   has_many :writings
@@ -29,9 +28,15 @@ class User < ApplicationRecord
     where(role: self::ROLE_TEACHER)
   end
 
-  
+  # avatar
+  def has_avatar?
+    self.attachment.present?
+  end
 
-  
+  def avatar_url
+    self.attachment.attachment.url
+  end
+  #end avatar
 
   def corrections
     return nil if self.is_student?

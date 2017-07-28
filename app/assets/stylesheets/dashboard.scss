@@ -275,3 +275,26 @@ battery .battery-level {
   }
   font-family: 'Inconsolata', monospace;
 }
+
+// image
+.user-info{
+  display: flex;
+  align-items: center;
+  &-avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  &-name{
+    font-weight: 700;
+  }
+}
+
+.dashboard-main-content{
+  .user-info{
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}

@@ -1,9 +1,9 @@
 class Writing < ApplicationRecord
   belongs_to :task
-  belongs_to :user
-  has_many :messages
-  has_many :transactions
-  has_one :correction
+  belongs_to :user, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :transactions, dependent: :destroy
+  has_one :correction, dependent: :destroy
 
   # constants
   STATUS_NEW = 'new'
