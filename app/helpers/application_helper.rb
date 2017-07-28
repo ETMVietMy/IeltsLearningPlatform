@@ -36,4 +36,8 @@ module ApplicationHelper
         return true if current_page?(controller: 'follows')
     end
   end
+
+  def avatar_or_default(user)
+    user.has_avatar? ? user.avatar_url : asset_path('avatar.png')
+  end
 end

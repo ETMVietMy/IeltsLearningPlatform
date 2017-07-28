@@ -14,8 +14,8 @@ class Writing < ApplicationRecord
   STATUS_DENIED = 'denied'
 
   # methods
-  def self.writings_count
-    group_by_day(:created_at, last: 7, format: "%b %e").count
+  def self.writings_count(user_id)
+    where(user_id: user_id).group_by_day(:created_at, last: 7, format: "%b %e").count
   end
 
   def self.total_writings(user_id)

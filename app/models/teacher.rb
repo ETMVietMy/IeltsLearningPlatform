@@ -16,6 +16,8 @@ class Teacher < ApplicationRecord
                   )
   end
 
-  
+  def self.random_teachers
+    User.teachers.order("RANDOM()").limit(3)
+  end
 
 end

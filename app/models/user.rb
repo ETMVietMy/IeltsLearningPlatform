@@ -20,6 +20,11 @@ class User < ApplicationRecord
   ROLE_STUDENT = "STD"
   ROLE_ADMIN = "ADM"
 
+  # scope
+  scope :teachers, -> { where(role: ROLE_TEACHER) }
+
+  # functions
+
   def name_or_username
     self.name.presence || self.username
   end
@@ -37,6 +42,11 @@ class User < ApplicationRecord
     self.attachment.attachment.url
   end
   #end avatar
+
+  #writing
+  def writing_stat
+    Writing.writings_count(self.id)
+  end
 
   def corrections
     return nil if self.is_student?

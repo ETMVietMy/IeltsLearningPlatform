@@ -15,8 +15,8 @@ class AccountController < ApplicationController
 
       # remove old attachment
       if avatar_param.present?
-        @account.attachment.destroy!
-        
+        @account.attachment.destroy! unless @account.attachment.nil?
+          
         @avatar = Attachment.new
         @avatar.attached_item = @account
         @avatar.attachment = avatar_param
