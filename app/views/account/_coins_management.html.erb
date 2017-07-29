@@ -15,7 +15,7 @@
           <%= f.input :to_account, :collection => User.getUserEmailAndAccount(current_user.email).order(:email),prompt: "Choose account..",
                       :label_method => :email,:value_method => :account_id, :label => "To Account",
                       selected: params[:account_id] %>
-          <%= f.input :amount, label: "Amount", :input_html => { :value => params[:amount] }%>
+          <%= f.input :amount, label: "Amount of Coins", :input_html => { :value => params[:amount] }%>
           <%= f.hidden_field :transaction_type_id, value: TransactionType.get_a2a_id %>
           <%= f.submit 'Submit', class: 'btn btn-sm btn-primary' %>
           <% end %>

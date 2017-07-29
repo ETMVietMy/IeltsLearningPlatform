@@ -1,0 +1,95 @@
+<div class="container-narrow">
+  <h1>Correction #<%= @correction.id  %></h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card card-dashboard card-dashboard-1">
+        <div class="card-block">
+          <div class="card-dashboard-heading">Teacher: </div>
+          <div class="card-dashboard-num"><%= @correction.get_user_teacher.username %></div>
+          <div class="card-dashboard-num"><%= @correction.get_user_teacher.email %></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-dashboard card-dashboard-2">
+        <div class="card-block">
+          <div class="card-dashboard-heading">Student: </div>
+          <div class="card-dashboard-num"><%= @correction.get_user_student.username %></div>
+          <div class="card-dashboard-num"><%= @correction.get_user_student.email %></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-dashboard card-dashboard-3">
+        <div class="card-block">
+          <div class="card-dashboard-heading">Price: </div>
+          <div class="card-dashboard-num"><span><%= @correction.get_teacher.price.to_int %></span> <%= image_tag 'coin.png', class: "coin"%> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <h2 class="sub-heading">Task</h2>
+  <% unless @task.attachment.nil? || @task.attachment.attachment.file.nil? %>
+    <div class="task-image">
+      <%= image_tag @task.attachment.attachment.url %>
+    </div>
+  <% end %>
+
+  <div class="task-content">
+    <%= @task.description %>
+  </div>
+
+  <h2 class="sub-heading">Student's Answer</h2>
+  <div class="answer-content">
+    <%= simple_format @writing.answer %>
+  </div>
+
+  <h2 class="sub-heading">Teacher's Correction</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Task Archivement</label>
+          <input class="form-control" type="number" placeholder="<%= @correction.task_achievement %>" readonly="">
+        </div>
+        <div class="form-group">
+          <label>Coherence and Cohesion</label>
+          <input class="form-control" type="number" placeholder="<%= @correction.coherence_cohesion %>" readonly="">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Lexical Resource</label>
+          <input class="form-control" type="number" placeholder="<%= @correction.lexical_resource %>" readonly="">
+        </div>
+        <div class="form-group">
+          <label>Grammatical Range and Accuracy</label>
+          <input class="form-control" type="number" placeholder="<%= @correction.grammar %>" readonly="">
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div class="form-group">
+        <label>Feedbacks</label>
+        <textarea class="form-control" rows="15" type="text" readonly=""><%= @correction.body %></textarea>
+      </div>
+    </div>
+
+    <% if current_user.is_admin? && @correction.is_status_denied? %>
+      <div class="row">
+        <div class="col-sm-2 offset-sm-4">
+          <div class="form-group">
+            <%= link_to "Accept", accept_deny_correction_path(id: @correction.id), class: 'btn btn-block btn-sm btn-success'  %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <%= link_to "Decline", refuse_deny_correction_path(id: @correction.id), class: 'btn btn-block btn-sm btn-danger'  %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+</div>
