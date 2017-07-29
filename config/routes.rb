@@ -47,7 +47,7 @@ Rails.application.routes.draw do
       resources :corrections, only: [:index, :edit, :update, :show]
 
       # transactions
-      resources :transactions, only: [:index]
+      resources :transactions, only: [:index, :create]
     end
 
     resources :teachers do
@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 
   	resources :tasks
     resources :ratings, only: :update
-    
+
   end
 
 

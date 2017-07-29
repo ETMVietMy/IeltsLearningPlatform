@@ -22,8 +22,8 @@ class Transaction < ApplicationRecord
                          transaction_description: "Transfer from #{@from_acc.user.email} to #{@to_acc.user.email}")
       if @transaction.save
         @from_acc.balance -= amount
-        @from_acc.save
         @to_acc.balance += amount
+        @from_acc.save
         @to_acc.save
       end
     elsif @trans_type.pending_payment?
