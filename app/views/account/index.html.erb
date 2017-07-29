@@ -1,56 +1,45 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8">
-      <h2 class="section-heading text-left">Your Account Information</h2>
-      
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><label>Username:</label></td>
-            <td><%= @account.username %></td>
-          </tr>
-          <tr>
-            <td><label>Email:</label></td>
-            <td><%= @account.email %></td>
-          </tr>
-          <tr>
-            <td><label>Account Type:</label></td>
-            <td><%= @account.is_student? ? "Student" : "Teacher" %></td>
-          </tr>
-        </tbody>
-      </table>
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-sm-8">
+        <h1 class="page-header">
+            Profile
+        </h1>
     </div>
-  </div>
-  <%= link_to "Change Information", account_edit_path, class: 'btn btn-primary mr-3' %>
-  <%= link_to "Change Password", account_edit_path, class: 'btn btn-secondary' %>
-  <div class="row">
-    <div class="col-md-8">
-      <% if current_user.is_teacher? %>
-        <h2 class="section-heading text-left mt-4">Teacher Information</h2>
-        
-        <table class="table">
-          <tbody>
-            <tr>
-              <td><label>Nationality:</label></td>
-              <td><%= @account.teacher.nationality %></td>
-            </tr>
-            <tr>
-              <td><label>Price:</label></td>
-              <td><%= @account.teacher.price %></td>
-            </tr>
-            <tr>
-              <td><label>Experience:</label></td>
-              <td><%= @account.teacher.experience %></td>
-            </tr>
-            <tr>
-              <td><label>Linkedin URL:</label></td>
-              <td><%= @account.teacher.linkedin %></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="col-sm-4 text-right">
+      <%= link_to 'Back', :back, class: "btn btn-sm btn-primary" %>
+    </div>
+</div>
+<!-- /.row -->
 
-        <%= link_to "Change Information", account_edit_teacher_info_path, class: 'btn btn-primary' %>
-      <% end %>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item">
+  <a class="nav-link active" data-toggle="tab" href="#account-info" role="tab">Account Info</a>
+</li>
+<% if current_user.is_teacher? %>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#teacher-info" role="tab">Teacher Info</a>
+  </li>
+<% end %>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="tab" href="#coins-management" role="tab">Coins Management</a>
+</li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="account-info" role="tabpanel">
+    <br>
+    <%= render "account_info"%>
+  </div>
+  <% if current_user.is_teacher? %>
+    <div class="tab-pane" id="teacher-info" role="tabpanel">
+      <br>
+      <%= render "teacher_info"%>
     </div>
+  <% end %>
+  <div class="tab-pane" id="coins-management" role="tabpanel">
+    <br>
+    <%= render "coins_management"%>
   </div>
 </div>

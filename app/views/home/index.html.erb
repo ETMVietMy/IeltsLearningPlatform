@@ -80,4 +80,22 @@
   </div>
 </section>
 
+<section class="section-teachers">
+  <div class="container">
+    <h2 class="section-heading">Our Teachers</h2>
+    <div class="row">
+      <% @teachers.each do |teacher|  %>
+        <div class="col-sm-4">
+          <div class="block-teacher">
+            <%= image_tag avatar_or_default(teacher), class: 'block-teacher-avatar' %>
+            <div class="block-teacher-name">
+              <%= teacher.name_or_username %>
+            </div>            
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
 <%= render 'layouts/footer' %>

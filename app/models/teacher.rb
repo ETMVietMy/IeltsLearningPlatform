@@ -3,10 +3,10 @@ class Teacher < ApplicationRecord
   has_many :follows
   has_many :comments, dependent: :destroy
 
+  has_many :ratings
+
   validates :experience, :nationality, :price, presence: true
   validates :price, numericality: true
-
-  
 
   def self.search(params)
     joins(:user)
@@ -14,6 +14,10 @@ class Teacher < ApplicationRecord
                   "%#{params[:username]}%",
                   "%#{params[:nationality]}%"
                   )
+  end
+
+  def self.random_teachers
+    User.teachers.order("RANDOM()").limit(3)
   end
 
 end

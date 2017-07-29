@@ -14,8 +14,11 @@ class TasksController < ApplicationController
 	end
 
 	def suggest
+		@suggest_task = Task.order("RANDOM()").first
 		@task = Task.new
 		@attachment = Attachment.new
+
+		respond_to :html, :js
 	end
 
 	def create

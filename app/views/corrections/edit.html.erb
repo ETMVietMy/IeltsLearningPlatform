@@ -1,0 +1,52 @@
+<h1>Correction #<%= @correction.id  %></h1>
+
+<h2 class="sub-heading">Task</h2>
+<% unless @task.attachment.nil? || @task.attachment.attachment.file.nil? %>
+  <div class="task-image">
+    <%= image_tag @task.attachment.attachment.url %>  
+  </div>
+<% end %>
+
+<div class="task-content">
+  <%= @task.description %>
+</div>
+
+<h2 class="sub-heading">Student Answer</h2>
+<div class="answer-content">
+  <%= simple_format @writing.answer %>
+</div>
+
+<h2 class="sub-heading">Your Correction</h2>
+<%= form_for(@correction, method: :put) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Task Archivement</label>
+        <%= f.number_field :task_achievement, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label>Coherence and Cohesion</label>
+        <%= f.number_field :coherence_cohesion, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Lexical Resource</label>
+        <%= f.number_field :lexical_resource, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label>Grammatical Range and Accuracy</label>
+        <%= f.number_field :grammar, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <div class="form-group">
+      <label>Feedbacks</label>
+      <%= f.text_area :body, class: 'form-control editor', rows: 30 %>
+    </div>    
+  </div>
+
+  <%= submit_tag "Save", class: "btn btn-secondary", name: "save" %>
+  <%= submit_tag "Finish", class: "btn btn-primary", name: "finish" %>
+<% end %>

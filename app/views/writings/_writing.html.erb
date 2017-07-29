@@ -1,8 +1,14 @@
 <tr>
   <td><%= writing.id %></td>
   <td><%= link_to truncate(writing.task_description, length: 40), writing %></td>
+  <td><%= writing.status %></td>
   <td><%= time_ago_in_words writing.created_at %></td>
   <td class="text-right">
-    <a href="#" class="btn btn-primary btn-sm">send request</a>
+    <% if writing.can_request? %>
+      <%= link_to "Get Correcting", new_message_path(writing_id: writing.id), class: 'btn btn-primary btn-sm' %>
+    <% end %>
+    <% if writing.can_view_correction? %>
+      <%= link_to "View Correction", writing_path(writing.id), class: 'btn btn-secondary btn-sm' %>
+    <% end %>
   </td>
 </tr>

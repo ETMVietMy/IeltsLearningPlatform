@@ -1,26 +1,35 @@
 <h1>Writing task</h1>
 
-<p>Suggestion:</p>
+<div class="container-limited">
+  <h5><strong>Example task:</strong></h5>
 
-<p>Or create your own:</p>
+  <div class="alert alert-info" id="task-description">
+    <%= simple_format @suggest_task.description %>
+  </div>
 
-<%= form_for(@task, html:{class: 'form-dashboard', multipart: true}) do |f| %>
-  <%= hidden_field_tag :next_location, 'writing' %>
-  <div class="form-group">
-    <label>Task Number *</label>
-    <%= f.select :task_number, options_for_select([1,2]), {}, class: 'form-control' %>
-
+  <div class="mb-4">
+    <a id="js-new-suggestion" role="button" class="btn btn-secondary btn-sm mr-2">New Suggestion</a>
+    <%= link_to "Choose this", new_writing_path(task_id: @suggest_task.id),role: "button",id: 'task-choose', class: 'btn btn-primary btn-sm' %>
   </div>
-  <div class="form-group">
-    <label>Attachment (optional)</label><br>
-    <%= file_field :attachment, :attachment %>
-  </div>
-  <div class="form-group">
-    <label>Description</label>
-    <%= f.text_area :description, rows: 6, class: 'form-control' %>
-  </div>
-  <%= submit_tag "Continue", class: "btn btn-primary" %>
-<% end %>
   
-
-<%= debug @attachment %>
+  <h5><strong>Or create your own:</strong></h5>
+  
+  <%= form_for(@task, html:{class: 'form-dashboard', multipart: true}) do |f| %>
+    <%= hidden_field_tag :next_location, 'writing' %>
+    <div class="form-group">
+      <label>Task Number *</label>
+      <%= f.select :task_number, options_for_select([1,2]), {}, class: 'form-control' %>
+  
+    </div>
+    <div class="form-group">
+      <label>Attachment (optional)</label><br>
+      <%= file_field :attachment, :attachment %>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <%= f.text_area :description, rows: 6, class: 'form-control' %>
+    </div>
+    <%= submit_tag "Continue", class: "btn btn-primary btn-sm" %>
+  <% end %>
+  
+</div>

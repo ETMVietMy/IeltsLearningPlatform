@@ -1,0 +1,45 @@
+<%= simple_form_for Message.new do |f| %>
+  <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header card-default">
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.input :recipients_emails,:collection => User.getAllTeacherUser.order(:username),prompt: "Choose your teacher..",
+                        :label_method => :username,:value_method => :email, :label => "Teacher",
+                        selected: params[:teacher_id] %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.input :subject, label: "Subject", :input_html => { :value => "Correcting Request" }, readonly: true%>
+          </div>
+        </div>
+        <!-- End of row -->
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.input :writing_id, :collection => current_user.writings, prompt: "Attach your writing...",
+                        :label_method => :task_description, :value_method => :id, :label => "",
+                        selected: params[:writing_id] %>
+          </div>
+        </div>
+        <!-- End of row -->
+      </div>
+
+      <div class="card-block">
+        <%= f.input :content, label: "Message"%>
+      </div>
+    </div>
+    </div>
+  </div>
+<br>
+<div class="row">
+  <div class="col-sm-2 offset-sm-5">
+    <div class="form-group">
+      <%= f.hidden_field :message_type, value: "req" %>
+      <%= f.submit 'Send', class: 'btn btn-block btn-sm btn-success' %>
+    </div>
+  </div>
+</div>
+  <!-- /.row -->
+<% end %>

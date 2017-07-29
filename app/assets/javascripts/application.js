@@ -10,10 +10,16 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
+//= require jquery.raty
 //= require jquery_ujs
 //= require tether
 //= require bootstrap-sprockets
 //= require cocoon
+//= require froala_editor.min.js
+//= require highcharts
 //= require turbolinks
 //= require_tree .
+
+

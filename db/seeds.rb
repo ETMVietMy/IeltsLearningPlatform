@@ -58,13 +58,55 @@ if User.find_by(email: 'teacher3@email.com')==nil
     })
 end
 
+# Create Admin and System mailing User
+if User.find_by(email: 'etm_admin1@email.com')==nil
+  u = User.create({
+    email: 'etm_admin1@email.com',
+    username: 'First Admin',
+    role: 'ADM',
+    password: 'admin1',
+    password_confirmation: 'admin1'
+    })
+end
+
+# Create Account
+User.all.each do |user|
+  if user.account.nil?
+    a = Account.create({
+      user_id: user.id,
+      balance: 0,
+      status: "active"
+      })
+  end
+end
+
+TransactionType.delete_all
+# Create transaction_type
+TransactionType.create(
+  name: 'Top Up Account',
+  code: 'TOPUP'
+)
+TransactionType.create(
+  name: 'Pay for correcting',
+  code: 'PAYMENT'
+)
+TransactionType.create(
+  name: 'Settle Payment for correcting',
+  code: 'SETTLE_PAYMENT'
+)
+TransactionType.create(
+  name: 'Account to Account transaction',
+  code: 'A2A'
+)
+
 if Task.count == 0
   tasks = ['Some people say that zoos have no useful purpose. Others believe that zoos are beneficial in many ways. Discuss and give your opinion.',
     'While some people think that reading books rather than watching TV is more beneficial for one’s imagination and language acquisition, I content that the role of the former in boosting intelligence and language ability is equal to the latter.',
     'While it is argued that a distinguished career is regarded as the most pivotal thing in a person’s life, I strongly believe that there are other factors which can make people’s lifetime become meaningful.',
     'Parents often give children everything they ask for and do what they like. Is it good for children? What are the consequences when they grow up?'
   ]
+
+  tasks.each do |task|
+    Task.create(description: task, task_number: 2)
+  end
 end
-
-
-
