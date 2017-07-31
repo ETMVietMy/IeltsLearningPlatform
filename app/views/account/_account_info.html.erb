@@ -14,7 +14,11 @@
           </tr>
           <tr>
             <td><label>Account Type:</label></td>
-            <td><%= @account.is_student? ? "Student" : "Teacher" %></td>
+            <td>
+              <%= @account.is_student? ? "Student":""%>
+              <%=  @account.is_teacher? ? "Teacher":""%>
+              <%=  @account.is_admin? ? "Admin":""%>
+            </td>
           </tr>
           <tr>
             <td><label>Account Balance:</label></td>

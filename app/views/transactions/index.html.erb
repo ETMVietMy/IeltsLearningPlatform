@@ -16,7 +16,7 @@
     <div class="alert alert-info">
       <h4 class="">
         <span>
-          You have <span class="font-bold text-primary"> <%= @account.balance %></span> <%= image_tag 'coin.png', class: "coin"%> in your account.
+          Account balance: <span class="font-bold text-primary"> <%= @account.balance %></span> <%= image_tag 'coin.png', class: "coin"%>
         </span>
       </h4>
       <span>Last 30 days: <span class="font-bold text-success"> +<%= @account.getIncomeLast30 %> <%= image_tag 'coin.png', class: "coin"%> Income</span> <span class="font-bold text-danger"> -<%= @account.getOutcomeLast30 %> <%= image_tag 'coin.png', class: "coin"%> Outcome</span></span>

@@ -22,8 +22,8 @@ class Transaction < ApplicationRecord
                          transaction_description: "Transfer from #{@from_acc.user.email} to #{@to_acc.user.email}")
       if @transaction.save
         @from_acc.balance -= amount
-        @from_acc.save
         @to_acc.balance += amount
+        @from_acc.save
         @to_acc.save
       end
     elsif @trans_type.pending_payment?
@@ -45,24 +45,27 @@ class Transaction < ApplicationRecord
       end
     elsif @trans_type.settle_payment?
       @transaction = Transaction.find_by(from_account: from_account, to_account: to_account, amount: amount, writing_id: writing_id)
-      @transaction.status = Transaction::DONE
-      @transaction.transaction_type_id = @trans_type.id
-      @transaction.transaction_description = "Settle: Payment for correcting from #{@from_acc.user.email} to teacher #{@to_acc.user.email}"
-      if @transaction.save
-        @to_acc.balance += amount
-        @to_acc.save
+      if !@transaction.nil? && @transaction.pending?
+        @transaction.status = Transaction::DONE
+        @transaction.transaction_type_id = @trans_type.id
+        @transaction.transaction_description = "Settle: Payment for correcting from #{@from_acc.user.email} to teacher #{@to_acc.user.email}"
+        if @transaction.save
+          @to_acc.balance += amount
+          @to_acc.save
+        end
+      end
+    elsif @trans_type.cancel?
+      @transaction = Transaction.find_by(from_account: from_account, to_account: to_account, amount: amount, writing_id: writing_id)
+      if !@transaction.nil? && @transaction.pending?
+        @transaction.status = Transaction::CANCEL
+        @transaction.transaction_type_id = @trans_type.id
+        @transaction.transaction_description = "Cancel: Payment for correcting from #{@from_acc.user.email} to teacher #{@to_acc.user.email}"
+        if @transaction.save
+          @from_acc.balance += amount
+          @from_acc.save
+        end
       end
     end
   end
 
-  def cancel
-    if self.type == PENDING
-      self.status = CANCEL
-      self.transaction_description = "Cancel: Payment for writing"
-      self.save
-      @from_acc = Account.find_by(id: from_account)
-      @from_acc.balance += amount
-      @from_acc.save
-    end
-  end
 end

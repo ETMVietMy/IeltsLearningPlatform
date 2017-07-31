@@ -45,9 +45,11 @@ Rails.application.routes.draw do
 
       # correction
       resources :corrections, only: [:index, :edit, :update, :show]
+      get 'accept_deny_correction/:id', to: 'corrections#accept_deny_correction', as: 'accept_deny_correction'
+      get 'refuse_deny_correction/:id', to: 'corrections#refuse_deny_correction', as: 'refuse_deny_correction'
 
       # transactions
-      resources :transactions, only: [:index]
+      resources :transactions, only: [:index, :create]
     end
 
     resources :teachers do
@@ -56,7 +58,7 @@ Rails.application.routes.draw do
 
   	resources :tasks
     resources :ratings, only: :update
-    
+
   end
 
 

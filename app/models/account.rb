@@ -2,8 +2,8 @@ class Account < ApplicationRecord
   belongs_to :user
 
   def get_transactions
-    @transactions ||= Transaction.where("(from_account = ? OR to_account = ?) AND status = ?",
-                                        self.id, self.id, Transaction::DONE).order("updated_at desc")
+    @transactions ||= Transaction.where("(from_account = ? OR to_account = ?) AND (status = ? OR status = ?)",
+                                        self.id, self.id, Transaction::DONE, Transaction::CANCEL).order("updated_at desc")
   end
 
   def get_pending_transactions
@@ -70,12 +70,21 @@ class Account < ApplicationRecord
       return
     end
 
-    if from_acc.balance<amount
-      self.errors.add("Transaction denied! Insufficient ballance to cover transfer amount.")
+    Transaction.transfer(from_account, to_account, amount, 'SETTLE_PAYMENT', writing_id)
+  end
+
+  # Cancel Payment for writing
+  def self.cancel_payment_for_correcting(from_account, to_account, amount, writing_id)
+    # puts from_account, to_account, amount, writing_id
+    to_acc = Account.find_by(id: to_account)
+    from_acc = Account.find_by(id: from_account)
+
+    if to_acc.nil? || from_acc.nil?
+      self.errors.add("Transaction denied! Cannot get data of account.")
       return
     end
 
-    Transaction.transfer(from_account, to_account, amount, 'SETTLE_PAYMENT', writing_id)
+    Transaction.transfer(from_account, to_account, amount, 'CANCEL', writing_id)
   end
 
   # get income last 30 days

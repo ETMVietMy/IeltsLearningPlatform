@@ -62,6 +62,10 @@ class User < ApplicationRecord
     self.role == ROLE_TEACHER
   end
 
+  def is_admin?
+    self.role == ROLE_ADMIN
+  end
+
   def getAllFollowedTeachers
     @follow_teachers ||= Teacher.where(id: Follow.where(user_id: id).map(&:teacher_id))
   end
@@ -74,6 +78,11 @@ class User < ApplicationRecord
   def received_messages
     @received_messages ||= Message.where(id: self.recipients.map(&:message_id), hide_recipient: false).order("created_at desc")
           #  .where.not(sender: getAllBlockCases).order("created_at desc")
+  end
+
+  def self.getUserEmailAndAccount(current_user_email)
+    @users_accounts ||= User.joins(:account).where('role NOT LIKE ? AND email NOT LIKE ?', ROLE_ADMIN, current_user_email)
+                   .select('accounts.id as account_id, users.email')
   end
 
   def unread_messages
@@ -89,7 +98,7 @@ class User < ApplicationRecord
   end
 
   def self.getAllTeacherUser()
-    @users ||= User.where(role: "TCH")
+    @users ||= User.where(role: ROLE_TEACHER)
   end
 
 end

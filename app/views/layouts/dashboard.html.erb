@@ -15,6 +15,27 @@
     <div class="dashboard">
       <div class="dashboard-sidebar">
         <ul class="nav nav-sidebar">
+          <% if current_user.is_admin? %>
+            <li class="nav-item <%= 'active' if is_active_class('dashboard') %>">
+              <a href="<%= dashboard_path %>" class="nav-link"><i class="fa fa-fw fa-bar-chart"></i> Dashboard</a>
+            </li>
+            <li class="nav-item <%= active_class(controller: 'account', action: 'index') %>">
+              <a class="nav-link" href="<%= account_path %>"><i class="fa fa-fw fa-user-circle-o"></i> Profile</a>
+            </li>
+            <li class="nav-item <%= active_class(controller: 'transactions', action: 'index') %>">
+              <a class="nav-link" href="<%= transactions_path %>"><i class="fa fa-fw fa-history"></i> Transaction History</a>
+            </li>
+            <li class="nav-item <%= 'active' if is_active_class('inbox') %>">
+              <a class="nav-link" href="<%= messages_path %>"><i class="fa fa-fw fa-envelope-o"></i> Inbox</a>
+            </li>
+            <li class="nav-item <%= active_class(controller: 'messages', action: 'sent')%>">
+              <a class="nav-link" href="<%= messages_sent_path %>"><i class="fa fa-fw fa-paper-plane-o"></i> Sent</a>
+            </li>
+            <li class="nav-item">
+              <a href="<%= corrections_path %>" class="nav-link"><i class="fa fa-pencil fa-fw"></i> Denied Corrections</a>
+            </li>
+          <% else %>
+
           <li class="nav-item <%= 'active' if is_active_class('dashboard') %>">
             <a href="<%= dashboard_path %>" class="nav-link"><i class="fa fa-fw fa-bar-chart"></i> Dashboard</a>
           </li>
@@ -32,7 +53,7 @@
           </li>
           <li class="nav-item <%= 'active' if is_active_class('writings') %>">
             <%= link_to writings_path, class: 'nav-link' do %>
-              <i class="fa fa-fw fa-pencil-square-o"></i> Your writing
+              <i class="fa fa-fw fa-pencil-square-o"></i> Writings
             <% end %>
           </li>
           <% if current_user.is_teacher? %>
@@ -41,11 +62,13 @@
           </li>
           <% end %>
           <li class="nav-item <%= 'active' if is_active_class('teachers') %>">
-            <a class="nav-link" href="<%= teachers_path %>"><i class="fa fa-fw fa-graduation-cap"></i> Find your teacher</a>
+            <a class="nav-link" href="<%= teachers_path %>"><i class="fa fa-fw fa-graduation-cap"></i> Find teacher</a>
           </li>
           <li class="nav-item <%= 'active' if is_active_class('follows') %>">
             <a class="nav-link" href="<%= follows_path %>"><i class="fa fa-fw fa-address-book-o"></i> Follows</a>
           </li>
+
+          <% end %>
         </ul>
       </div>
       <div class="dashboard-main-content">

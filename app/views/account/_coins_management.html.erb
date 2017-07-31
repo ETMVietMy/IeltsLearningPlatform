@@ -1,22 +1,40 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-8">
-      <h4>You have <span class="font-bold text-primary"> <%= @current_user.account.balance %></span> <%= image_tag 'coin.png', class: "coin"%> in your account.</h4>
+      <% if !current_user.is_admin? %>
+        <h4>You have <span class="font-bold text-primary"> <%= @current_user.account.balance %></span> <%= image_tag 'coin.png', class: "coin"%> in your account.</h4>
 
-      <a class="btn btn-sm btn-primary" href="<%= transactions_path %>"><i class="fa fa-fw fa-arrow-right"></i> Transaction History</a>
-      <hr>
-      <h4>Top Up</h4>
-        <%= simple_form_for Transaction.new do |f| %>
-        <%= f.input :amount, label: "Amount", :input_html => { :value => params[:amount] }%>
+        <a class="btn btn-sm btn-primary" href="<%= transactions_path %>"><i class="fa fa-fw fa-arrow-right"></i> Transaction History</a>
+        <hr>
+        <h4>Top Up</h4>
+          <p>Please transfer to account: xxxx xxxx xxxx xxxx, VCB HCMC with your email and name. We will top up your coins as soon as posible. Thank you for using our service!!</p>
+          <span><strong><em>Service in coming:</em></strong> <img src="https://www.invoiceninja.com/wp-content/uploads/2015/12/PayPal.png" alt="" style="width:160px;height:80px;"></span>
+        <hr>
+        <h4>Transfer Coins</h4>
+          <%= simple_form_for Transaction.new do |f| %>
+          <%= f.input :to_account, :collection => User.getUserEmailAndAccount(current_user.email).order(:email),prompt: "Choose account..",
+                      :label_method => :email,:value_method => :account_id, :label => "To Account",
+                      selected: params[:account_id] %>
+          <%= f.input :amount, label: "Amount of Coins", :input_html => { :value => params[:amount] }%>
+          <%= f.hidden_field :transaction_type_id, value: TransactionType.get_a2a_id %>
+          <%= f.submit 'Submit', class: 'btn btn-sm btn-primary' %>
+          <% end %>
+
+      <!-- Admin role -->
+      <% else %>
+        <h4>System balance: <span class="font-bold text-primary"> <%= @current_user.account.balance %></span> <%= image_tag 'coin.png', class: "coin"%></h4>
+        <a class="btn btn-sm btn-primary" href="<%= transactions_path %>"><i class="fa fa-fw fa-arrow-right"></i> Transaction History</a>
+        <hr>
+        <h4>Top Up</h4>
+          <%= simple_form_for Transaction.new do |f| %>
+          <%= f.input :to_account, :collection => User.getUserEmailAndAccount(current_user.email).order(:email),prompt: "Choose account..",
+                      :label_method => :email,:value_method => :account_id, :label => "To Account",
+                      selected: params[:account_id] %>
+          <%= f.input :amount, label: "Amount", :input_html => { :value => params[:amount] }%>
+          <%= f.hidden_field :transaction_type_id, value: TransactionType.get_topup_id %>
+          <%= f.submit 'Submit', class: 'btn btn-sm btn-primary' %>
+          <% end %>
         <% end %>
-        <a class="btn btn-sm btn-primary" href="#"><i class="fa fa-fw fa-arrow-right"></i> Submit</a>
-      <hr>
-      <h4>Transfer Coins</h4>
-      <%= simple_form_for Transaction.new do |f| %>
-      <%= f.input :amount, label: "Amount", :input_html => { :value => params[:amount] }%>
-      <%= f.input :to_account, label: "To Email", :input_html => { :value => params[:to_account] }%>
-      <% end %>
-      <a class="btn btn-sm btn-primary" href="#"><i class="fa fa-fw fa-arrow-right"></i> Submit</a>
     </div>
   </div>
 </div>
