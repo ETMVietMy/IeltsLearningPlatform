@@ -2,12 +2,16 @@
 <div class="row">
     <div class="col-sm-8">
         <h1 class="page-header">
-            Message Detail
+          <% if @message.text_message? %>
+            Message
+          <% else %>
+            Correcting Request
+          <% end %>
         </h1>
 
     </div>
     <div class="col-sm-4 text-right">
-      <a href="<%= messages_path %>" class="btn btn-sm btn-primary">Inbox</a>
+      <%= link_to 'Back', :back, class: "btn btn-sm btn-primary" %>
     </div>
 </div>
 <!-- /.row -->
@@ -20,40 +24,90 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <%= label_tag "Sender" %>
-                    <input class="form-control" type="text" placeholder="<%= @message.getSender.email %>" disabled="">
+                    <input class="form-control" type="text" placeholder="<%= @message.getSenderEmail %>" readonly="">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
                     <%= label_tag :subject %>
-                    <input class="form-control" type="text" placeholder="<%= @message.subject %>" disabled="">
+                    <input class="form-control" type="text" placeholder="<%= @message.subject %>" readonly="">
                   </div>
                 </div>
               </div>
               <!-- End of row -->
             </div>
             <div class="card-block">
-              <%= label_tag "Message" %>
               <div class="form-group">
-                <textarea class="form-control" rows="10" type="text" readonly=""><%= @message.content %>
+                <span class="font-bold"> <%= @message.getSenderName %> wrote:</span>
+                <textarea class="form-control" type="text" readonly=""><%= @message.content %>
                 </textarea>
               </div>
+              <% if @message.request? %>
+                <% if !@writing.nil? %>
+                  <div class="form-group">
+                    <span class="font-bold">Writing</span>
+                    <div class="card">
+                      <p> <%= @markdown.render("####_"+@writing.task_description + "_").html_safe %> </p>
+                      <p> <%= @markdown.render(@writing.answer).html_safe %> </p>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="alert alert-danger" role="alert">
+                    <strong>ERROR: </strong> The message doesn't link to any writing!
+                  </div>
+                <% end %>
+              <% end %>
             </div>
         </div>
     </div>
   </div>
   <br>
-  <div class="row">
-    <div class="col-sm-2 offset-sm-4">
-      <div class="form-group">
-        <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Accept]<%= @message.subject %>" class="btn btn-block btn-sm btn-success">Accept</a>
+  <% if @message.sender != current_user.id || true%>
+    <% if @message.request? && !@writing.nil? && current_user.is_teacher?%>
+      <div class="row">
+        <div class="col-sm-2 offset-sm-4">
+          <div class="form-group">
+            <%= link_to "Accept", accept_request_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <%= link_to "Decline", deny_request_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
+          </div>
+        </div>
+      </div>
+    <% elsif @message.correction? && !@writing.nil? && current_user.is_student? %>
+      <div class="row">
+        <div class="col-sm-2 offset-sm-4">
+          <div class="form-group">
+            <%= link_to "Accept", accept_correction_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <%= link_to "Decline", deny_correction_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
+          </div>
+        </div>
+      </div>
+    <% elsif @message.text_message? %>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-block">
+          <%= simple_form_for Message.new do |f| %>
+            <%= f.input :content, label: "Reply:"%>
+            <%= f.hidden_field :recipients_emails, value: @message.getSenderEmail  %>
+            <%= f.hidden_field :subject, value: "[RE:]" + @message.subject %>
+            <%= f.hidden_field :message_type, value: "msg" %>
+            <div class="row">
+              <div class="mx-auto">
+                <%= f.submit 'Send', class: 'btn btn-sm btn-success mx-auto' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="col-sm-2">
-      <div class="form-group">
-        <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Decline]<%= @message.subject %>" class="btn btn-block btn-sm btn-danger">Decline</a>
-      </div>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
   <!-- /.row -->

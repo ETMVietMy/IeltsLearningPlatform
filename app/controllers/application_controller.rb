@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  layout 'dashboard'
   protect_from_forgery with: :exception
 
   before_action :store_current_location, :unless => :devise_controller?

@@ -1,0 +1,27 @@
+<% if current_user.is_admin? %>
+  <% if correction.is_status_denied? %>
+  <tr class="font-bold">
+  <% else %>
+  <tr>
+  <% end %>
+    <td><%= correction.get_user_teacher.email %></td>
+    <td><%= correction.get_user_student.email  %></td>
+    <td><%= correction.get_last_updated_at %></td>
+    <td><%= correction.status %></td>
+    <td>
+      <%= link_to '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i> View'.html_safe, correction_path(correction.id) %>
+    </td>
+  </tr>
+<% else %>
+  <tr>
+    <td><%= correction.get_user_student.username %></td>
+    <td><%= "Task #{correction.writing.task_type}"  %></td>
+    <td><%= time_ago_in_words correction.created_at %></td>
+    <td><%= correction.status %></td>
+    <td>
+      <%= link_to "View", correction_path(correction.id) %>
+      |
+      <%= link_to "Edit", edit_correction_path(correction.id) %>
+    </td>
+  </tr>
+<% end %>

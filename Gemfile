@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'jquery-turbolinks'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -40,18 +40,37 @@ source 'https://rails-assets.org' do
 end
 
 gem 'bootstrap', '~> 4.0.0.alpha5'
-gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 gem 'devise'
 
+#vue
+gem 'vuejs-rails'
+
 # Upload images
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-aws'
 gem 'mini_magick'
 
 # simple_form
 gem 'simple_form'
 gem "cocoon"
+
+# editor
+gem "wysiwyg-rails"
+
+# markdown
+gem 'redcarpet'
+
+#dot env, store env locally
+gem 'dotenv-rails', group: [:development, :test], require: 'dotenv/rails-now'
+gem 'faker'
+
+# charts
+gem "highcharts-rails"
+
+# group date
+gem 'groupdate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -67,7 +86,6 @@ group :development, :test do
   gem 'simplecov', '~> 0.12.0', require: false
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
-  gem 'faker'
 end
 
 group :development do

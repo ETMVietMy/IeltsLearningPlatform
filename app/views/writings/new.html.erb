@@ -1,17 +1,34 @@
 <h1>Writing Answer</h1>
 
-<%= form_for(@writing, html: {class: 'form-dashboard'}) do |f| %>
-  <%= f.hidden_field :task_id %>
-  <div class="form-group">
-    <label>Question:</label>
-    <%= image_tag(@task.attachments.last.attachment.url, class: 'attachment img-responsive') if @task.attachments.present? %> 
-    <p><%= @task.description %></p>
-  </div>
+<div id="writing_form">
+  <%= form_for(@writing, html: {class: 'form-dashboard'}) do |f| %>
+    <%= f.hidden_field :task_id %>
+    <div class="form-group">
+      <label>Question:</label>
+      <%= image_tag(@task.attachments.last.attachment.url, class: 'attachment img-responsive') if @task.attachments.present? %> 
+      <p><%= @task.description %></p>
+    </div>
+  
+    <div class="form-group">
+      <div class="label-timer">
+        <label>Your Answer:</label>
+        <div class="timer">
+          <timer task-num="<%= @task.task_number %>"></timer>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label>Your Answer:</label>
-    <%= f.text_area :answer, rows: 18, class: "form-control" %>
+      <%= f.text_area :answer, rows: 18, class: "form-control" %>
+    </div>
+    <%= submit_tag "Save Your Answer", class: "btn btn-primary" %>
+  <% end %>
+</div>
+<script id="writing_timer_template" type="text/x-template">
+  <div class="">
+    <div class="time-num">{{calcTime()}}</div>
+    <div class="time-progress">
+      <span class="time-progress-value" v-bind:style="{width: percentage + '%'}"></span>
+      <span class="time-progress-bg"></span>
+    </div>
   </div>
-  <%= submit_tag "Save Your Answer", class: "btn btn-primary" %>
-<% end %>
+</script>
 

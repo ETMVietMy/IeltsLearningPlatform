@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719173335) do
+ActiveRecord::Schema.define(version: 20170727102528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "balance"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "attachments", force: :cascade do |t|
     t.string "attachment"
@@ -28,11 +37,28 @@ ActiveRecord::Schema.define(version: 20170719173335) do
 
   create_table "comments", force: :cascade do |t|
     t.text "message"
-    t.integer "rating"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "teacher_id"
+    t.integer "score"
+    t.float "rating", default: 0.0
+    t.integer "comment_id"
+  end
+
+  create_table "corrections", force: :cascade do |t|
+    t.integer "teacher_id"
+    t.bigint "writing_id"
+    t.text "body"
+    t.string "status", default: "new"
+    t.float "task_achievement", default: 0.0
+    t.float "coherence_cohesion", default: 0.0
+    t.float "lexical_resource", default: 0.0
+    t.float "grammar", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id", "status"], name: "index_corrections_on_teacher_id_and_status"
+    t.index ["writing_id"], name: "index_corrections_on_writing_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -51,6 +77,34 @@ ActiveRecord::Schema.define(version: 20170719173335) do
     t.boolean "is_read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "message_type", default: "msg"
+    t.integer "writing_id"
+    t.boolean "hide_sender", default: false
+    t.boolean "hide_recipient", default: false
+    t.string "recipients_emails"
+    t.index ["message_type"], name: "index_messages_on_message_type"
+    t.index ["writing_id"], name: "index_messages_on_writing_id"
+  end
+
+  create_table "promo_codes", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.integer "percent"
+    t.integer "limit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "comment_id"
+    t.bigint "user_id"
+    t.float "score", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "teacher_id"
+    t.integer "rating"
+    t.index ["comment_id"], name: "index_ratings_on_comment_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "recipients", force: :cascade do |t|
@@ -89,6 +143,29 @@ ActiveRecord::Schema.define(version: 20170719173335) do
     t.index ["user_id"], name: "index_teachers_on_user_id"
   end
 
+  create_table "transaction_types", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "from_account"
+    t.bigint "to_account"
+    t.integer "amount"
+    t.string "transaction_description"
+    t.bigint "transaction_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "promo_code_id"
+    t.string "status"
+    t.bigint "writing_id"
+    t.index ["promo_code_id"], name: "index_transactions_on_promo_code_id"
+    t.index ["transaction_type_id"], name: "index_transactions_on_transaction_type_id"
+    t.index ["writing_id"], name: "index_transactions_on_writing_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -116,7 +193,7 @@ ActiveRecord::Schema.define(version: 20170719173335) do
     t.bigint "task_id"
     t.bigint "user_id"
     t.integer "teacher_id"
-    t.string "status"
+    t.string "status", default: "new"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "answer"
@@ -124,10 +201,17 @@ ActiveRecord::Schema.define(version: 20170719173335) do
     t.index ["user_id"], name: "index_writings_on_user_id"
   end
 
+  add_foreign_key "accounts", "users"
+  add_foreign_key "corrections", "writings"
   add_foreign_key "follows", "teachers"
   add_foreign_key "follows", "users"
+  add_foreign_key "ratings", "comments"
+  add_foreign_key "ratings", "users"
   add_foreign_key "recipients", "messages"
   add_foreign_key "recipients", "users"
+  add_foreign_key "transactions", "promo_codes"
+  add_foreign_key "transactions", "transaction_types"
+  add_foreign_key "transactions", "writings"
   add_foreign_key "writings", "tasks"
   add_foreign_key "writings", "users"
 end

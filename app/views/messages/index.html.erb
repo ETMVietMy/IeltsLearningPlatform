@@ -13,31 +13,10 @@
 
 <div class="row">
   <div class="col-sm-12">
-      <!-- <h2>Striped Rows</h2> -->
-      <div class="table-responsive">
-          <table class="table table-hover table-striped">
-              <thead>
-                  <tr>
-                      <th>Sender</th>
-                      <th>Subject</th>
-                      <th>Sent at</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <% @messages.each do |message| %>
-                <%= render "message_row", message: message, sender: message.getSender %>
-                <% end %>
-              </tbody>
-          </table>
-      </div>
+    <!-- <h2>Striped Rows</h2> -->
+    <div class="table-responsive" id="messages-list">
+      <%= render "messages_table" %>
+    </div>
   </div>
 </div>
 <!-- /.row -->
-
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
-  });
-</script>
