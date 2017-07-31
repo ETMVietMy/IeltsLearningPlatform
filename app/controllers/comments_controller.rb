@@ -36,14 +36,15 @@ end
 end
 
 	def update
-		if @comment.update_attributes(comment_params)
-			flash[:success] = "Update completed!"
-			redirect_to teacher_path(@teacher)
-		else
-			flash[:error] = "Your information was not saved"
-			redirect_to teacher_path(@teacher)
-	end
-end
+	@comment = comment.find(params[:comment_id])
+	respond_to do |format|
+    if @comment.update_attributes(params[:comment])
+        format.js
+      end
+    end
+  end
+
+
 
 	private
 

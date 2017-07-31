@@ -19,6 +19,7 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new(user: current_user)
+    @teacher.comment.new
   end
 
   def create

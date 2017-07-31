@@ -6,6 +6,6 @@ class Comment < ApplicationRecord
 	validates :message, presence: true
   
 	 def average_rating
-	  ratings.sum(:score) / ratings.size
+	  comments.average(:rating).round(2)
 	end
 end
