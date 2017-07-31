@@ -33,4 +33,8 @@ class Writing < ApplicationRecord
   def can_request?
     %w(new).include? self.status
   end
+
+  def self.count_corrected
+    @count_corrected ||= Writing.where(status: [STATUS_CORRECTED, STATUS_ACCEPTED]).count
+  end
 end

@@ -23,10 +23,12 @@
         </div>
 
       <div class="row">
-        <div class="col-sm-8 text-left">
-          <span class="color-6">Already have an account?</span>
-          <%= link_to 'Log In', new_user_session_path, class:"tkb-color", :remote => true, "data-toggle" => "modal", "data-target" => "login" %>
-        </div>
+        <% if false %>
+          <div class="col-sm-8 text-left">
+            <span class="color-6">Already have an account?</span>
+            <%= link_to 'Log In', new_user_session_path, class:"tkb-color", :remote => true, "data-toggle" => "modal", "data-target" => "login" %>
+          </div>
+        <% end %>
         <div class="col-sm-4 text-right">
           <!-- <span class="color-6">Reset Password?</span> -->
         </div>
