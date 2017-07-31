@@ -1,3 +1,38 @@
 // Place all the styles related to the writings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.label-timer{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 5px;
+  .timer{
+    font-family: $font-heading;
+    font-size: 1.2em;
+  }  
+  .time-num{
+    text-align: right;
+  }
+  .time-progress{
+    width: 100px;
+    height: 3px;
+    position: relative;
+    &-value{
+      background-color: #0A943A;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      color: #fff;
+      display: block;
+      transition: 500ms all;
+    }
+    &-bg{
+      background-color: #CBD6E4;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
