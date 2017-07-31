@@ -8,6 +8,16 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def create
+    super
+    cookies.signed[:user_id] = current_user.id
+  end
+
+  def destroy
+    super
+    cookies.delete :user_id
+  end
+
   # POST /resource/sign_in
   # def create
   #   super
