@@ -7,9 +7,13 @@
 
       <h1>Prepare Your IELTS Writing Test</h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse atque enim, molestias id. Nihil ad dicta, nesciunt perspiciatis aperiam fuga!</p>
+      <p>Create your own task or choose from our library. Our teachers are always ready to help you improve your skill to the next level. You are not alone!</p>
       <p class="text-center">
-        <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-primary", :remote => true, "data-toggle" => "modal", "data-target" => "signup" %>
+        <% if !user_signed_in? %>
+          <%= link_to 'Get Start', new_user_registration_path, class:"btn btn-primary btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "#signup" %>
+        <% else %>
+          <%= link_to '<i class="fa fa-arrow-circle-right"></i> Your Workplace'.html_safe, dashboard_path, class:"btn btn-primary btn-sm"%>
+        <% end %>
       </p>
     </div>
   </div>
@@ -17,26 +21,29 @@
 
 <section class="features">
   <div class="container">
-    <h2 class="section-heading">Why Should I Use EMT</h2>
+    <h2 class="section-heading">Why Us?</h2>
 
     <div class="features-list">
       <div class="row">
         <div class="col-md-4">
           <div class="feature-item">
-            <h3>Fast Correcting</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, laudantium labore iure, </p>
+            <h3>Get Practices </h3>
+            <%= image_tag 'ink.png', style: "margin-bottom: 5px;"%>
+            <p>Recieve a task randomly and practice your writing like in the real exam</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="feature-item">
-            <h3>Reason 2</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, laudantium labore iure, itaque quis perferendis natus </p>
+            <h3>Get Connections</h3>
+            <%= image_tag 'shake-hands.png', style: "margin-bottom: 5px;"%>
+            <p>Get connect to a teacher from our network or become a part of us and start your teacher career</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="feature-item">
-            <h3>Another Reason</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <h3>Get Protections</h3>
+            <%= image_tag 'shield.png', style: "margin-bottom: 5px;"%>
+            <p>You only pay with satisfy or recieve reward worth with your work</p>
           </div>
         </div>
       </div>
@@ -46,9 +53,9 @@
 
 <div class="container hr"></div>
 
-<section class="section-how">
+<!-- <section class="section-how">
   <div class="container">
-    <h2 class="section-heading">How to get your writing marked</h2> 
+    <h2 class="section-heading">Get Start</h2>
 
     <div class="block-how">
       <div class="block-how-thumb">
@@ -78,7 +85,33 @@
       </div>
     </div>
   </div>
+</section> -->
+
+<section class="section-how">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="alert alert-success text-center" role="alert">
+          <h4> <%= Teacher.count %> Teachers </h4>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="alert alert-info text-center" role="alert">
+          <h4> <%= Task.count %></span> Ielts Writing Tasks </h4>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="alert alert-warning text-center" role="alert">
+          <h4> <%= Writing.count %></span> Writings </h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
+
+<div class="container hr"></div>
 
 <section class="section-teachers">
   <div class="container">
@@ -90,10 +123,16 @@
             <%= image_tag avatar_or_default(teacher), class: 'block-teacher-avatar' %>
             <div class="block-teacher-name">
               <%= teacher.name_or_username %>
-            </div>            
+            </div>
           </div>
         </div>
       <% end %>
+    </div>
+    <br>
+    <div class="row">
+      <div class="mx-auto">
+        <%= link_to '<i class="fa fa-th-list"></i> View All'.html_safe, teachers_path, class:"btn btn-primary btn-sm"%>
+      </div>
     </div>
   </div>
 </section>

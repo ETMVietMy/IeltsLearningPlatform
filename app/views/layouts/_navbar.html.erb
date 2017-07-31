@@ -10,14 +10,17 @@
     <a class="navbar-brand" href="<%= root_path %>">EMT</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <strong><a class="nav-link" href="<%= root_path %>">Home</a></strong>
-        </li>
-        <li class="nav-item">
-          <strong><a class="nav-link" href="<%= dashboard_path %>">Start Working</a></strong>
-        </li>
+        <% if false %>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to '<i class="fa fa-arrow-circle-right"></i> Workplace'.html_safe, dashboard_path, class:"btn btn-primary btn-sm"%>
+            </li>
+          <% end %>
+        <% end %>
       </ul>
+
       <ul class="navbar-nav navbar-right">
         <% if !user_signed_in? %>
           <li class="nav-item">
@@ -32,7 +35,7 @@
             <%= link_to "Welcome, #{current_user.username}", dashboard_path, class: "nav-link"%>
           </li>
           <li class="nav-item">
-            <%= link_to 'Sign Out', destroy_user_session_path, class:"btn btn-primary btn-sm", method: 'delete' %>
+            <%= link_to '<i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out'.html_safe, destroy_user_session_path, class:"btn btn-primary btn-sm", method: 'delete' %>
           </li>
         <% end %>
       </ul>
