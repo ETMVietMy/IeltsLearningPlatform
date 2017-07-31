@@ -18,6 +18,7 @@
 @import "modal";
 @import "tasks";
 @import "teachers";
+@import "writings";
 
 html, body{
   height: 100%;
@@ -25,6 +26,12 @@ html, body{
 
 img{
   max-width: 100%;
+}
+
+.coin {
+  width : 25px !important;
+  height : 25px !important;
+  margin-top : -6px;
 }
 
 header{
@@ -141,7 +148,7 @@ header{
   padding:1rem;
   font-family: 'Inconsolata', monospace;
 
-  
+
 }
 
   #custom {
@@ -156,8 +163,8 @@ header{
     border-right:1px solid rgba(0,0,0,0.2);
     padding:1rem;
     font-family: 'Inconsolata', monospace;
-    
-    
+
+
   }
 
 
@@ -270,3 +277,25 @@ battery .battery-level {
   font-family: 'Inconsolata', monospace;
 }
 
+// image
+.user-info{
+  display: flex;
+  align-items: center;
+  &-avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  &-name{
+    font-weight: 700;
+  }
+}
+
+.dashboard-main-content{
+  .user-info{
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}

@@ -7,5 +7,4 @@ jQuery.noConflict();
   $(document).on('turbolinks:load', function(){
     $('.editor').froalaEditor({height: 300});
   });
-  console.log('asciausgciqw')
 })(jQuery)

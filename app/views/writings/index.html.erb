@@ -1,13 +1,21 @@
-<h1>Your writing</h1>
+<!-- Page Heading -->
+<div class="row">
+  <div class="col-lg-10">
+    <h1 class="page-header">
+      Your writings
+    </h1>
+  </div>
+  <div class="col-lg-2 text-right">
+    <%= link_to "New Writing", tasks_suggest_path, class: 'btn btn-sm btn-primary' %>  </div>
+  </div>
+<!-- /.row -->
 
-<div class="text-right mt-4 mb-4">
-  <%= link_to "New Writing", tasks_suggest_path, class: 'btn btn-primary' %>
-</div>
 <table class="table">
   <thead>
     <tr>
       <th>Id</th>
       <th>Task Type</th>
+      <th>Status</th>
       <th>Create At</th>
       <th></th>
     </tr>

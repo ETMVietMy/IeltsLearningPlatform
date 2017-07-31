@@ -1,9 +1,9 @@
 <tr>
   <td><%= transaction.transaction_description %></td>
-  <% if transaction.from_account == current_user.id %>
-    <td><span class="text-success">+<%= transaction.amount %></span></td>
+  <% if transaction.from_account == current_user.account.id %>
+    <td><span class="text-danger">-<%= !transaction.cancel? ? transaction.amount : 0 %></span></td>
   <% else %>
-    <td><span class="text-danger">-<%= transaction.amount %></span></td>
+    <td><span class="text-success">+<%= !transaction.cancel? ? transaction.amount : 0%></span></td>
   <% end %>
   <% if transaction.updated_at > Time.now.beginning_of_day %>
     <td><%="#{time_ago_in_words(transaction.updated_at)} ago"%></td>

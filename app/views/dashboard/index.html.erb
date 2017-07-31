@@ -6,7 +6,7 @@
       <div class="card card-dashboard card-dashboard-1">
         <div class="card-block">
           <div class="card-dashboard-heading">You have: </div>
-          <div class="card-dashboard-num"><span>15</span>Writings</div>
+          <div class="card-dashboard-num"><span><%= @total_writings %></span>Writings</div>
         </div>
       </div>
     </div>
@@ -14,7 +14,7 @@
       <div class="card card-dashboard card-dashboard-2">
         <div class="card-block">
           <div class="card-dashboard-heading">You have: </div>
-          <div class="card-dashboard-num"><span>5</span>Messages</div>
+          <div class="card-dashboard-num"><span><%= @total_unread_messages %></span> Unread Messages</div>
         </div>
       </div>
     </div>
@@ -26,5 +26,13 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="chart mt-4">
+    <div id="student_chart" style="width:100%; height:400px;">
+      
+    </div>
+    <script>
+      var writings = JSON.parse('<%= @student_graph.to_json.html_safe %>');
+    </script>
   </div>
 </div>

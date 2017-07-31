@@ -22,6 +22,14 @@
 //= require cocoon
 //= require froala_editor.min.js
 
+//= require highcharts
+//= require vue
+//= require writing-template/writing
+//= require turbolinks
+//= require_tree .
+
+
 //= require_tree .
 //= require turbolinks
+
 

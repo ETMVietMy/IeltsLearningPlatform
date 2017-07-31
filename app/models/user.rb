@@ -7,8 +7,7 @@ class User < ApplicationRecord
   has_one  :teacher
   has_one  :account
   has_many :follows
-  
-
+  has_one :attachment, as: :attached_item, dependent: :destroy
 
   has_many :comments, dependent: :destroy
   has_many :writings
@@ -19,6 +18,12 @@ class User < ApplicationRecord
 
   ROLE_TEACHER = "TCH"
   ROLE_STUDENT = "STD"
+  ROLE_ADMIN = "ADM"
+
+  # scope
+  scope :teachers, -> { where(role: ROLE_TEACHER) }
+
+  # functions
 
   def name_or_username
     self.name.presence || self.username
@@ -28,9 +33,20 @@ class User < ApplicationRecord
     where(role: self::ROLE_TEACHER)
   end
 
-  
+  # avatar
+  def has_avatar?
+    self.attachment.present?
+  end
 
-  
+  def avatar_url
+    self.attachment.attachment.url
+  end
+  #end avatar
+
+  #writing
+  def writing_stat
+    Writing.writings_count(self.id)
+  end
 
   def corrections
     return nil if self.is_student?
@@ -44,6 +60,10 @@ class User < ApplicationRecord
 
   def is_teacher?
     self.role == ROLE_TEACHER
+  end
+
+  def is_admin?
+    self.role == ROLE_ADMIN
   end
 
   def getAllFollowedTeachers
@@ -60,6 +80,11 @@ class User < ApplicationRecord
           #  .where.not(sender: getAllBlockCases).order("created_at desc")
   end
 
+  def self.getUserEmailAndAccount(current_user_email)
+    @users_accounts ||= User.joins(:account).where('role NOT LIKE ? AND email NOT LIKE ?', ROLE_ADMIN, current_user_email)
+                   .select('accounts.id as account_id, users.email')
+  end
+
   def unread_messages
     @unread_messages ||= received_messages.select{|message| message.is_read == false}
   end
@@ -73,7 +98,7 @@ class User < ApplicationRecord
   end
 
   def self.getAllTeacherUser()
-    @users ||= User.where(role: "TCH")
+    @users ||= User.where(role: ROLE_TEACHER)
   end
 
 end

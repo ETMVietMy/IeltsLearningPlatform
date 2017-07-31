@@ -4,11 +4,12 @@
             <th>Sender</th>
             <th>Subject</th>
             <th>Sent at</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
       <% @messages.each do |message| %>
-      <%= render "message_row", message: message, sender: message.getSender %>
+      <%= render "message_row", message: message, sender: message.getSenderEmail %>
       <% end %>
     </tbody>
 </table>

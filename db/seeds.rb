@@ -58,6 +58,17 @@ if User.find_by(email: 'teacher3@email.com')==nil
     })
 end
 
+# Create Admin and System mailing User
+if User.find_by(email: 'etm_admin1@email.com')==nil
+  u = User.create({
+    email: 'etm_admin1@email.com',
+    username: 'First Admin',
+    role: 'ADM',
+    password: 'admin1',
+    password_confirmation: 'admin1'
+    })
+end
+
 # Create Account
 User.all.each do |user|
   if user.account.nil?
@@ -69,24 +80,37 @@ User.all.each do |user|
   end
 end
 
-TransactionType.delete_all
 # Create transaction_type
-TransactionType.create(
-  name: 'Top Up Account',
-  code: 'TOPUP'
-)
-TransactionType.create(
-  name: 'Pay for correcting',
-  code: 'PAYMENT'
-)
-TransactionType.create(
-  name: 'Settle Payment for correcting',
-  code: 'SETTLE_PAYMENT'
-)
-TransactionType.create(
-  name: 'Account to Account transaction',
-  code: 'A2A'
-)
+if TransactionType.find_by(code: TransactionType::TOPUP)==nil
+  TransactionType.create(
+    name: 'Top Up Account',
+    code: 'TOPUP'
+  )
+end
+if TransactionType.find_by(code: TransactionType::PENDING_PAYMENT)==nil
+  TransactionType.create(
+    name: 'Pay for correcting',
+    code: 'PAYMENT'
+  )
+end
+if TransactionType.find_by(code: TransactionType::SETTLE_PAYMENT)==nil
+  TransactionType.create(
+    name: 'Settle Payment for correcting',
+    code: 'SETTLE_PAYMENT'
+  )
+end
+if TransactionType.find_by(code: TransactionType::A2A)==nil
+  TransactionType.create(
+    name: 'Account to Account transaction',
+    code: 'A2A'
+  )
+end
+if TransactionType.find_by(code: TransactionType::CANCEL)==nil
+  TransactionType.create(
+    name: 'Cancel Pending Payment',
+    code: 'CANCEL'
+  )
+end
 
 if Task.count == 0
   tasks = ['Some people say that zoos have no useful purpose. Others believe that zoos are beneficial in many ways. Discuss and give your opinion.',

@@ -1,13 +1,13 @@
 <tr>
-  <td><%= transaction.transaction_description %></td>
-  <% if transaction.from_account == current_user.id %>
-    <td><span class="text-success">+<%= transaction.amount %></span></td>
+  <td><%= pending_transaction.transaction_description %></td>
+  <% if pending_transaction.from_account == current_user.account.id %>
+    <td><span class="text-danger">-<%= pending_transaction.amount %></span></td>
   <% else %>
-    <td><span class="text-danger">+<%= transaction.amount %></span></td>
+    <td><span class="text-success">+<%= pending_transaction.amount %></span></td>
   <% end %>
-  <% if transaction.updated_at > Time.now.beginning_of_day %>
-    <td><%="#{time_ago_in_words(transaction.updated_at)} ago"%></td>
+  <% if pending_transaction.updated_at > Time.now.beginning_of_day %>
+    <td><%="#{time_ago_in_words(pending_transaction.updated_at)} ago"%></td>
   <% else %>
-    <td><%= transaction.updated_at.strftime("%b %d, %Y") %></td>
+    <td><%= pending_transaction.updated_at.strftime("%b %d, %Y") %></td>
   <% end %>
 </tr>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725171724) do
+ActiveRecord::Schema.define(version: 20170727102528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(version: 20170725171724) do
     t.bigint "writing_id"
     t.text "body"
     t.string "status", default: "new"
-    t.float "task_achievement"
-    t.float "coherence_cohesion"
-    t.float "lexical_resource"
-    t.float "grammar"
+    t.float "task_achievement", default: 0.0
+    t.float "coherence_cohesion", default: 0.0
+    t.float "lexical_resource", default: 0.0
+    t.float "grammar", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["teacher_id", "status"], name: "index_corrections_on_teacher_id_and_status"
@@ -114,15 +114,6 @@ ActiveRecord::Schema.define(version: 20170725171724) do
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_recipients_on_message_id"
     t.index ["user_id"], name: "index_recipients_on_user_id"
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -193,7 +184,7 @@ ActiveRecord::Schema.define(version: 20170725171724) do
     t.bigint "task_id"
     t.bigint "user_id"
     t.integer "teacher_id"
-    t.string "status"
+    t.string "status", default: "new"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "answer"

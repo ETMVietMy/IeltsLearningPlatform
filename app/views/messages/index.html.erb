@@ -20,14 +20,3 @@
   </div>
 </div>
 <!-- /.row -->
-
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-    $(".clickable-row").click(function(e) {
-      // console.log(e.target.nodeName);
-      if (e.target.nodeName!='I'){
-        window.location = $(this).data("href");
-      }
-    });
-  });
-</script>

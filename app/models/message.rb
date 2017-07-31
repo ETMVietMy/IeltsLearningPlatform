@@ -11,11 +11,16 @@ class Message < ApplicationRecord
   TEXT_MESSAGE = 'msg'
   REQUEST = 'req'
   CORRECTION = 'cor'
+  NOTIFICATION = 'not'
 
-  %w(text_message request correction).each do |state|
+  %w(text_message request correction notification).each do |state|
     define_method "#{state}?" do
       message_type == self.class.const_get(state.upcase)
     end
+  end
+
+  def self.total_unread_message(user_id)
+    joins(:recipients).where('recipients.user_id = ? and is_read = ?', user_id, false).count
   end
 
   def writing
@@ -25,8 +30,20 @@ class Message < ApplicationRecord
     self.message_type == REQUEST
   end
 
-  def getSender
-    @user ||= User.find_by(id: sender)
+  def getSenderEmail
+    if self.message_type!=NOTIFICATION
+      @user ||= User.find_by(id: sender).email
+    else
+      "System Notification"
+    end
+  end
+
+  def getSenderName
+    if self.message_type!=NOTIFICATION
+      @user ||= User.find_by(id: sender).name
+    else
+      "System Admin"
+    end
   end
 
   def getRecipient

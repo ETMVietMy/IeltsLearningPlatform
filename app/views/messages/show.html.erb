@@ -24,7 +24,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <%= label_tag "Sender" %>
-                    <input class="form-control" type="text" placeholder="<%= @message.getSender.email %>" readonly="">
+                    <input class="form-control" type="text" placeholder="<%= @message.getSenderEmail %>" readonly="">
                   </div>
                 </div>
 
@@ -39,7 +39,7 @@
             </div>
             <div class="card-block">
               <div class="form-group">
-                <span class="font-bold"> <%= @message.getSender.username %> wrote:</span>
+                <span class="font-bold"> <%= @message.getSenderName %> wrote:</span>
                 <textarea class="form-control" type="text" readonly=""><%= @message.content %>
                 </textarea>
               </div>
@@ -63,40 +63,51 @@
     </div>
   </div>
   <br>
-  <% if @message.request? && !@writing.nil? %>
+  <% if @message.sender != current_user.id || true%>
+    <% if @message.request? && !@writing.nil? && current_user.is_teacher?%>
+      <div class="row">
+        <div class="col-sm-2 offset-sm-4">
+          <div class="form-group">
+            <%= link_to "Accept", accept_request_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <%= link_to "Decline", deny_request_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
+          </div>
+        </div>
+      </div>
+    <% elsif @message.correction? && !@writing.nil? && current_user.is_student? %>
+      <div class="row">
+        <div class="col-sm-2 offset-sm-4">
+          <div class="form-group">
+            <%= link_to "Accept", accept_correction_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <%= link_to "Decline", deny_correction_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
+          </div>
+        </div>
+      </div>
+    <% elsif @message.text_message? %>
     <div class="row">
-      <div class="col-sm-2 offset-sm-4">
-        <div class="form-group">
-          <%= link_to "Accept", accept_request_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <div class="form-group">
-          <%= link_to "Decline", deny_request_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
-        </div>
-      </div>
-    </div>
-  <% elsif @message.correction? && !@writing.nil? %>
-    <div class="row">
-      <div class="col-sm-2 offset-sm-4">
-        <div class="form-group">
-          <%= link_to "Accept", accept_correction_path(@message.id), class: 'btn btn-block btn-sm btn-success'  %>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <div class="form-group">
-          <%= link_to "Decline", deny_correction_path(@message.id), class: 'btn btn-block btn-sm btn-danger'  %>
+      <div class="col-sm-12">
+        <div class="card card-block">
+          <%= simple_form_for Message.new do |f| %>
+            <%= f.input :content, label: "Reply:"%>
+            <%= f.hidden_field :recipients_emails, value: @message.getSenderEmail  %>
+            <%= f.hidden_field :subject, value: "[RE:]" + @message.subject %>
+            <%= f.hidden_field :message_type, value: "msg" %>
+            <div class="row">
+              <div class="mx-auto">
+                <%= f.submit 'Send', class: 'btn btn-sm btn-success mx-auto' %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-  <% else %>
-  <div class="row">
-    <div class="col-sm-2 offset-sm-5">
-      <div class="form-group">
-        <%= link_to "Reply", nil, class: 'btn btn-block btn-sm btn-success'  %>
-        <!-- <a href="<%= new_message_path %>?recipient=<%= @message.getSender.email %>&subject=[Accept]<%= @message.subject %>" class="btn btn-block btn-sm btn-success">Accept</a> -->
-      </div>
-    </div>
-  </div>
+    <% end %>
   <% end %>
   <!-- /.row -->

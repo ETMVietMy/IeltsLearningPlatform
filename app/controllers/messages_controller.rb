@@ -46,6 +46,11 @@ class MessagesController < ApplicationController
 
       if @message.save
         Recipient.create(user_id: recipient.id, message_id: @message.id)
+        # change writing status
+        if @message.writing_id.present?
+          Writing.find(@message.writing_id).change_status(Writing::STATUS_REQUESTED)
+        end
+
         flash[:success] = "Your message has been sent."
         redirect_to messages_sent_path
       else
@@ -78,25 +83,26 @@ class MessagesController < ApplicationController
   end
 
   def accept_correction
-    # reply_correction(true)
-    handle_reply(
-      params[:message_id], 
-      true,
-      "Your correcting has been accepted",
-      "#{current_user.name_or_username} has accepted your correcting",
-      "You have been accepted the correcting succefully"
-    )
+    reply_correction(true)
+    # handle_reply(
+    #   params[:message_id],
+    #   true,
+    #   "Your correcting has been accepted",
+    #   "#{current_user.name_or_username} has accepted your correcting",
+    #   "You have been accepted the correcting succefully"
+    # )
     #def handle_reply(message_id, is_accepted, reply_subject, reply_content, success_flash = 'You have been reply to the request succefully')
 
   end
   def deny_correction
-    handle_reply(
-      params[:message_id], 
-      false,
-      "Your correcting request has been denied",
-      "#{current_user.name_or_username} has denied your correting, please review and update it",
-      "You have been accepted the correcting succefully"
-    )
+    reply_correction(false)
+    # handle_reply(
+    #   params[:message_id],
+    #   false,
+    #   "Your correcting request has been denied",
+    #   "#{current_user.name_or_username} has denied your correting, please review and update it",
+    #   "You have been accepted the correcting succefully"
+    # )
   end
 
   def sent
@@ -122,20 +128,25 @@ class MessagesController < ApplicationController
     @correction = Correction.new(writing_id: @writing.id, teacher_id: current_user.id, status: Correction::STATUS_NEW)
 
     Correction.transaction do
-      @correction.save!
-
       if is_accepted
+        @correction.save!
         reply_subject = "Your correcting request has been accepted"
         reply_content = "#{current_user.name_or_username} has accepted your request, please wait for him/her to correct your answer"
+        Account.start_payment_for_correcting(@writing.user.account.id, current_user.account.id, current_user.teacher.price, @writing.id)
+        # change status of writing
+        @writing.change_status(Writing::STATUS_CORRECTING)
       else
         reply_subject = "Your correcting request has been denied"
         reply_content = "#{current_user.name_or_username} has denied your request, please request to another teacher"
+        # change status of writing
+        @writing.change_status(Writing::STATUS_NEW)
       end
 
       @message = Message.new(
-        sender: current_user.id,
+        sender: "Notification",
         subject: reply_subject,
         content: reply_content,
+        message_type: Message::NOTIFICATION,
         is_read: false
       )
       @recipient = Recipient.new(
@@ -167,7 +178,7 @@ class MessagesController < ApplicationController
     @correction = @writing.correction
     if is_accepted
       @correction.assign_attributes(status: Correction::STATUS_ACCEPTED)
-    else 
+    else
       @correction.assign_attributes(status: Correction::STATUS_DENIED)
     end
 
@@ -177,15 +188,17 @@ class MessagesController < ApplicationController
       if is_accepted
         reply_subject = "Your correcting has been accepted"
         reply_content = "#{current_user.name_or_username} has accepted your correcting"
+        Account.settle_payment_for_correcting(current_user.account.id, @correction.get_teacher_account.id, @correction.get_teacher.price, @writing.id)
       else
         reply_subject = "Your correcting request has been denied"
         reply_content = "#{current_user.name_or_username} has denied your correting, please review and update it"
       end
 
       @message = Message.new(
-        sender: current_user.id,
+        sender: "Notification",
         subject: reply_subject,
         content: reply_content,
+        message_type: Message::NOTIFICATION,
         is_read: false
       )
       @recipient = Recipient.new(
@@ -218,7 +231,7 @@ class MessagesController < ApplicationController
     if @correction.new_record?
       if is_accepted
         @correction.assign_attributes(status: Correction::STATUS_ACCEPTED)
-      else 
+      else
         @correction.assign_attributes(status: Correction::STATUS_DENIED)
       end
     end
@@ -234,10 +247,14 @@ class MessagesController < ApplicationController
       #   reply_content = "#{current_user.name_or_username} has denied your correting, please review and update it"
       # end
 
+      if is_accepted
+        Account.settle_payment_for_correcting(current_user.account.id, @correction.get_teacher_account.id, @correction.get_teacher.price, @writing.id)
+      end
       @message = Message.new(
-        sender: current_user.id,
+        sender: "Notification",
         subject: reply_subject,
         content: reply_content,
+        message_type: Message::NOTIFICATION,
         is_read: false
       )
       @recipient = Recipient.new(

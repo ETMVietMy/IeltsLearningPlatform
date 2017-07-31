@@ -66,6 +66,12 @@ gem 'redcarpet'
 gem 'dotenv-rails', group: [:development, :test], require: 'dotenv/rails-now'
 gem 'faker'
 
+# charts
+gem "highcharts-rails"
+
+# group date
+gem 'groupdate'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
