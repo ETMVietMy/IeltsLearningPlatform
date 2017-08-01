@@ -306,3 +306,20 @@ battery .battery-level {
   right: 30px;
   width: 300px;
 }
+
+.rating-star{
+  display: inline-block;
+  position: relative;
+  font-size: 18px;
+  &-value{
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #F8D72A;
+  }
+  &-bg{
+    color: #D1D1D1;
+  }
+}

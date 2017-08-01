@@ -44,4 +44,18 @@ module ApplicationHelper
   def coin(amount)
     (amount.to_s  + ' ' + content_tag(:img, '', src: asset_path('coin.png'), class: "coin")).html_safe
   end
+
+  def rating_star(value)
+    percentage = value / 5 * 100
+
+    fg = content_tag 'div', class: 'rating-star-value', style: "width: #{percentage}%" do
+        (1..5).map{fa_icon "star"}.join.html_safe
+      end
+    bg = content_tag 'div', class: 'rating-star-bg' do
+        (1..5).map{fa_icon "star"}.join.html_safe
+      end
+    content_tag 'div', class: 'rating-star' do
+      [fg, bg].join.html_safe
+    end.html_safe
+  end
 end
