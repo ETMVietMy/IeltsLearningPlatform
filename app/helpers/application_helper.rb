@@ -40,4 +40,8 @@ module ApplicationHelper
   def avatar_or_default(user)
     user.has_avatar? ? user.avatar_url : asset_path('avatar.png')
   end
+
+  def coin(amount)
+    (amount.to_s  + ' ' + content_tag(:img, '', src: asset_path('coin.png'), class: "coin")).html_safe
+  end
 end

@@ -26,12 +26,12 @@
 <!-- Tab panes -->
 <div class="tab-content">
   <% if !current_user.is_admin? %>
-    <div class="tab-pane <%= "active" if params[:type].nil? || params[:type]!="msg" %>" id="correcting-request" role="tabpanel">
+    <div class="tab-pane mt-4 <%= "active" if params[:type].nil? || params[:type]!="msg" %>" id="correcting-request" role="tabpanel">
       <%= render "correcting_request"%>
     </div>
   <% end %>
 
-  <div class="tab-pane <%= "active" if ((!params[:type].nil? && params[:type]=="msg") || current_user.is_admin?) %>" id="compose-message" role="tabpanel">
+  <div class="tab-pane mt-4 <%= "active" if ((!params[:type].nil? && params[:type]=="msg") || current_user.is_admin?) %>" id="compose-message" role="tabpanel">
     <%= render "compose_message"%>
   </div>
 </div>

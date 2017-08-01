@@ -50,9 +50,13 @@ class MessagesController < ApplicationController
         if @message.writing_id.present?
           Writing.find(@message.writing_id).change_status(Writing::STATUS_REQUESTED)
         end
+        
+        # websocket boardcast
+        notify_user(recipient.id)
 
         flash[:success] = "Your message has been sent."
         redirect_to messages_sent_path
+        
       else
         flash[:error] = "ERROR: #{@message.errors.full_messages.to_sentence}"
         redirect_to new_message_path
@@ -155,6 +159,8 @@ class MessagesController < ApplicationController
       )
       @message.save!
       @recipient.save!
+
+      notify_user(@request.sender)
     end
 
     flash[:success] = 'You have been reply to the request succefully'
@@ -189,9 +195,12 @@ class MessagesController < ApplicationController
         reply_subject = "Your correcting has been accepted"
         reply_content = "#{current_user.name_or_username} has accepted your correcting"
         Account.settle_payment_for_correcting(current_user.account.id, @correction.get_teacher_account.id, @correction.get_teacher.price, @writing.id)
+
+        @writing.change_status(Writing::STATUS_ACCEPTED)
       else
         reply_subject = "Your correcting request has been denied"
         reply_content = "#{current_user.name_or_username} has denied your correting, please review and update it"
+        @writing.change_status(Writing::STATUS_DENIED)
       end
 
       @message = Message.new(
@@ -207,6 +216,8 @@ class MessagesController < ApplicationController
       )
       @message.save!
       @recipient.save!
+      
+      notify_user(@request.sender)
     end
 
     flash[:success] = 'You have been reply to the request succefully'

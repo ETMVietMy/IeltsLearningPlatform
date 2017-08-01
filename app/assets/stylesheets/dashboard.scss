@@ -299,3 +299,10 @@ battery .battery-level {
     padding-bottom: 15px;
   }
 }
+
+.notification{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 300px;
+}

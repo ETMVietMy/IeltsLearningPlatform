@@ -1,7 +1,7 @@
 jQuery.noConflict();
 (function($) {
   $(document).on('turbolinks:load', function(){
-    if ( $('#student_chart').length > 0 ){
+    if ($('#student_chart').length > 0){
       var myChart = Highcharts.chart('student_chart', {
         chart: {
           type: 'line'
@@ -23,6 +23,5 @@ jQuery.noConflict();
         }]
       });
     }
-
   })
 })(jQuery)

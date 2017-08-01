@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :writings
   has_many :tasks
   has_many :recipients
+  has_many :messages, through: :recipients
 
   validates :username, presence: true
 
@@ -42,6 +43,11 @@ class User < ApplicationRecord
     self.attachment.attachment.url
   end
   #end avatar
+
+  # information
+  def unread_messages_count
+    self.messages.where(is_read: false).count
+  end
 
   #writing
   def writing_stat

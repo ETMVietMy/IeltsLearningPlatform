@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   layout 'dashboard'
   protect_from_forgery with: :exception
 
+  helper_method :unread_messages_count
+
   before_action :store_current_location, :unless => :devise_controller?
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -11,6 +13,16 @@ class ApplicationController < ActionController::Base
       flash["error"] = "You don't have permission to access this area"
       return redirect_to dashboard_path
     end
+  end
+
+  def unread_messages_count
+    @unread_messages_count ||= current_user.unread_messages.count
+    return @unread_messages_count
+  end
+
+  def notify_user(user_id)
+    message = "You have a <a href='#{messages_path}'>new message</a>"
+    ActionCable.server.broadcast("message_#{user_id}", content: message)
   end
 
   protected

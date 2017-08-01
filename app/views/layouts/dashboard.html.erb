@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <script type="text/javascript">
+      var user_id = <%= current_user.id %>;
+    </script>
+
     <%= render 'layouts/navbar-dashboard' %>
 
     <div class="dashboard">
@@ -46,7 +50,11 @@
             <a class="nav-link" href="<%= transactions_path %>"><i class="fa fa-fw fa-history"></i> Transaction History</a>
           </li>
           <li class="nav-item <%= 'active' if is_active_class('inbox') %>">
-            <a class="nav-link" href="<%= messages_path %>"><i class="fa fa-fw fa-envelope-o"></i> Inbox</a>
+            <a class="nav-link" href="<%= messages_path %>"><i class="fa fa-fw fa-envelope-o"></i> Inbox 
+            <% if unread_messages_count > 0 %>
+              <span class="badge bg-danger"><%= unread_messages_count %></span>
+            <% end %>
+            </a>
           </li>
           <li class="nav-item <%= active_class(controller: 'messages', action: 'sent')%>">
             <a class="nav-link" href="<%= messages_sent_path %>"><i class="fa fa-fw fa-paper-plane-o"></i> Sent</a>
@@ -76,6 +84,5 @@
         <%= yield %>
       </div>
     </div>
-
   </body>
 </html>

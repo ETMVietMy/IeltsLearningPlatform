@@ -12,7 +12,6 @@
 //
 
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.raty
 
@@ -25,11 +24,10 @@
 //= require highcharts
 //= require vue
 //= require writing-template/writing
-//= require turbolinks
+//= require tasks
+//= require cable
 //= require_tree .
 
-
-//= require_tree .
 //= require turbolinks
 
 
