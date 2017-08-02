@@ -1,5 +1,5 @@
 <!-- Navigation Bar -->
-<header>
+<header class="<%= "teacher" if current_user.is_teacher? %> <%= "student" if current_user.is_student? %>">
   <nav class="navbar navbar-toggleable-md  navbar-expand-md bg-faded
   <%= 'navbar-light' unless current_page?(controller: 'home', action: 'index') %>
   <%= 'navbar-dark nav-home' if current_page?(controller: 'home', action: 'index') %>"
@@ -7,7 +7,11 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="<%= root_path %>">EMT</a>
+    <a class="navbar-brand" href="<%= root_path %>">
+    <%= fa_icon('graduation-cap') if current_user.is_student? %>
+    <%= fa_icon('pencil-square-o') if current_user.is_teacher? %>
+    EMT
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">

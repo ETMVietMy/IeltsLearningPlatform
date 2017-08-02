@@ -22,21 +22,21 @@
     <div class="col-md-6">
       <div class="form-group">
         <label>Task Archivement</label>
-        <%= f.number_field :task_achievement, class: 'form-control' %>
+        <%= f.text_field :task_achievement, class: 'form-control' %>
       </div>
       <div class="form-group">
         <label>Coherence and Cohesion</label>
-        <%= f.number_field :coherence_cohesion, class: 'form-control' %>
+        <%= f.text_field :coherence_cohesion, class: 'form-control' %>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label>Lexical Resource</label>
-        <%= f.number_field :lexical_resource, class: 'form-control' %>
+        <%= f.text_field :lexical_resource, class: 'form-control' %>
       </div>
       <div class="form-group">
         <label>Grammatical Range and Accuracy</label>
-        <%= f.number_field :grammar, class: 'form-control' %>
+        <%= f.text_field :grammar, class: 'form-control' %>
       </div>
     </div>
   </div>
@@ -47,6 +47,11 @@
     </div>    
   </div>
 
-  <%= submit_tag "Save", class: "btn btn-secondary", name: "save" %>
+  <%= submit_tag "Save Draft", class: "btn btn-secondary", name: "save" %>
   <%= submit_tag "Finish", class: "btn btn-primary", name: "finish" %>
+
+  <div class="mt-3">
+    <p class="text-muted mb-0"><small>* <strong>Save draft</strong> will save your work and let you continue later</small></p>
+    <p class="text-muted"><small>* Clicking <strong>Finish</strong> will tell the student that his/her writing has been marked</small></p>
+  </div>
 <% end %>

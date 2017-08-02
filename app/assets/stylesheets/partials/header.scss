@@ -39,4 +39,15 @@ header{
   .btn{
     padding: 7px 20px;
   }
+
+  &.student{
+    .navbar{
+    }
+  }
+
+  &.teacher{
+    .navbar{
+      
+    }
+  }
 }
