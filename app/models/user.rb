@@ -49,6 +49,14 @@ class User < ApplicationRecord
     self.messages.where(is_read: false).count
   end
 
+  def teacher_info
+    self.teacher
+  end
+
+  def average_rating
+    self.comments.average(:rating) || 0
+  end
+
   #writing
   def writing_stat
     Writing.writings_count(self.id)

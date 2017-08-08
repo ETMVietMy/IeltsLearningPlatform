@@ -1,10 +1,28 @@
-<table class="table table-striped">
+<h1>Get a teacher to correct your writing</h1>
+<!-- <table class="table table-striped">
   <tbody>
     <% @teachers.each do |teacher| %>
     <tr>
-      <td><%= teacher.username %></td>
+      <td>
+        <%= teacher.username %>
+        (<%= coin(teacher.teacher_info.price) %>)
+      </td>
       <td class="text-right"><%= link_to "Choose", create_request_path(@writing.id, teacher.id), method: "post", class: 'btn btn-secondary btn-sm'  %></td>
     </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
+
+<div class="teacher-option-list mt-4">
+  <% @teachers.each do |teacher| %>
+    <%= link_to create_request_path(@writing.id, teacher.id), method: "post", class: 'teacher-option' do %>
+      <div class="teacher-option-name">
+        <%= teacher.username %>
+        <%= rating_star(teacher.average_rating) %>
+      </div>
+      <div class="teacher-option-price">
+        <%= coin(teacher.teacher_info.price) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -23,8 +23,19 @@
    margin: 10px 0 20px; 
 } 
 
+.teacher-option-list{
+  .teacher-option{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    &:hover{
+      background-color: #fafafa;
+      text-decoration: none;
+    }
+    &-name{
 
-
-
-
-
+    }
+  }
+}

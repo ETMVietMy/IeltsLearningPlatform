@@ -5,7 +5,7 @@
   <td><%= time_ago_in_words writing.created_at %></td>
   <td class="text-right">
     <% if writing.can_request? %>
-      <%= link_to "Get Correcting", new_message_path(writing_id: writing.id), class: 'btn btn-primary btn-sm' %>
+      <%= link_to "Get Correcting", new_request_path(writing_id: writing.id), class: 'btn btn-primary btn-sm' %>
     <% end %>
     <% if writing.can_view_correction? %>
       <%= link_to "View Correction", writing_path(writing.id), class: 'btn btn-secondary btn-sm' %>

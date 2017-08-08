@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def coin(amount)
-    (amount.to_s  + ' ' + content_tag(:img, '', src: asset_path('coin.png'), class: "coin")).html_safe
+    (amount.to_i.to_s  + ' ' + content_tag(:img, '', src: asset_path('coin.png'), class: "coin")).html_safe
   end
 
   def rating_star(value)

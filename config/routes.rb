@@ -30,8 +30,8 @@ Rails.application.routes.draw do
 
       # writing
       resources :writings, only: [:index, :show, :create]
-      get 'writing/:writing_id/request', to: 'writings#new_request', as: 'new_request'
-      post 'writing/:writing_id/request/:teacher_id', to: 'writings#create_request', as: 'create_request'
+      get 'writings/:writing_id/request', to: 'writings#new_request', as: 'new_request'
+      post 'writings/:writing_id/request/:teacher_id', to: 'writings#create_request', as: 'create_request'
       # resources :tasks, only: [:show] do
       #   resources :writings, only: [:new, :create]
       # end
