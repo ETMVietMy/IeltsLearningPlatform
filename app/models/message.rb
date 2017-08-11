@@ -24,6 +24,9 @@ class Message < ApplicationRecord
   end
 
   def writing
+    return nil unless self.writing_id.present?
+    
+    Writing.find_by_id(self.writing_id)
   end
 
   def is_request?

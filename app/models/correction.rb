@@ -36,6 +36,11 @@ class Correction < ApplicationRecord
     @account ||= User.find(teacher_id).account
   end
 
+  def finish
+    self.update_attribute(:status, STATUS_DONE)
+    self.writing.change_status(Writing::STATUS_CORRECTED)
+  end
+
   def get_last_updated_at
     if !@last_updated_at.nil?
       return @last_updated_at

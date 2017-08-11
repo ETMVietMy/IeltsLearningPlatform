@@ -58,6 +58,25 @@
                   </div>
                 <% end %>
               <% end %>
+              <% if @message.writing_id && @writing.present? && @writing.can_view_correction? %>
+                <div class="form-group">
+                  <span class="font-bold">Writing</span>
+                  <div class="card">
+                    <p> <%= @markdown.render("####_"+@writing.task_description + "_").html_safe %> </p>
+                    <p> <%= @markdown.render(@writing.answer).html_safe %> </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <span class="font-bold">Correction</span>
+                  <div class="card">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p><%= @writing.correction.id %></p>
+                    <%= simple_format @writing.correction.body %>
+                  </div>
+                </div>
+              <% end %>
             </div>
         </div>
     </div>

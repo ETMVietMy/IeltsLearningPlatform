@@ -23,7 +23,7 @@ class CorrectionsController < ApplicationController
         flash[:success] = "You have save your corrections"
         redirect_to corrections_path
       elsif params[:finish].present?
-        @correction.update_attribute(:status, 'done')
+        @correction.finish
         # send message
         @message = Message.new(sender: current_user.id,
           subject: 'Your writing has been finished',
