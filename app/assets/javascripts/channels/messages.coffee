@@ -19,7 +19,6 @@ jQuery(document).ready ->
           <p>#{data.content}</p>
         </div>
         """
-        console.log html
         $('body').append html
 
       test: (data) ->

@@ -15,7 +15,7 @@ jQuery.noConflict();
       props: ['taskNum'],
       template: '#writing_timer_template',
       data: function(){
-        let max = this.taskNum == 1 ? (20 * 60) : (40 * 60);
+        var max = this.taskNum == 1 ? (20 * 60) : (40 * 60);
         return Object.assign({}, data, {
           max: max
         })
@@ -37,8 +37,8 @@ jQuery.noConflict();
           // console.log(this.second);
         },
         calcTime: function(){
-          let m = parseInt(this.second / 60);
-          let s = this.second % 60;
+          var m = parseInt(this.second / 60);
+          var s = this.second % 60;
 
           return zp(m, 2)+ ':' + zp(s, 2);
         }
