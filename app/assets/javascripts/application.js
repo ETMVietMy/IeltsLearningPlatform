@@ -26,7 +26,6 @@
 //= require writing-template/writing
 //= require tasks
 //= require cable
-//= require_tree .
 
 //= require turbolinks
 
