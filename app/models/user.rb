@@ -27,7 +27,11 @@ class User < ApplicationRecord
   # functions
 
   def name_or_username
-    self.name.presence || self.username
+    if self.name.present?
+      return self.name
+    else
+      return self.username
+    end
   end
 
   def self.teachers

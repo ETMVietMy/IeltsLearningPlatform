@@ -40,14 +40,15 @@ header{
     padding: 7px 20px;
   }
 
-  &.student{
-    .navbar{
+  &.header-student{
+    .bg-faded{
+      background-color: #31b0d5;
     }
   }
 
-  &.teacher{
-    .navbar{
-      
+  &.header-teacher{
+    .bg-faded{
+      background-color: #2E79A3;
     }
   }
 }

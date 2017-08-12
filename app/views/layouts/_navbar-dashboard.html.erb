@@ -1,5 +1,5 @@
 <!-- Navigation Bar -->
-<header class="<%= "teacher" if current_user.is_teacher? %> <%= "student" if current_user.is_student? %>">
+<header class="<%= "header-teacher" if current_user.is_teacher? %> <%= "header-student" if current_user.is_student? %>">
   <nav class="navbar navbar-toggleable-md  navbar-expand-md bg-faded
   <%= 'navbar-light' unless current_page?(controller: 'home', action: 'index') %>
   <%= 'navbar-dark nav-home' if current_page?(controller: 'home', action: 'index') %>"
