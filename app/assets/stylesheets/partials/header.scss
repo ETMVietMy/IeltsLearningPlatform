@@ -39,20 +39,25 @@ header{
   .btn{
     padding: 7px 20px;
   }
-  color: #fff;
-  a{
+  &.header-student, &.header-teacher{
     color: #fff;
+    a{
+      color: #fff;
+    }
+    .btn-secondary{
+      color: #343434;
+    }
   }
 
   &.header-student{
     .bg-faded{
-      background-color: #31b0d5;
+      background-color: $light-blue;
     }
   }
 
   &.header-teacher{
     .bg-faded{
-      background-color: #2E79A3;
+      background-color: $dark-blue;
     }
   }
 }

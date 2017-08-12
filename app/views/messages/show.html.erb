@@ -47,7 +47,7 @@
                 <% if !@writing.nil? %>
                   <div class="form-group">
                     <span class="font-bold">Writing</span>
-                    <div class="card">
+                    <div class="card p-3">
                       <p> <%= @markdown.render("####_"+@writing.task_description + "_").html_safe %> </p>
                       <p> <%= @markdown.render(@writing.answer).html_safe %> </p>
                     </div>
@@ -61,18 +61,20 @@
               <% if @message.writing_id && @writing.present? && @writing.can_view_correction? %>
                 <div class="form-group">
                   <span class="font-bold">Writing</span>
-                  <div class="card">
+                  <div class="card p-3">
                     <p> <%= @markdown.render("####_"+@writing.task_description + "_").html_safe %> </p>
                     <p> <%= @markdown.render(@writing.answer).html_safe %> </p>
                   </div>
                 </div>
                 <div class="form-group">
                   <span class="font-bold">Correction</span>
-                  <div class="card">
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p><%= @writing.correction.id %></p>
+                  <div class="card p-3">
+                    <p>
+                      <strong>Task Archivement</strong>: <%= @writing.correction.task_achievement %> <br>
+                      <strong>Coherence Cohesion</strong>: <%= @writing.correction.coherence_cohesion %> <br>
+                      <strong>Lexical Resource</strong>: <%= @writing.correction.lexical_resource %> <br>
+                      <strong>Grammar</strong>: <%= @writing.correction.grammar %>
+                    </p>
                     <%= simple_format @writing.correction.body %>
                   </div>
                 </div>

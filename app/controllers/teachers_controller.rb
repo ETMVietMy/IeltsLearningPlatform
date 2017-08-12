@@ -19,7 +19,6 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new(user: current_user)
-    @teacher.comment.new
   end
 
   def create
@@ -32,7 +31,7 @@ class TeachersController < ApplicationController
 
     Teacher.transaction do
       @teacher.save!
-      current_user.update_attributes(role: 'TEC')
+      current_user.update_attributes(role: User::ROLE_TEACHER)
     end
 
     flash[:success] = "You have registered successfully as a teacher"

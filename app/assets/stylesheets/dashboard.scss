@@ -52,6 +52,18 @@ header{
     flex: 0 0 250px;
     background-color: #f7f7f7;
   }
+  // &.dashboard-teacher{
+  //   &.dashboard-sidebar{
+  //     background-color: $dark-blue;
+  //     color: #fff;
+  //   }
+  // }
+  // &.dashboard-student{
+  //   &.-sidebar{
+  //     background-color: $light-blue;
+  //     color: #fff;
+  //   } 
+  // }
   &-main-content{
     flex: 1;
     padding: 40px;

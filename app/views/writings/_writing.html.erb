@@ -1,7 +1,9 @@
 <tr>
   <td><%= writing.id %></td>
   <td><%= link_to truncate(writing.task_description, length: 40), writing %></td>
-  <td><%= writing.status %></td>
+  <td>
+    <span class="badge badge-info"><%= writing.status %></span>
+  </td>
   <td><%= time_ago_in_words writing.created_at %></td>
   <td class="text-right">
     <% if writing.can_request? %>

@@ -58,4 +58,8 @@ module ApplicationHelper
       [fg, bg].join.html_safe
     end.html_safe
   end
+
+  def writing_badge(text, type)
+
+  end
 end

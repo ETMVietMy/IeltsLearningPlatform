@@ -16,7 +16,7 @@
 
     <%= render 'layouts/navbar-dashboard' %>
 
-    <div class="dashboard">
+    <div class="dashboard <%= "dashboard-teacher" if current_user.is_teacher? %> <%= "dashboard-student" if current_user.is_student? %>">
       <div class="dashboard-sidebar">
         <ul class="nav nav-sidebar">
           <% if current_user.is_admin? %>
