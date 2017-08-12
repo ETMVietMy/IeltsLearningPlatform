@@ -27,7 +27,7 @@ class User < ApplicationRecord
   # functions
 
   def name_or_username
-    if user.respond_to?(:name) && self.name.present?
+    if self.respond_to?(:name) && self.name.present?
       return self.name
     else
       return self.username
